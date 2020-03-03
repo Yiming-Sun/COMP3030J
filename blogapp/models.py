@@ -13,3 +13,24 @@ class NewAppointment(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+
+class Costomer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
+    email = db.Column(db.String(120), index=True, unique=True)
+    phone = db.Column(db.String(120), index=True, unique=True)
+
+
+class Employee(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True, unique=True)
+    password_hash = db.Column(db.String(128))
+    email = db.Column(db.String(120), index=True, unique=True)
+    emid = db.Column(db.String(120), unique=True)
+    phone = db.Column(db.String(120), index=True, unique=True)
+    animal = db.Column(db.String(120), index=True)
+    workplace = db.Column(db.String(120), index=True)
+
+class Id(db.Model):
+    cid = db.Column(db.String(120), unique=True, primary_key=True)
