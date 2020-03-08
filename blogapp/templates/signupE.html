@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+        {#        <script src="static/js/signup.js"></script>#}
+        <style>
+            #container {
+                margin-top: 150px;
+                width: 45%;
+                margin-left: 55%;
+            }
+
+            #sub {
+                width: 50%;
+                margin-left: 8%;
+            }
+
+            #animal {
+                width: 100px;
+                margin-left: 2%;
+                margin-top: 5px;
+            }
+
+            #workplace {
+                width: 100px;
+                margin-left: 2%;
+                margin-top: 5px;
+            }
+
+
+        </style>
+
+    </head>
+
+
+    <body>
+
+        <div id="container">
+            {#        <form action="" method="post" class="form-horizontal" onsubmit="return validate_form(this)">#}
+            <form action="" method="post" class="form-horizontal">
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div>
+                    <div class="form-group">
+                        <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                        <div class="col-sm-5">
+                            <input type="" name="username" class="form-control" id="inputUsername"
+                                   placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-5">
+                            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="EmployeeId" class="col-sm-2 control-label">Employee Id</label>
+                        <div class="col-sm-5">
+                            <input type="" name="EmployeeId" class="form-control" id="EmployeeId" placeholder="Your Id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-5">
+                            <input type="password" name="pass1" class="form-control" id="inputPassword"
+                                   placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRPassword" class="col-sm-2 control-label">Repeat Password</label>
+                        <div class="col-sm-5">
+                            <input type="password" name="pass2" class="form-control" id="inputRPassword"
+                                   placeholder="RePassword">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-5">
+                            <input type="" name="phone" class="form-control" id="inputPhone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="animal" class="col-sm-2 control-label">Animal</label>
+                        <select id="animal" name="animal">
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="workplace" class="col-sm-2 control-label">workplace</label>
+                        <select id="workplace" name="workplace">
+                            <option value="Beijing">Beijing</option>
+                            <option value="Shanghai">Shanghai</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group" id="sub">
+                        <div class="col-sm-offset-2 col-sm-10 ">
+                            <button class="btn btn-lg btn-primary btn-block register-btn" type="submit">Sign up Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </body>
+{% endblock %}

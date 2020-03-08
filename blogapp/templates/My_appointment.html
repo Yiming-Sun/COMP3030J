@@ -1,58 +1,79 @@
 {% extends "logged_base.html" %}
 
+
+
+
 {% block content %}
 
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
+
     <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th class="text-center">Order No</th>
                 <th class="text-center">Order Date</th>
+                <th class="text-center">Pet Type</th>
                 <th class="text-center">Attending doctor</th>
                 <th class="text-center">Condition</th>
                 <th class="text-center">Operations</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td class="text-center">A1324C5</td>
-                <td class="text-center">2020/01/24</td>
-                <td class="text-center">Allen</td>
-                <td class="text-center">Dead</td>
-                <td>
-                    <button class="btn btn-default appform_button">Information</button>
-                    <button class="btn btn-primary appform_button">Trace</button>
-                    <button class="btn btn-success appform_button">Modify</button>
-                    <button class="btn btn-danger appform_button">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">A1324C5</td>
-                <td class="text-center">2020/01/24</td>
-                <td class="text-center">Allen</td>
-                <td class="text-center">Dead</td>
-                <td>
-                    <button class="btn btn-default appform_button">Information</button>
-                    <button class="btn btn-primary appform_button">Trace</button>
-                    <button class="btn btn-success appform_button">Modify</button>
-                    <button class="btn btn-danger appform_button">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">A1324C5</td>
-                <td class="text-center">2020/01/24</td>
-                <td class="text-center">Allen</td>
-                <td class="text-center">Dead</td>
-                <td>
-                    <button class="btn btn-default">Information</button>
-                    <button class="btn btn-primary">Trace</button>
-                    <button class="btn btn-success">Modify</button>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
-        </tbody>
+        {% if my_appointments %}
+            <tbody>
+                {% for appointment in my_appointments %}
+                <tr>
+                    <td class="text-center">{{appointment.id}}</td>
+                    <td class="text-center">{{appointment.date}}</td>
+                    <td class="text-center">{{appointment.petType}}</td>
+                    <td class="text-center">{{appointment.doctor}}</td>
+                    <td class="text-center">暂无</td>
+                    <td>
+                        <button class="btn btn-default appform_button"><a href="#">Information</a></button>
+                        <button class="btn btn-primary appform_button"><a>Trace</a></button>
+                        <button class="btn btn-success appform_button"><a>Modify</a></button>
+<!--    data-toggle表示以什么事件触发， data-target表示事件的目标   -->
+                        <button id="operation" class="btn btn-danger appform_button" type="button" data-toggle="modal" data-target="#my" onclick=""><a>Delete</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        {% else %}
+            <p>you don't have any appointments before!</p>
+        {% endif %}
+
     </table>
+
+
+<!--    <div class="modal-dialog col-lg-4 col-lg-offset-4" role="alert">-->
+<!--        <p class="text-center" style="font-size: large">do you want to delete?</p><br><br>-->
+<!--        <button type="button" class="close" data-dismiss="alert">-->
+<!--            <span >close</span>-->
+<!--        </button>-->
+<!--        <button type="button" class="close" data-dismiss="alert">-->
+<!--            <span style="color: red;margin-right: 10px">sure</span>-->
+<!--        </button>-->
+<!--    </div>-->
+
+
+    <div class="modal fade" id="my" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>content</p>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
 {% endblock %}
+
