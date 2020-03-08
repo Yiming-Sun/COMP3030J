@@ -1,0 +1,42 @@
+{% extends "logged_base.html" %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $('#operationDate').datepicker({
+        weekStart: 1,
+        autoclose: true,
+        daysOfWeekHighlighted: "0,6",
+        format: "yyyy/mm/dd",
+        language: "zh-CN"
+    });
+
+        $('#date').datepicker({
+        weekStart: 1,
+        autoclose: true,
+        daysOfWeekHighlighted: "0,6",
+        format: "yyyy/mm/dd",
+        language: "zh-CN"
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 100px">
+    <h1>make a new appointment</h1>
+
+    <div class="row">
+         <div class="col-md-6">
+            {% import 'bootstrap/wtf.html' as wtf%}
+             {{ wtf.quick_form(form) }}
+        </div>
+
+        <div class="col-md-4 border col-md-offset-2" style="border: 1px solid grey">
+            {% include 'appointment_flow.html' %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
