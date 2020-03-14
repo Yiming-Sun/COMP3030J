@@ -1,0 +1,30 @@
+{% extends "logged_base.html" %}
+
+{% block content %}
+
+    <div class="container col-lg-offset-2 col-lg-8" style="margin-top: 100px">
+        <div style="margin-top: 100px;">
+            <h1 class="text-center">
+                <b>Please choose your appointment type:</b>
+            </h1>
+        </div>
+
+        <div class="container col-lg-offset-2 col-lg-3" style="margin-top: 80px;">
+            <a class="btn btn-default" href="{{ url_for('New_appointment') }}" role="button" style="border: 2px solid black;border-radius:30px;">
+                <h3 class="text-center">NORMAL</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+                <p  class="text-center">tip:This is normal appointment</p>
+            </a>
+
+        </div>
+        <div class="container col-lg-offset-2 col-lg-3" style="margin-top: 80px;">
+            <a class="btn btn-default" href="{{ url_for('New_appointment') }}" role="button" style="border: 2px solid black;border-radius:30px;">
+                <h3 class="text-center">URGENT</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+                <p  class="text-center">tip:This is urgent appointment</p>
+            </a>
+        </div>
+    </div>
+
+
+{% endblock %}

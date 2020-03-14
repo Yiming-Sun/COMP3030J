@@ -5,13 +5,13 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav ">
-                    <li class="active"><a href="url_for{{'My_appointment'}}">My Appointment</a></li>
-                    <li><a href="url_for{{'New_appointment'}}">New Appointment</a></li>
+                    <li><a href="{{ url_for('My_appointment') }}">My Appointment</a></li>
+                    <li class="active"><a href="{{ url_for('appointment_type') }}">New Appointment</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-collapse">
-                    <button type="button" class="btn btn-default navbar-btn"><a href="#">log out</a></button>
+                     <button type="button" class="btn btn-default navbar-btn"><a href="{{ url_for('index') }}">log out</a></button>
                 </ul>
-                <a href="#" class="navbar-right navbar-collapse" >
+                <a href="{{ url_for('Configuration') }}" class="navbar-right navbar-collapse" >
                     <img src="../static/Picture/default.jpg" alt="N" class="img-circle" style="height: 50px;width: 50px;margin-right: 10px">
                 </a>
 

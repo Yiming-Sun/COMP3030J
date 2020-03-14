@@ -1,0 +1,121 @@
+{% extends "logged_base.html" %}
+{% block content %}
+
+    <head>
+        {#        <script src="static/js/signup.js"></script>#}
+        <style>
+            #container {
+                margin-top: 150px;
+                width: 45%;
+                margin-left: 55%;
+            }
+
+            #sub {
+                width: 50%;
+                margin-left: 8%;
+            }
+
+
+        </style>
+
+    </head>
+
+
+
+    <body>
+
+
+    <div id="container">
+        {#        <form action="" method="post" class="form-horizontal" onsubmit="return validate_form(this)">#}
+        <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <img src="../static/Picture/default.jpg" alt="Your photo" class="img-circle"
+                 style="height: 200px;width: 200px;margin-top: 10px" id="photo">
+            <input type="file" name="file" id="file">
+
+            <div>
+                <div class="form-group">
+                    <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-5">
+                        <input type="" name="username" class="form-control" id="inputUsername" placeholder="Username"
+                               value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-5">
+                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email"
+                               value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-5">
+                        <input type="password" name="pass" class="form-control" id="inputPassword"
+                               placeholder="Password" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+                    <div class="col-sm-5">
+                        <input type="" name="phone" class="form-control" id="inputPhone" placeholder="Phone" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputLocation" class="col-sm-2 control-label">Location</label>
+                    <div class="col-sm-5">
+                        <input type="" name="Location" class="form-control" id="inputLocation" placeholder="Location"
+                               value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="times" class="col-sm-2 control-label">times</label>
+                    <div class="col-sm-5">
+                        <input type="" name="times" class="form-control" id="times" placeholder="times" value="">
+                    </div>
+                </div>
+
+
+                <div class="form-group" id="sub">
+                    <div class="col-sm-offset-2 col-sm-10 ">
+                        <button class="btn btn-lg btn-primary btn-block register-btn" type="submit">Confirm
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+    </body>
+
+    <script>
+        var input = document.getElementById("inputUsername");
+        input.value = "{{ u }}";
+        var input = document.getElementById("inputEmail");
+        input.value = "{{ e }}";
+        var input = document.getElementById("inputPassword");
+        input.value = "{{ p }}";
+        var input = document.getElementById("inputPhone");
+        input.value = "{{ ph }}";
+        var input = document.getElementById("inputLocation");
+        input.value = "{{ l }}";
+        var input = document.getElementById("times");
+        input.value = "{{ t }}";
+
+
+
+        var p = document.getElementById("photo")
+        p.src = "data:;base64,{{ img }}"
+
+
+
+    </script>
+{% endblock %}
+
