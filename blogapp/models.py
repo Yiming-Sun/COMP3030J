@@ -4,15 +4,15 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(128))
-    email = db.Column(db.String(120), index=True, unique=True)
-    phone = db.Column(db.String(120), index=True, unique=True)
+    email = db.Column(db.String(120), index=True)
+    phone = db.Column(db.String(120), index=True)
 
 
 class ConfigurationC(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(128))
     email = db.Column(db.String(120), index=True)
     phone = db.Column(db.String(120), index=True)
@@ -23,7 +23,7 @@ class ConfigurationC(db.Model):
 
 class ConfigurationE(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True)
     email = db.Column(db.String(120), index=True)
     password_hash = db.Column(db.String(128))
     phone = db.Column(db.String(120), index=True)
@@ -35,7 +35,7 @@ class ConfigurationE(db.Model):
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(128))
     email = db.Column(db.String(120), index=True)
     emid = db.Column(db.String(120))

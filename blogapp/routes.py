@@ -186,6 +186,8 @@ def Configuration():
                 Conc.passw_hash = passw_hash
                 Conc.Location = Location
                 Conc.times = times
+
+                db.session.commit()
             else:
                 new = ConfigurationC(username=username, email=email, phone=phone, password_hash=passw_hash, Location=Location, times=times)
                 db.session.add(new)
@@ -264,6 +266,7 @@ def Configuration():
                 ConE.passw_hash = passw_hash
                 ConE.Location = Location
                 ConE.times = times
+                db.session.commit()
             else:
                 new = ConfigurationE(username=username, email=email, phone=phone, animal=animal, workplace=workplace, password_hash=passw_hash, Location=Location, times=times)
                 db.session.add(new)
