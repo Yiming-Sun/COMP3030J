@@ -44,7 +44,7 @@ def New_appointment():
 @app.route('/My_appointment')
 def My_appointment():
     if not session.get("USERNAME") is None:
-        print(session.get("USERNAME"))
+        # print(session.get("USERNAME"))
         my_appointments = NewAppointment.query.filter(NewAppointment.user_id == session.get("USERNAME")).all()
         return render_template('My_appointment.html', title='Home', my_appointments=my_appointments)
     else:
@@ -54,9 +54,9 @@ def My_appointment():
 @app.route('/Doc_appointment', methods=['GET', 'POST'])
 def Doc_appointment():
     if not session.get("USERNAME") is None:
-        print(session.get("USERNAME"))
+        # print(session.get("USERNAME"))
         my_e = Employee.query.filter(Employee.username == session.get("USERNAME")).first()
-        print(my_e)
+        # print(my_e)
         my_appointments = NewAppointment.query.filter(NewAppointment.doctor == my_e.id).all()
         return render_template('Appointment_doc.html', title='Home', my_appointments=my_appointments)
     else:
@@ -134,6 +134,7 @@ def Configuration():
                 img_path = 'blogapp/upload_photo/' + un + '.jpg'
                 figfile = io.BytesIO(open(img_path, 'rb').read())
                 img = base64.b64encode(figfile.getvalue()).decode('ascii')
+                print(1)
 
                 return render_template('ConfigurationC.html', u=u, e=e, p=p, ph=ph, l=l, t=t, img=img)
 
@@ -150,7 +151,7 @@ def Configuration():
                 img_path = 'blogapp/upload_photo/default.jpg'
                 figfile = io.BytesIO(open(img_path, 'rb').read())
                 img = base64.b64encode(figfile.getvalue()).decode('ascii')
-
+                print(2)
                 return render_template('ConfigurationC.html', u=u, e=e, p=p, ph=ph, l=l, t=t, img=img)
 
         if request.method == "POST":
@@ -161,10 +162,12 @@ def Configuration():
             Location = request.form['Location']
             times = request.form['times']
 
+
             up = Config.UPLOAD
             file = request.files.get('file')
-            filename = session.get("USERNAME") + '.jpg'
-            file.save(os.path.join(up, filename))
+            if file is not "":
+                filename = session.get("USERNAME") + '.jpg'
+                file.save(os.path.join(up, filename))
             flash('photo upload sucessfully')
 
 
@@ -192,9 +195,21 @@ def Configuration():
                 new = ConfigurationC(username=username, email=email, phone=phone, password_hash=passw_hash, Location=Location, times=times)
                 db.session.add(new)
                 db.session.commit()
-
+            print(3)
             flash("Your Configuration has been changed sucessfully1")
             return redirect(url_for('My_appointment'))
+
+
+
+
+
+
+
+
+
+
+
+
     elif userE is not None:
         if request.method == "GET":
             if ConE is not None:
@@ -307,7 +322,7 @@ def signupC():
                 session['USERNAME'] = username
                 flash('photo upload sucessfully')
                 flash('photo upload sucessfully')
-                print(session['USERNAME'])
+                # print(session['USERNAME'])
                 return redirect(url_for('appointment_type'))
             else:
                 # print(username + " " + email + " " + pass1 + " " + pass2 + " " + phone + " ")

@@ -2,7 +2,7 @@
 {% block content %}
 
     <head>
-        {#        <script src="static/js/signup.js"></script>#}
+        <script src="static/js/signup.js"></script>
         <style>
             #container {
                 margin-top: 150px;
@@ -27,7 +27,7 @@
 
     <div id="container">
         {#        <form action="" method="post" class="form-horizontal" onsubmit="return validate_form(this)">#}
-        <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form action="" method="post" class="form-horizontal" enctype="multipart/form-data" id="infoForm" onsubmit="return validate_form(this)">
             {% for message in get_flashed_messages() %}
                 <div class="alert alert-warning">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -84,7 +84,8 @@
 
                 <div class="form-group" id="sub">
                     <div class="col-sm-offset-2 col-sm-10 ">
-                        <button class="btn btn-lg btn-primary btn-block register-btn" type="submit">Confirm
+                        <button class="btn btn-lg btn-primary btn-block register-btn" type="submit"
+                                onclick="submitXML()">Confirm
                         </button>
                     </div>
 
@@ -110,10 +111,8 @@
         input.value = "{{ t }}";
 
 
-
         var p = document.getElementById("photo")
         p.src = "data:;base64,{{ img }}"
-
 
 
     </script>

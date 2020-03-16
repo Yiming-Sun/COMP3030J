@@ -1,7 +1,7 @@
 {% extends "logged_base.html" %}
 {% block content %}
     <head>
-        {#        <script src="static/js/signup.js"></script>#}
+        <script src="static/js/signup.js"></script>
         <style>
             #container {
                 margin-top: 150px;
@@ -36,7 +36,7 @@
 
     <div id="container">
         {#        <form action="" method="post" class="form-horizontal" onsubmit="return validate_form(this)">#}
-        <form action="" method="post" class="form-horizontal">
+        <form action="" method="post" class="form-horizontal" onsubmit="return validate_form(this)">
             {% for message in get_flashed_messages() %}
                 <div class="alert alert-warning">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
