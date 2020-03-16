@@ -1,7 +1,7 @@
 from blogapp import app, db
 from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
 from blogapp.forms import AppointmentForm, LoginForm
-from blogapp.models import Employee,NewAppointment, Customer,Id
+from blogapp.models import Employee, NewAppointment, Customer, Id, Question
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from blogapp.config import Config
@@ -208,3 +208,26 @@ def upload():
 
 def tsest():
     print("right")
+
+@app.route('/question', methods=['POST', 'GET'])
+def question():
+    if request.method == 'GET':
+
+        question_ground = Question.query.filter().all()
+        return render_template('Question.html',question_ground=question_ground)
+    else:
+        title = request.form.get('title')
+        content = request.form.get('content')
+        question = Question(question_title=title, content=content)
+        if session.get("USERNAME") is None:
+            question.author_name = 'Anonymous_user'
+            db.session.add(question)
+            db.session.commit()
+            return redirect(url_for('question'))
+        else:
+            name=session.get("USERNAME")
+            user = Customer.query.filter(Customer.username==name).first()
+            question.author_name = user
+            db.session.add(question)
+            db.session.commit()
+            return redirect(url_for('question'))

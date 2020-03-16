@@ -38,8 +38,13 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/zhihu-master" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\flaskproject\hospital\blogapp\static\css" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="hospital" type="PythonConfigurationType" factoryName="Python">
@@ -83,6 +88,10 @@
       <workItem from="1583500180152" duration="599000" />
       <workItem from="1583549675387" duration="11382000" />
       <workItem from="1583587727135" duration="3182000" />
+      <workItem from="1583819252242" duration="1285000" />
+      <workItem from="1584062832519" duration="5662000" />
+      <workItem from="1584089854349" duration="18778000" />
+      <workItem from="1584268553865" duration="5025000" />
     </task>
     <servers />
   </component>
@@ -94,10 +103,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1583389390390" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1583586508062">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1584272249223">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583586508062" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584272249223" />
     <state width="1342" height="195" key="GridCell.Tab.0.bottom" timestamp="1583419754657">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -118,10 +127,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="270" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1583388657076" />
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1583389161125">
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1584268553791">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1583389161125" />
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584268553791" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1584096676199">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584096676199" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/hospital$hospital.coverage" NAME="hospital Coverage Results" MODIFIED="1583393220158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

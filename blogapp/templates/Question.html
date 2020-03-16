@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+
+
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+
+<div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
+      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">My question</a></li>
+      <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
+        <li role="presentation"><a href="#new_question" role="tab" data-toggle="tab">New question</a></li>
+    </ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="home">
+{# ---------------------------------------------------------------------------#}
+     <div class="index col-lg-12">
+
+         <ul class="list col-lg-8" >
+             {%if question_ground%}
+             {% for question in question_ground%}
+             <li class="list-item">
+                 <div class="avatar-group">
+{#                     <a href="{{url_for('personal_article',username=question.author.username)}}"><img src="{{url_for('static',filename='uploads/'+question.author.telephone+'头像.jpg')}}" alt="" class="avatar"></a>#}
+                </div>
+                <div class="question-information">
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">information</span>
+                </div>
+                <div style="margin-left:15px;">
+                    <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{question.author_name}}</p>
+                </div>
+                <div>
+                    <h2 class="question-title" ><a href="" style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;">{{question.question_title}}</a></h2>
+                </div>
+                <div class="question-group">
+                     <p class="question-content" style="margin-left:0px;line-height: 1.7;font-size: 13px">{{ question.content }}</p>
+                     <div class="question-info"  style="text-align:right;">
+                         <span class="question-time">{{question.create_time}}</span>
+                     </div>
+                </div>
+            </li>
+             {%endfor%}
+             {%endif%}
+
+
+         </ul>
+     </div>
+  </div>
+
+{# ---------------------------------------------------------------------------#}
+  <div role="tabpanel" class="tab-pane" id="question">
+      {# ---------------------------------------------------------------------------#}
+       aaaaaaaaaa
+      {# ---------------------------------------------------------------------------#}
+  </div>
+
+
+  <div role="tabpanel" class="tab-pane" id="messages">
+      {# ---------------------------------------------------------------------------#}
+dddddddddd
+      {# ---------------------------------------------------------------------------#}
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="new_question">
+      {# ---------------------------------------------------------------------------#}
+
+
+    <h3 class="page-title">发布文章</h3>
+    <form action="" method="post">
+    <div class="form-container">
+        <div class="form-group">
+            <input type="text" placeholder="请输入文章标题" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <textarea name="content" rows="10" placeholder="请编写文章内容" class="form-control" ></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">发布</button>
+        </div>
+
+    </div>
+    </form>
+
+
+      {# ---------------------------------------------------------------------------#}
+  </div>
+
+</div>
+</div>
+
+{% endblock %}
