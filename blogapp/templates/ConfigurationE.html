@@ -133,6 +133,19 @@
         var p = document.getElementById("photo")
         p.src = "data:;base64,{{ img }}"
 
+        $("#file").change(function () {
+            var file = this.files[0];
+            if (window.FileReader) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                //监听文件读取结束后事件
+                reader.onloadend = function (e) {
+                    //e.target.result就是最后的路径地址
+                    $("#photo").attr("src", e.target.result);
+                };
+            }
+        });
+
     </script>
 
 {% endblock %}

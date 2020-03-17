@@ -21,6 +21,30 @@ def index():
 
 @app.route('/New_appointment', methods=['GET', 'POST'])
 def New_appointment():
+    un = session.get('USERNAME')
+    Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+    ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    if userC is not None:
+        if Conc is not None:
+            img_path = 'blogapp/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    if userE is not None:
+        if ConE is not None:
+            img_path = 'blogapp/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+
     form = AppointmentForm()
     if not session.get("USERNAME") is None:
         if form.validate_on_submit():
@@ -36,29 +60,53 @@ def New_appointment():
             db.session.add(appointment)
             db.session.commit()
             flash('done')
-            return redirect(url_for('My_appointment'))
+            return render_template('My_appointment.html', img=img)
+    else:
+        return redirect(url_for('index'))
 
-    return render_template('New_appointment.html', title='Home', form=form)
+    return render_template('New_appointment.html', title='Home', form=form, img=img)
 
 
 @app.route('/My_appointment')
 def My_appointment():
     if not session.get("USERNAME") is None:
+        un = session.get('USERNAME')
+        Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+        if Conc is not None:
+            img_path = 'blogapp/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+
         # print(session.get("USERNAME"))
         my_appointments = NewAppointment.query.filter(NewAppointment.user_id == session.get("USERNAME")).all()
-        return render_template('My_appointment.html', title='Home', my_appointments=my_appointments)
+        return render_template('My_appointment.html', title='Home', my_appointments=my_appointments, img=img)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
 
+
 @app.route('/Doc_appointment', methods=['GET', 'POST'])
 def Doc_appointment():
     if not session.get("USERNAME") is None:
+        un = session.get('USERNAME')
+        ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+        if ConE is not None:
+            img_path = 'blogapp/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
         # print(session.get("USERNAME"))
         my_e = Employee.query.filter(Employee.username == session.get("USERNAME")).first()
         # print(my_e)
         my_appointments = NewAppointment.query.filter(NewAppointment.doctor == my_e.id).all()
-        return render_template('Appointment_doc.html', title='Home', my_appointments=my_appointments)
+        return render_template('Appointment_doc.html', title='Home', my_appointments=my_appointments, img=img)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
@@ -89,6 +137,7 @@ def sign_in_c():
         return redirect(url_for('index'))
     return render_template('sign_in.html', title='Sign In', form=form)
 
+
 @app.route('/login_d', methods=['GET', 'POST'])
 def sign_in_d():
     form = LoginForm()
@@ -106,6 +155,7 @@ def sign_in_d():
         flash('Incorrect Password')
         return redirect(url_for('index'))
     return render_template('sign_in.html', title='Sign In', form=form)
+
 
 @app.route('/sign_up')
 def sign_up():
@@ -162,15 +212,12 @@ def Configuration():
             Location = request.form['Location']
             times = request.form['times']
 
-
             up = Config.UPLOAD
             file = request.files.get('file')
             if file is not "":
                 filename = session.get("USERNAME") + '.jpg'
                 file.save(os.path.join(up, filename))
             flash('photo upload sucessfully')
-
-
 
             passw_hash = generate_password_hash(password)
 
@@ -192,7 +239,8 @@ def Configuration():
 
                 db.session.commit()
             else:
-                new = ConfigurationC(username=username, email=email, phone=phone, password_hash=passw_hash, Location=Location, times=times)
+                new = ConfigurationC(username=username, email=email, phone=phone, password_hash=passw_hash,
+                                     Location=Location, times=times)
                 db.session.add(new)
                 db.session.commit()
             print(3)
@@ -283,10 +331,10 @@ def Configuration():
                 ConE.times = times
                 db.session.commit()
             else:
-                new = ConfigurationE(username=username, email=email, phone=phone, animal=animal, workplace=workplace, password_hash=passw_hash, Location=Location, times=times)
+                new = ConfigurationE(username=username, email=email, phone=phone, animal=animal, workplace=workplace,
+                                     password_hash=passw_hash, Location=Location, times=times)
                 db.session.add(new)
                 db.session.commit()
-
 
             flash("Your Configuration has been changed sucessfully2")
             return redirect(url_for('Doc_appointment'))
@@ -296,11 +344,10 @@ def Configuration():
     return render_template('Configuration.html', title="Configuration")
 
 
-
-
 @app.route('/appointment_type')
 def appointment_type():
     return render_template('appointment_type.html', title="home")
+
 
 @app.route('/signupC', methods=['GET', 'POST'])
 def signupC():
@@ -399,3 +446,9 @@ def upload():
 
 def tsest():
     print("right")
+
+
+# @app.route('/getSession/', methods=['GET', 'POST'])
+# def getSession():
+#     print(session.get('USERNAME'))
+#     return session.get('USERNAME')
