@@ -67,38 +67,11 @@ class AnswerQuestion(db.Model):
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
     content=db.Column(db.Text,nullable=False)
     create_time=db.Column(db.DateTime,default=datetime.now)
-
     author_id=db.Column(db.Integer,db.ForeignKey('employee.id'))
     answer_question_id=db.Column(db.Integer,db.ForeignKey('question.id'))
-
     author=db.relationship('Employee',backref=db.backref('realanswer'))
     question=db.relationship('Question',backref=db.backref('questionAnswer'))
 
-# #发布的文章
-# class Article(db.Model):
-#     __tablename__='article'
-#     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
-#     title=db.Column(db.String(100),nullable=False)
-#     content=db.Column(db.Text,nullable=False)
-#     #now()获取的是服务器第一次运行的时间
-#     #now是每次创建一个模型的时候，都获取当前时间
-#     create_time=db.Column(db.DateTime,default=datetime.now)
-#     author_id=db.Column(db.Integer,db.ForeignKey('user.id'))
-#     author=db.relationship('User',backref=db.backref('questions'))
 
-
-
-
-# #文章下的评论
-# class Answer(db.Model):
-#     __tablename__='answer'
-#     id=db.Column(db.Integer,primary_key=True,autoincrement=True)
-#     content=db.Column(db.Text,nullable=False)
-#     create_time=db.Column(db.DateTime,default=datetime.now)
-#     article_id=db.Column(db.Integer,db.ForeignKey('article.id'))
-#     author_id=db.Column(db.Integer,db.ForeignKey('user.id'))
-#
-#     article=db.relationship('Article',backref=db.backref('answers',order_by=create_time.desc()))
-#     author=db.relationship('User',backref=db.backref('answers'))
 
 
