@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+
+
+{%block content%}
+<link rel="stylesheet" href="{{url_for('static',filename='css/detail.css')}}">
+
+
+<div class="row">
+
+    <!--文章标题-->
+    <div class="head_block col-lg-40">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin:0 auto;">
+            <div class="question-title-div col-lg-20">
+                <h2 class="question-title">{{question.title}}</h2>
+            </div>
+
+        <ul>
+            <li>
+            <form action="" method="post">
+                 <div class="form-group" style="text-align:left;position:relative; margin-left:600px;">
+                    <button class="btn btn-primary">收藏</button>
+                </div>
+            </form>
+            </li>
+            <li>
+{#            {%if question.author==user%}#}
+{#            <form action="" method="post">#}
+{#                <div class="form-group">#}
+{#                    <input type="hidden" name="article_id" value="{{question.id}}">#}
+{#                    <input type="hidden" name="username" value="{{user.username}}">#}
+{#                </div>#}
+{#                <div class="form-group" style="text-align:left;position:relative; margin-left:670px;margin-top:-49px;">#}
+{#                    <button class="btn btn-primary">删除</button>#}
+{#                </div>#}
+{#            </form>#}
+{#            {%endif%}#}
+            </li>
+        </ul>
+
+        </div>
+    </div>
+
+    <div class="index col-lg-18">
+        <ul class="list col-lg-8">
+            <li class="list-item">
+                <div class="avatar-group">
+                    <img src="{{url_for('static',filename='Picture/'+'home1'+'.jpg')}}" style="margin-bottom:5px;" alt="" class="avatar">
+                </div>
+                <div class="question-information">
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-bottom:8px;">{{question.author.username}}</span>
+                </div>
+                <div class="question-group" style="width:680px;">
+                     <p class="question-content" style="margin-top:10px;margin-right:3px;line-height: 1.7;font-size: 15px;">{{question.content}}</p>
+                    <p style=" margin-top: 4px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">自我介绍</p>
+                </div>
+                <div  style="">
+                    <a>
+                        <span style="font-size: 14px;color: #8590a6;">{{question.create_time}}</span>
+                    </a>
+                </div>
+
+
+            <h5 style="margin-left:10px;margin-top:8px;font-size: 14px;color: #8590a6;">评论</h5>
+            <form action="{{url_for('add_answer')}}" method="post">
+                <div class="form-group">
+                    <input type="text" name='answer_content' style="margin-left:8px;margin-top:4px;" class="form-control" placeholder="请添加评论">
+                    <input type="hidden" name="question_id" value="{{question.id}}">
+                </div>
+                <div class="form-group" style="text-align:right;position:relative;">
+                    <button class="btn btn-primary">提交评论</button>
+                </div>
+            </form>
+            <ul class="answer-list">
+                {%for answer in question.questionAnswer%}
+                <li>
+                    <div class="user-info">
+{#                        <a href=""><img class="avatar" src="{{url_for('static',filename='uploads/'+answer.author.telephone+'头像.jpg')}}" alt="" ></a>#}
+                        <a href=""><span class="username">{{answer.author.username}}</span></a>
+                             <span class="create-time">{{answer.create_time}}</span>
+                    </div>
+                    <p class="answer-content">{{answer.content}}</p>
+
+                    {%if answer.author==user%}
+                    <form action="{{url_for('delete_answer')}}" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="question_id" value="{{question.id}}">
+                            <input type="hidden" name="answer_id" value="{{answer.id}}">
+                        </div>
+                        <div class="form-group" style="text-align:right;position:relative;">
+                            <button class="btn btn-primary">删除</button>
+                        </div>
+                    </form>
+                    {%endif%}
+
+                </li>
+                {%endfor%}
+            </ul>
+            </li>
+
+        </ul>
+
+        <ul class="list3 col-lg-4">
+            <li class="list-item3" >
+                <div class="user">
+                   <div class="content" style="height:253px;">
+                        <div class="row" style="margin-left:-10px;">
+                          <div class="col-sm-7 col-md-6">
+                            <div class="thumbnail">
+{#                              <img src="{{url_for('static',filename='uploads/'+user2.telephone+'头像.jpg')}}" alt="" class="avatar2" style="">#}
+                                  <div class="caption">
+                                    <h4>{{user2.username}}</h4>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+                       <p style="color: #8590a6;">user2.self_introduce</p>
+                   </div>
+                </div>
+            </li>
+            <div style="clear:both;"></div>
+            <li class="list-item3" style="margin-top:8px;">
+                <div class="user">
+                    <div class="content" style="height:140px;">
+                       <div class="list-group">
+{#                          <a href="{{url_for('personal_article',username=user2.username)}}" class="list-group-item"><span class="badge">{{article_num}}</span>Ta的文章</a>#}
+{#                          <a href="{{url_for('persional_question',username=user2.username)}}" class="list-group-item"><span class="badge">{{question_num}}</span>Ta的提问</a>#}
+{#                          <a href="{{url_for('personal_answer',username=user2.username)}}" class="list-group-item"><span class="badge">{{answer_num}}</span>Ta的回答</a>#}
+                        </div>
+                   </div>
+                </div>
+            </li>
+            <div style="clear:both;"></div>
+            <li class="list-item3" style="margin-top:8px;">
+                <div class="user">
+                   <div class="content" style="height:293px;">
+                       <p>头像中心</p>
+                   </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+{%endblock%}

@@ -1,0 +1,148 @@
+
+ul{
+    list-style:none;
+}
+
+.avatar-group{
+    width:45px;
+    height:100%;
+    float:left;
+}
+
+.avatar-group .avatar{
+    width:40px;
+    height:40px;
+    margin-bottom:6px;
+}
+
+.question-title-div{
+    margin-left:5px;
+}
+
+.question-title{
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 3;
+    color: #1a1a1a;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.question-content{
+    float:left;
+    width:680px;
+    line-height: 1.7;
+    font-size: 15px;
+    color: #1a1a1a;
+}
+
+.head_block{
+	background:#FFFFFF;
+	overflow:hidden;
+	border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-sizing: border-box;
+    padding: 1px 8px;
+    margin-bottom: 10px;
+    margin-top:-18px;
+}
+
+.main{
+	background:#FFFFFF;
+	width:730px;
+	margin:0 auto;
+	overflow:hidden;
+	border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-sizing: border-box;
+    padding: 9px px;
+    margin-bottom: 13px;
+}
+
+
+.ContentItem-time {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #8590a6;
+}
+
+.answer-list{
+    padding-left:0;
+}
+
+.answer-list li{
+    list-style: none;
+    border-bottom:1px solid #eee;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+}
+
+.user-info{
+    font-size:16px;
+    color:#9b9b9b;
+    line-height:40px;
+}
+
+.user-info .username{
+    margin-left:20px;
+}
+
+.answer-content{
+    margin-left:60px;
+}
+
+.user-info .create-time{
+    float:right;
+}
+
+
+.user .content{
+   border-right:1px solid rgba(26,26,26,.1);
+   border-left:1px solid rgba(26,26,26,.1);
+   box-shadow: 2px 2px 0 rgba(26,26,26,.1);
+   height:300px;
+   padding:10px;
+   background:#fff;
+}
+
+
+
+.index{
+   display:flex;
+   justify-content: space-between;
+   margin:16px 0;
+   padding:0;
+}
+
+.index .list{
+    padding:0;
+}
+
+.index .list .list-item{
+   padding:16px;
+   margin-bottom:10px;
+   background:#fff;
+   border-right:1px solid rgba(26,26,26,.1);
+   border-left:1px solid rgba(26,26,26,.1);
+   box-shadow: 2px 2px 0 rgba(26,26,26,.1);
+}
+
+.list-group-item{
+    border:0px;
+}
+
+a.list-group-item{
+        color: #8590a6;
+}
+
+
+
+
+
+
+
+

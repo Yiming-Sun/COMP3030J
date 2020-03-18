@@ -24,7 +24,9 @@
              {% for question in question_ground%}
              <li class="list-item">
                  <div class="avatar-group">
-{#                     <a href="{{url_for('personal_article',username=question.author.username)}}"><img src="{{url_for('static',filename='uploads/'+question.author.telephone+'头像.jpg')}}" alt="" class="avatar"></a>#}
+                     <a href="">
+{#                         <img src="{{url_for('static',filename='uploads/'+question.author.telephone+'头像.jpg')}}" alt="" class="avatar">#}
+                     </a>
                 </div>
                 <div class="question-information">
                     <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">information</span>
@@ -33,7 +35,8 @@
                     <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{question.author_name}}</p>
                 </div>
                 <div>
-                    <h2 class="question-title" ><a href="" style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;">{{question.question_title}}</a></h2>
+
+                    <h2 class="question-title" ><a href="{{url_for('question_detail',question_id=question.id)}}" style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;">{{question.question_title}}</a></h2>
                 </div>
                 <div class="question-group">
                      <p class="question-content" style="margin-left:0px;line-height: 1.7;font-size: 13px">{{ question.content }}</p>
