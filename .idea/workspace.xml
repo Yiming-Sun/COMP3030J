@@ -38,7 +38,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/zhihu-master" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
   <component name="RecentsManager">
@@ -91,8 +91,7 @@
       <workItem from="1583819252242" duration="1285000" />
       <workItem from="1584062832519" duration="5662000" />
       <workItem from="1584089854349" duration="18778000" />
-      <workItem from="1584268553865" duration="18845000" />
-      <workItem from="1584496675699" duration="8241000" />
+      <workItem from="1584268553865" duration="5025000" />
     </task>
     <servers />
   </component>
@@ -132,10 +131,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584268553791" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1584364301998">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1584096676199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584364301998" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584096676199" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/hospital$hospital.coverage" NAME="hospital Coverage Results" MODIFIED="1583393220158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

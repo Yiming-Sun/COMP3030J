@@ -1,7 +1,8 @@
 from blogapp import app, db
 from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
 from blogapp.forms import AppointmentForm, LoginForm
-from blogapp.models import Employee, NewAppointment, Customer, Id, Question, AnswerQuestion
+from blogapp.models import Employee, NewAppointment, Customer, Id, Question
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from blogapp.config import Config
 import os
@@ -75,11 +76,10 @@ def sign_in_c():
         if not user_in_db:
             flash("No user found with username: {}")
             flash('No user found with username: {}'.format(form.username.data))
-            return redirect(url_for('sign_in_c'))
+            return redirect(url_for('sign_in'))
         if (check_password_hash(user_in_db.password_hash, form.password.data)):
             flash('Login success!')
             session["USERNAME"] = user_in_db.username
-            session["type"] = "customer"
             return redirect(url_for('My_appointment'))
         flash('Incorrect Password')
         return redirect(url_for('index'))
@@ -97,7 +97,6 @@ def sign_in_d():
         if (check_password_hash(doc_in_db.password_hash, form.password.data)):
             flash('Login success!')
             session["USERNAME"] = doc_in_db.username
-            session["type"] = "employee"
             print('sdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             return redirect(url_for('Doc_appointment'))
         flash('Incorrect Password')
@@ -219,94 +218,16 @@ def question():
     else:
         title = request.form.get('title')
         content = request.form.get('content')
-
+        question = Question(question_title=title, content=content)
         if session.get("USERNAME") is None:
-            flash('Please login first')
-            return redirect(url_for('index'))
-            # question1 = Question(question_title=title, content=content,author_name = 'Anonymous_user')
-            # db.session.add(question1)
-            # db.session.commit()
-            # return redirect(url_for('question'))
-        else:
-            name=session.get("USERNAME")
-            question1 = Question(question_title=title, content=content,author_name=name)
-            db.session.add(question1)
+            question.author_name = 'Anonymous_user'
+            db.session.add(question)
             db.session.commit()
             return redirect(url_for('question'))
-
-
-@app.route('/question_detail/<int:question_id>',methods=['GET','POST'])
-def question_detail(question_id):
-    print("cccccccccccccccccc")
-    user2 = Question.query.filter(Question.id == question_id).first().author
-    # print('tttttttttttttttt'+session.get('USERNAME'))
-    temp=session.get('USERNAME')
-    print('temp' + temp)
-    user = Employee.query.filter(Employee.username == temp).first()
-    # question_num = len(user2.realquestions)
-    # answer_num = len(user2.realanswer)
-    # article_num = len(user2.questions)
-    # print('user:'+user.username+'gggggggggggg')
-    context = {
-            'question': Question.query.filter(Question.id == question_id).first(),
-            # 'question_num': question_num,
-            # 'answer_num': answer_num,
-
-            # 'article_num': article_num
-    }
-    return render_template('Question_detail.html', user2=user2,user=user,**context)
-
-
-
-@app.route('/add_answer/',methods=['POST'])
-def add_answer():
-    content=request.form.get('answer_content')
-    question_id=request.form.get('question_id')
-    answer=AnswerQuestion(content=content)
-    name=session.get('USERNAME')
-
-    employee= Employee.query.filter(Employee.username == name).first()
-    if employee is not None:
-        question=Question.query.filter(Question.id==question_id).first()
-        answer.question=question
-        answer.author=employee
-        db.session.add(answer)
-        db.session.commit()
-        return redirect(url_for('question_detail',question_id=int(question_id)))
-    else:
-        # question = Question.query.filter(Question.id == question_id).first()
-        # answer.question = question
-        # answer.author = Customer.query.filter(Customer.username == name).first()
-        # db.session.add(answer)
-        # db.session.commit()
-        print("no permission")
-        return redirect(url_for('question_detail', question_id=int(question_id)))
-
-
-@app.route('/delete_answer/',methods=['POST'])
-def delete_answer():
-    question_id=request.form.get('question_id')
-    answer_id=request.form.get('answer_id')
-    answer=AnswerQuestion.query.filter(AnswerQuestion.id==answer_id).first()
-    db.session.delete(answer)
-    db.session.commit()
-    return redirect(url_for('question_detail',question_id=int(question_id)))
-
-
-@app.route('/someone_detail/<username>',methods=['GET','POST'])
-def someone_detail(username):
-    # print("ssssssssssssssssssss")
-    user2=Customer.query.filter(Customer.username==username).first()
-    # touxiang='uploads/'+user2.telephone+'头像'+'.jpg'
-    # image='uploads/'+user2.telephone+'背景'+'.jpg'
-    question_num=len(user2.realquestions)
-    answer_num=len(user2.realanswer)
-    article_num=len(user2.questions)
-    context={
-        'articles':Question.query.filter(Question.author_id==user2.id).all(),
-        'question_num': question_num,
-        'answer_num': answer_num,
-        'article_num': article_num
-    }
-    return redirect(url_for('question'))
-    # return render_template('Question_detail.html',image=image,user2=user2,user=g.user,touxiang=touxiang,**context)
+        else:
+            name=session.get("USERNAME")
+            user = Customer.query.filter(Customer.username==name).first()
+            question.author_name = user
+            db.session.add(question)
+            db.session.commit()
+            return redirect(url_for('question'))
