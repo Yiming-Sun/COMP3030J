@@ -1,10 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!--Yiming Sun(2020/3/14)-->
+{% extends "logged_base.html" %}
 
-</body>
-</html>
+{% block scripts %}
+{{super()}}
+
+
+    <script type="text/javascript">
+        $('#date').datepicker({
+            weekStart: 1,
+            autoclose: true,
+            daysOfWeekHighlighted: "0,6",
+
+            default: "1200-01-01",
+            format: "yyyy-mm-dd",
+            language: "zh-CN"
+        });
+
+        $('.in_form').addClass("form-control");
+
+
+
+    </script>
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container" style="margin-top: 100px;border: 1px solid black">
+        <h1 class="text-center" style="margin: 40px auto">Modify your appointment:</h1>
+
+        <form class="form-horizontal" role="form" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+<!--            <p>{{form.errors}}</p>-->
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.applicant.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.applicant(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.phoneNo.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.phoneNo(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.date.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.date(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.petType.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.petType(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.petName.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.petName(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.doctor.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.doctor(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.comment.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.comment(class='in_form')}}
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-10">
+                    {{ form.csrf_token }}
+                    <button type="submit" class="btn btn-default">submit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}

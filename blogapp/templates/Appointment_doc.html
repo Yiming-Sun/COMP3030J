@@ -1,0 +1,124 @@
+{% extends "logged_base.html" %}
+
+
+{% block scripts %}
+{{super()}}
+
+    <script>
+         $(document).ready(function () {
+            $('tbody>tr').each(function () {
+
+                // if ($(this).children('td').eq(6).text()!="None"){
+                //     $(this).css({"color": "red"})
+                // }
+                if ($(this).children('.apt').text()=="2"){
+                    $(this).css({"color": "red"});
+                }
+            });
+
+            $('button').each(function(){
+                $(this).css({"margin":"0px 30px"})
+            })
+
+            $('#newAppointment').css({"display":"none"});
+            $('#myAppointment').attr({href:"#"});
+
+            let a = 0;
+            $('.changeT').click(function () {
+                a = $(this).parent().parent();
+            });
+
+            $("#changeType").click(function () {
+
+                let id = a.children(".appointment_id");
+                console.log(id.text());
+
+               $.ajax({
+                   url:"/Doc_appointment",
+                   type:"POST",
+                   data:{"appointment_id":id.text()},
+                   success:function () {
+                        a.css({"color": "red"});
+                   },
+                   error:function () {
+
+                   }
+               })
+           });
+
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Order No</th>
+                <th class="text-center">Order Date</th>
+                <th class="text-center">Applicant</th>
+                <th class="text-center">Pet Type</th>
+                <th class="text-center">Condition</th>
+                <th class="text-center">Operation Date</th>
+                <th class="text-center">Operation Time</th>
+                <th class="text-center">Operations</th>
+                <th class="text-center" style="display: none">type</th>
+            </tr>
+        </thead>
+        {% if my_appointments %}
+            <tbody>
+                {% for appointment in my_appointments %}
+                <tr>
+
+                    <td class="text-center appointment_id">{{appointment.id}}</td>
+                    <td class="text-center">{{appointment.date}}</td>
+                    <td class="text-center">{{appointment.applicant}}</td>
+                    <td class="text-center">{{appointment.petType}}</td>
+                    <td class="text-center">{{appointment.condition}}</td>
+                    <td class="text-center">{{appointment.op_date}}</td>
+                    <td class="text-center">{{appointment.op_time}}</td>
+                    <td class="text-center apt" style="display: none">{{appointment.app_type}}</td>
+                    <td>
+                        <a href="#"><button class="btn btn-default appform_button">Detail</button></a>
+                        <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button">Trace</button></a>
+                        <button class="btn btn-default appform_button changeT" type="button" data-toggle="modal" data-target="#my">change type</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        {% else %}
+            <p>you don't have any appointments before!</p>
+        {% endif %}
+
+    </table>
+
+
+
+    <div class="modal fade" id="my" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">change type</h4>
+                </div>
+                <div class="modal-body">
+                    <p>do you want to change the type?</p>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="changeType" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+{% endblock %}
+

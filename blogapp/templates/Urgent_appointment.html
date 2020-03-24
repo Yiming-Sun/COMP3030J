@@ -1,3 +1,4 @@
+<!--Yiming Sun(2020/3/14)-->
 {% extends "logged_base.html" %}
 
 {% block scripts %}
@@ -7,7 +8,7 @@
         weekStart: 1,
         autoclose: true,
         daysOfWeekHighlighted: "0,6",
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         language: "zh-CN"
     });
 
@@ -15,9 +16,41 @@
         weekStart: 1,
         autoclose: true,
         daysOfWeekHighlighted: "0,6",
-        format: "yyyy/mm/dd",
+        format: "yyyy-mm-dd",
         language: "zh-CN"
     });
+
+        $(function(){
+        $('#petType').change(function(){
+            let type = $('#petType').val();
+            console.log(type);
+            let doctors = $('#doctor');
+            $.ajax({
+                url:"/Urgent_appointment",
+                type:"POST",
+                data:({"type":type}),
+                success:function (data) {
+                    console.log(data);
+                    let selects = JSON.parse(data);//JSON字符串转换为JSON对象
+                    doctors.children().remove();
+                    for (let i=0; i<selects.length; i++){
+                        let a = $('<option></option>');
+                        a.text(selects[i]);
+                        a.attr({value:selects[i]});
+                        console.log(a);
+                        doctors.append(a);
+                    }
+
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+    });
+
+
     </script>
 {% endblock %}
 
