@@ -24,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -38,12 +39,18 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/blogapp/static/css" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\flaskproject\hospital\blogapp\static" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\flaskproject\hospital\blogapp\static\css" />
+      <recent name="E:\flaskproject\hospital\blogapp\templates" />
+      <recent name="E:\flaskproject\hospital\blogapp\static\Picture" />
     </key>
   </component>
   <component name="RunManager">
@@ -92,7 +99,13 @@
       <workItem from="1584062832519" duration="5662000" />
       <workItem from="1584089854349" duration="18778000" />
       <workItem from="1584268553865" duration="18845000" />
-      <workItem from="1584496675699" duration="8241000" />
+      <workItem from="1584496675699" duration="12338000" />
+      <workItem from="1584538251299" duration="2941000" />
+      <workItem from="1584609924883" duration="2871000" />
+      <workItem from="1584621505518" duration="1480000" />
+      <workItem from="1584623046355" duration="1498000" />
+      <workItem from="1585358729486" duration="1099000" />
+      <workItem from="1585362686379" duration="18551000" />
     </task>
     <servers />
   </component>
@@ -104,10 +117,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1583389390390" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1584272249223">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585362688802">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584272249223" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585362688802" />
     <state width="1342" height="195" key="GridCell.Tab.0.bottom" timestamp="1583419754657">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -128,10 +141,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="270" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1583388657076" />
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1584268553791">
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1584609926010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584268553791" />
+    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584609926010" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1584364301998">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

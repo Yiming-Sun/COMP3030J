@@ -1,34 +1,52 @@
-from datetime import datetime
-
 from blogapp import db
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
-
+from datetime import datetime
 
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(128))
-    email = db.Column(db.String(120), index=True, unique=True)
-    phone = db.Column(db.String(120), index=True, unique=True)
+    email = db.Column(db.String(120), index=True)
+    phone = db.Column(db.String(120), index=True)
+
+
+class ConfigurationC(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True)
+    password_hash = db.Column(db.String(128))
+    email = db.Column(db.String(120), index=True)
+    phone = db.Column(db.String(120), index=True)
+    Location = db.Column(db.String(120), index=True)
+    times = db.Column(db.String(120), index=True)
+
+
+
+class ConfigurationE(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True)
+    email = db.Column(db.String(120), index=True)
+    password_hash = db.Column(db.String(128))
+    phone = db.Column(db.String(120), index=True)
+    animal = db.Column(db.String(120), index=True)
+    workplace = db.Column(db.String(120), index=True)
+    Location = db.Column(db.String(120), index=True)
+    times = db.Column(db.String(120), index=True)
 
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
+    username = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(128))
-    email = db.Column(db.String(120), index=True, unique=True)
-    emid = db.Column(db.String(120), unique=True)
-    phone = db.Column(db.String(120), index=True, unique=True)
+    email = db.Column(db.String(120), index=True)
+    emid = db.Column(db.String(120))
+    phone = db.Column(db.String(120), index=True)
     animal = db.Column(db.String(120), index=True)
     workplace = db.Column(db.String(120), index=True)
 
+
 class Id(db.Model):
     cid = db.Column(db.String(120), unique=True, primary_key=True)
-
-
-
-
 
 
 class NewAppointment(db.Model):
@@ -45,7 +63,6 @@ class NewAppointment(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
-
 
 
 
@@ -73,5 +90,25 @@ class AnswerQuestion(db.Model):
     question=db.relationship('Question',backref=db.backref('questionAnswer'))
 
 
-
+# class ConfigurationC(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     username = db.Column(db.String(64), index=True)
+#     password_hash = db.Column(db.String(128))
+#     email = db.Column(db.String(120), index=True)
+#     phone = db.Column(db.String(120), index=True)
+#     Location = db.Column(db.String(120), index=True)
+#     times = db.Column(db.String(120), index=True)
+#
+#
+#
+# class ConfigurationE(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     username = db.Column(db.String(64), index=True)
+#     email = db.Column(db.String(120), index=True)
+#     password_hash = db.Column(db.String(128))
+#     phone = db.Column(db.String(120), index=True)
+#     animal = db.Column(db.String(120), index=True)
+#     workplace = db.Column(db.String(120), index=True)
+#     Location = db.Column(db.String(120), index=True)
+#     times = db.Column(db.String(120), index=True)
 

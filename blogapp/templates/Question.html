@@ -1,36 +1,87 @@
-{% extends "base.html" %}
-
-
-
-
+{% extends "logged_base.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
 
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
-      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">My question</a></li>
+      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">My question
+         <span class="badge">{{question_num}}</span></a></li>
       <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
         <li role="presentation"><a href="#new_question" role="tab" data-toggle="tab">New question</a></li>
     </ul>
-
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="home">
 {# ---------------------------------------------------------------------------#}
      <div class="index col-lg-12">
-
          <ul class="list col-lg-8" >
              {%if question_ground%}
              {% for question in question_ground%}
              <li class="list-item">
                  <div class="avatar-group">
                      <a href="">
-{#                         <img src="{{url_for('static',filename='uploads/'+question.author.telephone+'头像.jpg')}}" alt="" class="avatar">#}
+                         <img src={{url_for('static', filename='upload_photo/'+question.author.username+'.jpg')}} alt="N" class="avatar" >
+{#                         <p>../upload_photo/{{question.author.username}}.jpg</p>#}
+{#                         <p>{{url_for('static',filename='uploads/'+article.author.telephone+'头像.jpg')}}</p>#}
                      </a>
                 </div>
                 <div class="question-information">
                     <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">information</span>
                 </div>
+                <div style="margin-left:15px;">
+                    <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{question.author_name}}</p>
+                </div>
+                <div>
+                    <h2 class="question-title" ><a href="{{url_for('question_detail',question_id=question.id)}}" style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;">{{question.question_title}}</a></h2>
+                </div>
+                <div class="question-group">
+                     <p class="question-content" style="margin-left:0px;line-height: 1.7;font-size: 13px">{{ question.content }}</p>
+                     <div class="question-info"  style="text-align:right;">
+                         <span class="question-time">{{question.create_time}}</span>
+                     </div>
+                </div>
+            </li>
+             {%endfor%}
+             {%endif%}
+
+
+         </ul>
+     </div>
+  </div>
+
+{# ---------------------------------------------------------------------------#}
+  <div role="tabpanel" class="tab-pane" id="question">
+      {# -------------------------------My question--------------------------------------------#}
+
+
+
+      <div class="index col-lg-12">
+
+         <ul class="list col-lg-8" >
+             {%if my_question%}
+
+             {% for question in my_question%}
+             <li class="list-item">
+                 <div class="avatar-group">
+                     <a href="">
+                         <img src={{url_for('static', filename='upload_photo/'+question.author.username+'.jpg')}} alt="N" class="avatar" >
+{#                         <p>../upload_photo/{{question.author.username}}.jpg</p>#}
+{#                         <p>{{url_for('static',filename='uploads/'+article.author.telephone+'头像.jpg')}}</p>#}
+                     </a>
+                </div>
+                <div class="question-information">
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">information</span>
+                </div>
+
+                    <form action="{{url_for('delete_question')}}" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="question_id" value="{{question.id}}">
+                        </div>
+                        <div class="form-group" style="text-align:right;position:relative;">
+                            <button class="btn btn-primary">Delete</button>
+                        </div>
+                    </form>
+
                 <div style="margin-left:15px;">
                     <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{question.author_name}}</p>
                 </div>
@@ -51,12 +102,12 @@
 
          </ul>
      </div>
-  </div>
 
-{# ---------------------------------------------------------------------------#}
-  <div role="tabpanel" class="tab-pane" id="question">
-      {# ---------------------------------------------------------------------------#}
-       aaaaaaaaaa
+
+
+
+
+
       {# ---------------------------------------------------------------------------#}
   </div>
 
@@ -71,17 +122,17 @@ dddddddddd
       {# ---------------------------------------------------------------------------#}
 
 
-    <h3 class="page-title">发布文章</h3>
+    <h3 class="page-title">Add question</h3>
     <form action="" method="post">
     <div class="form-container">
         <div class="form-group">
-            <input type="text" placeholder="请输入文章标题" name="title" class="form-control">
+            <input type="text" placeholder="Question tittle" name="title" class="form-control">
         </div>
         <div class="form-group">
-            <textarea name="content" rows="10" placeholder="请编写文章内容" class="form-control" ></textarea>
+            <textarea name="content" rows="10" placeholder="Content" class="form-control" ></textarea>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary">发布</button>
+            <button class="btn btn-primary">Submit</button>
         </div>
 
     </div>

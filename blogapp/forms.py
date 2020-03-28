@@ -1,13 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, DateField, PasswordField, BooleanField, SubmitField, validators
 from wtforms.validators import DataRequired
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
-from blogapp import db
-from blogapp.models import Employee
 
-from wtforms import form, fields, validators, widgets
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from blogapp import app, db
+from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
+from blogapp.models import Employee, NewAppointment, Customer, Id, ConfigurationC, ConfigurationE, AnswerQuestion, \
+    Question
 
 def possible_doc():
     return Employee.query
@@ -34,3 +33,18 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Sign In')
+
+
+class ConfigurationFormC(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    Email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    Phone = StringField('Phone', validators=[DataRequired()])
+    submit = SubmitField('Confirm')
+
+class ConfigurationFormE(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    Email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    Phone = StringField('Phone', validators=[DataRequired()])
+    submit = SubmitField('Confirm')

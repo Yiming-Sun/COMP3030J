@@ -1,7 +1,13 @@
+import base64
+import io
+from tkinter import Image
+
 from blogapp import app, db
 from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
 from blogapp.forms import AppointmentForm, LoginForm
-from blogapp.models import Employee, NewAppointment, Customer, Id, Question, AnswerQuestion
+from blogapp.models import Employee, NewAppointment, Customer, Id, ConfigurationC, ConfigurationE, Question, \
+    AnswerQuestion
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from blogapp.config import Config
 import os
@@ -16,6 +22,30 @@ def index():
 
 @app.route('/New_appointment', methods=['GET', 'POST'])
 def New_appointment():
+    un = session.get('USERNAME')
+    Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+    ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    if userC is not None:
+        if Conc is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    if userE is not None:
+        if ConE is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+
     form = AppointmentForm()
     if not session.get("USERNAME") is None:
         if form.validate_on_submit():
@@ -31,29 +61,53 @@ def New_appointment():
             db.session.add(appointment)
             db.session.commit()
             flash('done')
-            return redirect(url_for('My_appointment'))
+            return render_template('My_appointment.html', img=img)
+    else:
+        return redirect(url_for('index'))
 
-    return render_template('New_appointment.html', title='Home', form=form)
+    return render_template('New_appointment.html', title='Home', form=form, img=img)
 
 
 @app.route('/My_appointment')
 def My_appointment():
     if not session.get("USERNAME") is None:
-        print(session.get("USERNAME"))
+        un = session.get('USERNAME')
+        Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+        if Conc is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+
+        # print(session.get("USERNAME"))
         my_appointments = NewAppointment.query.filter(NewAppointment.user_id == session.get("USERNAME")).all()
-        return render_template('My_appointment.html', title='Home', my_appointments=my_appointments)
+        return render_template('My_appointment.html', title='Home', my_appointments=my_appointments, img=img)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
 
+
 @app.route('/Doc_appointment', methods=['GET', 'POST'])
 def Doc_appointment():
     if not session.get("USERNAME") is None:
-        print(session.get("USERNAME"))
+        un = session.get('USERNAME')
+        ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+        if ConE is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        # print(session.get("USERNAME"))
         my_e = Employee.query.filter(Employee.username == session.get("USERNAME")).first()
-        print(my_e)
+        # print(my_e)
         my_appointments = NewAppointment.query.filter(NewAppointment.doctor == my_e.id).all()
-        return render_template('Appointment_doc.html', title='Home', my_appointments=my_appointments)
+        return render_template('Appointment_doc.html', title='Home', my_appointments=my_appointments, img=img)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
@@ -79,11 +133,12 @@ def sign_in_c():
         if (check_password_hash(user_in_db.password_hash, form.password.data)):
             flash('Login success!')
             session["USERNAME"] = user_in_db.username
-            session["type"] = "customer"
+            session["type"] ='customer'
             return redirect(url_for('My_appointment'))
         flash('Incorrect Password')
         return redirect(url_for('index'))
     return render_template('sign_in.html', title='Sign In', form=form)
+
 
 @app.route('/login_d', methods=['GET', 'POST'])
 def sign_in_d():
@@ -93,25 +148,231 @@ def sign_in_d():
         if not doc_in_db:
             flash("No user found with username: {}")
             flash('No user found with username: {}'.format(form.username.data))
-            return redirect(url_for('sign_in'))
+            return redirect(url_for('sign_in_d'))
         if (check_password_hash(doc_in_db.password_hash, form.password.data)):
             flash('Login success!')
             session["USERNAME"] = doc_in_db.username
-            session["type"] = "employee"
+            session["type"] = 'employee'
             print('sdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             return redirect(url_for('Doc_appointment'))
         flash('Incorrect Password')
         return redirect(url_for('index'))
     return render_template('sign_in.html', title='Sign In', form=form)
 
+
 @app.route('/sign_up')
 def sign_up():
     return render_template('sign_up.html', title='Home')
 
 
+@app.route('/Configuration', methods=['GET', 'POST'])
+def Configuration():
+    un = session.get('USERNAME')
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+    ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+    if userC is not None:
+        if request.method == "GET":
+            if Conc is not None:
+                u = Conc.username
+                e = Conc.email
+                p = Conc.password_hash
+                ph = Conc.phone
+                l = Conc.Location
+                t = Conc.times
+
+                # add new photo
+                # https://blog.csdn.net/ZWX2445205419/article/details/94441146
+                img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+                figfile = io.BytesIO(open(img_path, 'rb').read())
+                img = base64.b64encode(figfile.getvalue()).decode('ascii')
+                print(1)
+
+                return render_template('ConfigurationC.html', u=u, e=e, p=p, ph=ph, l=l, t=t, img=img)
+
+        if request.method == "GET":
+            if Conc is None:
+                u = userC.username
+                e = userC.email
+                p = userC.password_hash
+                ph = userC.phone
+                l = None
+                t = 0
+                # add new photo
+                # https://blog.csdn.net/ZWX2445205419/article/details/94441146
+                img_path = 'blogapp/static/upload_photo/default.jpg'
+                figfile = io.BytesIO(open(img_path, 'rb').read())
+                img = base64.b64encode(figfile.getvalue()).decode('ascii')
+                print(2)
+                return render_template('ConfigurationC.html', u=u, e=e, p=p, ph=ph, l=l, t=t, img=img)
+
+        if request.method == "POST":
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['pass']
+            phone = request.form['phone']
+            Location = request.form['Location']
+            times = request.form['times']
+
+            up = Config.UPLOAD
+            file = request.files.get('file')
+            if file is not "":
+                filename = session.get("USERNAME") + '.jpg'
+                file.save(os.path.join(up, filename))
+            flash('photo upload sucessfully')
+
+            passw_hash = generate_password_hash(password)
+
+            Cnow = Customer.query.filter(Customer.username == un).first()
+            Cnow.username = username
+            Cnow.email = email
+            Cnow.phone = phone
+            Cnow.passw_hash = passw_hash
+
+            db.session.commit()
+
+            if Conc is not None:
+                Conc.username = username
+                Conc.email = email
+                Conc.phone = phone
+                Conc.passw_hash = passw_hash
+                Conc.Location = Location
+                Conc.times = times
+
+                db.session.commit()
+            else:
+                new = ConfigurationC(username=username, email=email, phone=phone, password_hash=passw_hash,
+                                     Location=Location, times=times)
+                db.session.add(new)
+                db.session.commit()
+            print(3)
+            flash("Your Configuration has been changed sucessfully1")
+            return redirect(url_for('My_appointment'))
+
+
+
+
+
+
+
+
+
+
+
+
+    elif userE is not None:
+        if request.method == "GET":
+            if ConE is not None:
+                u = ConE.username
+                e = ConE.email
+                p = ConE.password_hash
+                ph = ConE.phone
+                an = ConE.animal
+                wo = ConE.workplace
+                l = ConE.Location
+                t = ConE.times
+                # add new photo
+                # https://blog.csdn.net/ZWX2445205419/article/details/94441146
+                img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+                figfile = io.BytesIO(open(img_path, 'rb').read())
+                img = base64.b64encode(figfile.getvalue()).decode('ascii')
+                return render_template('ConfigurationE.html', u=u, e=e, p=p, ph=ph, an=an, wo=wo, l=l, t=t, img=img)
+        if request.method == "GET":
+            if ConE is not None:
+                u = userE.username
+                e = userE.email
+                p = userE.password_hash
+                ph = userE.phone
+                an = userE.animal
+                wo = userE.workplace
+                l = None
+                t = 0
+                # add new photo
+                # https://blog.csdn.net/ZWX2445205419/article/details/94441146
+                img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+                figfile = io.BytesIO(open(img_path, 'rb').read())
+                img = base64.b64encode(figfile.getvalue()).decode('ascii')
+                return render_template('ConfigurationE.html', u=u, e=e, p=p, ph=ph, an=an, wo=wo, l=l, t=t, img=img)
+
+        if request.method == "POST":
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['pass']
+            phone = request.form['phone']
+            animal = request.form['animal']
+            workplace = request.form['workplace']
+            Location = request.form['Location']
+            times = request.form['times']
+
+            up = Config.UPLOAD
+            file = request.files.get('file')
+            filename = session.get("USERNAME") + '.jpg'
+            file.save(os.path.join(up, filename))
+            flash('photo upload sucessfully')
+
+            passw_hash = generate_password_hash(password)
+
+            Enow = Employee.query.filter(Employee.username == un).first()
+            Enow.username = username
+            Enow.email = email
+            Enow.phone = phone
+            Enow.animal = animal
+            Enow.workplace = workplace
+            Enow.passw_hash = passw_hash
+
+            db.session.commit()
+
+            if ConE is not None:
+                ConE.username = username
+                ConE.email = email
+                ConE.phone = phone
+                ConE.animal = animal
+                ConE.workplace = workplace
+                ConE.passw_hash = passw_hash
+                ConE.Location = Location
+                ConE.times = times
+                db.session.commit()
+            else:
+                new = ConfigurationE(username=username, email=email, phone=phone, animal=animal, workplace=workplace,
+                                     password_hash=passw_hash, Location=Location, times=times)
+                db.session.add(new)
+                db.session.commit()
+
+            flash("Your Configuration has been changed sucessfully2")
+            return redirect(url_for('Doc_appointment'))
+    else:
+        flash("Who are you?????????")
+        return redirect(url_for('index'))
+    return render_template('Configuration.html', title="Configuration")
+
+
 @app.route('/appointment_type')
 def appointment_type():
-    return render_template('appointment_type.html', title="home")
+    un = session.get('USERNAME')
+    Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+    ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    if userC is not None:
+        if Conc is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    if userE is not None:
+        if ConE is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    return render_template('appointment_type.html', title="home",img=img)
 
 
 @app.route('/signupC', methods=['GET', 'POST'])
@@ -132,7 +393,9 @@ def signupC():
                 db.session.add(user)
                 db.session.commit()
                 session['USERNAME'] = username
-                print(session['USERNAME'])
+                flash('photo upload sucessfully')
+                flash('photo upload sucessfully')
+                # print(session['USERNAME'])
                 return redirect(url_for('appointment_type'))
             else:
                 # print(username + " " + email + " " + pass1 + " " + pass2 + " " + phone + " ")
@@ -184,38 +447,44 @@ def signupE():
     return render_template('signupE.html')
 
 
-@app.route('/upload/', methods=['POST', 'GET'])
-def upload():
-    if request.method == 'POST':
-        # 获取用户上传的文件对象
-        f = request.files['faceImg']
-        # 获取上传文件的文件名
-        # print(f.filename)
-        # 获取当前项目的目录位置;
-        basepath = os.path.dirname(__file__)
-        # print(__file__)       # /root/PycharmProjects/day34/app.py
-        # print(basepath)       # /root/PycharmProjects/day34
-        # /root/PycharmProjects/day34/static/img/face/xxx.png
-        # 拼接路径， 保存到本地的位置;
-        filepath = os.path.join(basepath, 'static', 'img', 'face', f.filename)
-
-        # 保存文件
-        f.save(filepath)
-        flash("上传文件%s成功" % (f.filename))
-        return redirect(url_for('upload'))
-    else:
-        return render_template('upload.html')
 
 
 def tsest():
     print("right")
 
+
 @app.route('/question', methods=['POST', 'GET'])
 def question():
+    un = session.get('USERNAME')
+    Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+    ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    if userC is not None:
+        if Conc is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    if userE is not None:
+        if ConE is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    #         上面冗余用来查找头像
     if request.method == 'GET':
 
         question_ground = Question.query.filter().all()
-        return render_template('Question.html',question_ground=question_ground)
+        my_question = Question.query.filter(Question.author_name == un).all()
+        question_num = len(my_question)
+        return render_template('Question.html',question_ground=question_ground,img=img,my_question=my_question,question_num=question_num)
     else:
         title = request.form.get('title')
         content = request.form.get('content')
@@ -237,12 +506,44 @@ def question():
 
 @app.route('/question_detail/<int:question_id>',methods=['GET','POST'])
 def question_detail(question_id):
+    un = session.get('USERNAME')
+    Conc = ConfigurationC.query.filter(ConfigurationC.username == un).first()
+    ConE = ConfigurationE.query.filter(ConfigurationE.username == un).first()
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    if userC is not None:
+        if Conc is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if Conc is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    if userE is not None:
+        if ConE is not None:
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+        if ConE is None:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+            figfile = io.BytesIO(open(img_path, 'rb').read())
+            img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    #         上面冗余用来查找头像
+
+
+
     print("cccccccccccccccccc")
     user2 = Question.query.filter(Question.id == question_id).first().author
+    # 问题都是用户Customer提出的
     # print('tttttttttttttttt'+session.get('USERNAME'))
     temp=session.get('USERNAME')
+    type=session.get('type')
+    if type == 'employee':
+        user = Employee.query.filter(Employee.username == temp).first()
+    else:
+        user = Customer.query.filter(Customer.username == temp).first()
     print('temp' + temp)
-    user = Employee.query.filter(Employee.username == temp).first()
     # question_num = len(user2.realquestions)
     # answer_num = len(user2.realanswer)
     # article_num = len(user2.questions)
@@ -251,10 +552,9 @@ def question_detail(question_id):
             'question': Question.query.filter(Question.id == question_id).first(),
             # 'question_num': question_num,
             # 'answer_num': answer_num,
-
             # 'article_num': article_num
     }
-    return render_template('Question_detail.html', user2=user2,user=user,**context)
+    return render_template('Question_detail.html', user2=user2,user=user,**context,img=img)
 
 
 
@@ -264,9 +564,10 @@ def add_answer():
     question_id=request.form.get('question_id')
     answer=AnswerQuestion(content=content)
     name=session.get('USERNAME')
+    type=session.get('type')
 
-    employee= Employee.query.filter(Employee.username == name).first()
-    if employee is not None:
+    if type =='employee':
+        employee = Employee.query.filter(Employee.username == name).first()
         question=Question.query.filter(Question.id==question_id).first()
         answer.question=question
         answer.author=employee
@@ -274,12 +575,7 @@ def add_answer():
         db.session.commit()
         return redirect(url_for('question_detail',question_id=int(question_id)))
     else:
-        # question = Question.query.filter(Question.id == question_id).first()
-        # answer.question = question
-        # answer.author = Customer.query.filter(Customer.username == name).first()
-        # db.session.add(answer)
-        # db.session.commit()
-        print("no permission")
+        print('don t have the permission');
         return redirect(url_for('question_detail', question_id=int(question_id)))
 
 
@@ -293,12 +589,11 @@ def delete_answer():
     return redirect(url_for('question_detail',question_id=int(question_id)))
 
 
+
 @app.route('/someone_detail/<username>',methods=['GET','POST'])
 def someone_detail(username):
     # print("ssssssssssssssssssss")
     user2=Customer.query.filter(Customer.username==username).first()
-    # touxiang='uploads/'+user2.telephone+'头像'+'.jpg'
-    # image='uploads/'+user2.telephone+'背景'+'.jpg'
     question_num=len(user2.realquestions)
     answer_num=len(user2.realanswer)
     article_num=len(user2.questions)
@@ -310,3 +605,16 @@ def someone_detail(username):
     }
     return redirect(url_for('question'))
     # return render_template('Question_detail.html',image=image,user2=user2,user=g.user,touxiang=touxiang,**context)
+
+# @app.route('/getSession/', methods=['GET', 'POST'])
+# def getSession():
+#     print(session.get('USERNAME'))
+#     return session.get('USERNAME')
+@app.route('/delete_question/',methods=['POST'])
+def delete_question():
+    question_id=request.form.get('question_id')
+
+    question=Question.query.filter(Question.id==question_id).first()
+    db.session.delete(question)
+    db.session.commit()
+    return redirect(url_for('question'))
