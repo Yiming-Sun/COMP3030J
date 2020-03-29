@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, DateField, PasswordField, BooleanField, SubmitField, validators
 from wtforms.validators import DataRequired
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-
+from sqlalchemy import and_
 from blogapp import db
 from blogapp.models import Employee
 
@@ -32,9 +32,10 @@ class AppointmentForm(FlaskForm):
     comment = StringField('Symptom')
     submit = SubmitField('Submit')
 
-    def __init__(self, *args, **kwargs):
-        super(AppointmentForm, self).__init__(*args, **kwargs)
-        self.doctor.choices = [(v.id, v.username) for v in Employee.query.filter(Employee.animal == "Dog").all()]
+    def select_doctor(self, place):
+        # super(AppointmentForm, self).__init__(*args, **kwargs)
+        self.doctor.choices = [(v.id, v.username) for v in Employee.query.filter(and_(Employee.animal == "Dog", Employee.workplace == place)).all()]
+
 
 
 # Yiming Sun(2020/3/14)
@@ -52,9 +53,12 @@ class UrgentAppointment(FlaskForm):
     comment = StringField('Symptom')
     submit = SubmitField('Submit')
 
-    def __init__(self, *args, **kwargs):
-        super(UrgentAppointment, self).__init__(*args, **kwargs)
-        self.doctor.choices = [(v.id, v.username) for v in Employee.query.filter(Employee.animal == "Dog").all()]
+    # def __init__(self, *args, **kwargs):
+    #     super(UrgentAppointment, self).__init__(*args, **kwargs)
+    #     self.doctor.choices = [(v.id, v.username) for v in Employee.query.filter(Employee.animal == "Dog").all()]
+    def select_doctor(self, place):
+        # super(AppointmentForm, self).__init__(*args, **kwargs)
+        self.doctor.choices = [(v.id, v.username) for v in Employee.query.filter(and_(Employee.animal == "Dog", Employee.workplace == place)).all()]
 
 
 class LoginForm(FlaskForm):

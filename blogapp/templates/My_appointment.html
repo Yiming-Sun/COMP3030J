@@ -183,26 +183,20 @@
                     <td class="text-center apt" style="display: none">{{appointment.app_type}}</td>
                     <td class="text-center appointment_id">{{appointment.id}}</td>
                     <td class="text-center">{{appointment.date}}</td>
-                    <td class="text-center">{% if appointment.petType==1 %}
+                    <td class="text-center">{% if appointment.petType==2 %}
                             cat
-                        {%  elif appointment.petType==2  %}
+                        {%  elif appointment.petType==1  %}
                             dog
                         {% endif %}</td>
                     <td class="text-center">{{appointment.petName}}</td>
-                    <td class="text-center">
-                        {% if appointment.doctor==1 %}
-                            Allen
-                        {%  elif appointment.doctor==2  %}
-                            Fred
-                        {% endif %}
-                    </td>
+                    <td class="text-center">{{appointment.doctor}}</td>
 
                     <td class="text-center condition">
                         {{ condition_dict | getCondition(appointment.condition) }}
                     </td>
                     <td class="text-center op_date">{{appointment.op_date}}</td>
                     <td>
-                        <a href="#"><button class="btn btn-default appform_button ">Information</button></a>
+                        <a href="{{ url_for('appointment_detail', id=appointment.id, type=appointment.app_type) }}"><button class="btn btn-default appform_button ">Information</button></a>
                         <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button bt_trace"> Trace</button></a>
                         {% if appointment.app_type ==1 %}
 

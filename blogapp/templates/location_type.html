@@ -1,0 +1,65 @@
+<!--Yiming Sun(2020/3/27)-->
+{% extends "logged_base.html" %}
+
+
+{% block scripts %}
+    {{super()}}
+    <script>
+        $(function () {
+           $('.btn').click(function () {
+
+               let place = $(this).children("h3").text();
+               $.ajax({
+                   url:'/location_type',
+                   type:'GET',
+                   data:{"place":place},
+                   success:function (data) {
+                       console.log(data);
+                   },
+                   error:function () {
+
+                   }
+               });
+
+           });
+
+        });
+    </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container col-lg-offset-2 col-lg-8" style="margin-top: 100px">
+        <div style="margin-top: 100px;">
+            <h1 class="text-center">
+                <b>Please choose your location:</b>
+            </h1>
+        </div>
+
+        <div class="container col-lg-3" style="margin-top: 80px;">
+            <a class="btn btn-default" href="{{ url_for('appointment_type', place='Beijing') }}" role="button" style="border: 2px solid black;border-radius:30px;">
+                <h3 class="text-center">Beijing</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+            </a>
+        </div>
+
+        <div class="container col-lg-offset-1 col-lg-3" style="margin-top: 80px;">
+            <a class="btn btn-default" href="{{ url_for('appointment_type', place='Shanghai') }}" role="button" style="border: 2px solid black;border-radius:30px;">
+                <h3 class="text-center">Shanghai</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+            </a>
+        </div>
+
+        <div class="container col-lg-offset-1 col-lg-3" style="margin-top: 80px;">
+            <a class="btn btn-default" href="{{ url_for('appointment_type', place='Chengdu') }}" role="button" style="border: 2px solid black;border-radius:30px;">
+                <h3 class="text-center">Chengdu</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+
+            </a>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -2,11 +2,12 @@ from blogapp import app, db
 from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
 from blogapp.forms import AppointmentForm, LoginForm, UrgentAppointment
 from blogapp.models import Employee,NewAppointment, Customer,Id, AlchemyJsonEncoder
-
+from sqlalchemy import and_
 from werkzeug.security import generate_password_hash, check_password_hash
 from blogapp.config import Config
 import os
 import json
+import datetime
 
 
 petT = {
@@ -24,10 +25,7 @@ condition_dict = {
     7:"out"
 }
 
-doctorN = {
-    "1": "Allen",
-    "2": "Fred"
-}
+doctorN = {}
 
 
 #自定义过滤器
@@ -66,7 +64,8 @@ def appointment_modify(id):
         else:
 
             form.applicant.data = appointment.applicant
-            #form.date.data = appointment.date
+            date_str = appointment.date
+            form.date.data = datetime.date(*map(int,date_str.split('-')))
             form.petType.data = appointment.petType
             form.petName.data = appointment.petName
             form.doctor.data = appointment.doctor
@@ -74,6 +73,44 @@ def appointment_modify(id):
             form.comment.data = appointment.comment
 
         return render_template('appointment_modify.html',form=form)
+    else:
+        flash("User needs to either login or signup first")
+        return redirect(url_for('sign_in'))
+
+
+@app.route('/appointment_detail/<int:id><int:type>')
+def appointment_detail(id,type):
+
+    if not session.get("USERNAME") is None:
+        if type == 1:
+            form = AppointmentForm()
+            appointment = NewAppointment.query.filter(NewAppointment.id == id).first()
+            form.applicant.data = appointment.applicant
+            date_str = appointment.date
+            form.date.data = datetime.date(*map(int,date_str.split('-')))
+            form.petType.data = appointment.petType
+            form.petName.data = appointment.petName
+            form.doctor.data = appointment.doctor
+            form.phoneNo.data = appointment.phoneNo
+            form.comment.data = appointment.comment
+
+
+        else:
+            form = UrgentAppointment()
+            appointment = NewAppointment.query.filter(NewAppointment.id == id).first()
+            form.applicant.data = appointment.applicant
+            date_str = appointment.date
+            form.date.data = datetime.date(*map(int,date_str.split('-')))
+            form.petType.data = appointment.petType
+            form.petName.data = appointment.petName
+            form.doctor.data = appointment.doctor
+            date_str = appointment.op_date
+            form.operationDate.data = datetime.date(*map(int,date_str.split('-')))
+            form.operationTime.data = appointment.op_time
+            form.phoneNo.data = appointment.phoneNo
+            form.comment.data = appointment.comment
+
+        return render_template('appointment_detail.html',form=form)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('sign_in'))
@@ -99,10 +136,13 @@ def appointment_urgent_modify(id):
         else:
 
             form.applicant.data = appointment.applicant
-            #form.date.data = appointment.date
+            date_str = appointment.date
+            form.date.data = datetime.date(*map(int,date_str.split('-')))
             form.petType.data = appointment.petType
             form.petName.data = appointment.petName
             form.doctor.data = appointment.doctor
+            date_str = appointment.op_date
+            form.operationDate.data = datetime.date(*map(int,date_str.split('-')))
             form.operationTime.data = appointment.op_time
             form.phoneNo.data = appointment.phoneNo
             form.comment.data = appointment.comment
@@ -140,10 +180,12 @@ def appointment_trace(id,condition):
 @app.route('/New_appointment', methods=['GET', 'POST'])
 def New_appointment():
     form = AppointmentForm()
+    form.select_doctor(session.get("PLACE"))
     if not session.get("USERNAME") is None:
-
+        print(session.get("PLACE"))
 
         if form.validate_on_submit():
+            print("iasdiasdnaidsiandodaksnsa")
             name = form.applicant.data
             date = form.date.data
             petType = form.petType.data
@@ -159,14 +201,14 @@ def New_appointment():
             return redirect(url_for('My_appointment'))
 
         elif request.method == "POST":
-
+            print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             type = request.values.get("type")
-            print(petT[type])
-            doctors = Employee.query.filter(petT[type] == Employee.animal).all()
+            #print(petT[type])
+            doctors = Employee.query.filter(and_(petT[type] == Employee.animal, session.get("PLACE") == Employee.workplace)).all()
             name_list = []
             for doctor in doctors:
                 name_list.append(doctor.username)
-            print(name_list)
+            #print(name_list)
             return json.dumps(name_list, ensure_ascii=False)
 
     return render_template('New_appointment.html', title='Home',form=form)
@@ -175,6 +217,7 @@ def New_appointment():
 @app.route('/Urgent_appointment', methods=['GET', 'POST'])
 def Urgent_appointment():
     form = UrgentAppointment()
+    form.select_doctor(session.get("PLACE"))
     if not session.get("USERNAME") is None:
 
 
@@ -199,7 +242,7 @@ def Urgent_appointment():
 
             type = request.values.get("type")
             print(petT[type])
-            doctors = Employee.query.filter(petT[type] == Employee.animal).all()
+            doctors = Employee.query.filter(and_(petT[type] == Employee.animal, session.get("PLACE") == Employee.workplace)).all()
             name_list = []
             for doctor in doctors:
                 name_list.append(doctor.username)
@@ -231,8 +274,7 @@ def My_appointment():
                 petName = request.values.get("pet_name")
                 if len(petName) == 0:
                     items = NewAppointment.query.filter(NewAppointment.user_id == session.get("USERNAME")).all()
-                    print("1111111111111111")
-                    print(items)
+
                 else:
                     items = NewAppointment.query.filter(NewAppointment.petName == petName).all()
                 data = NewAppointment.to_json(items)
@@ -295,7 +337,7 @@ def sign_in_c():
             flash('Login success!')
             session["USERNAME"] = user_in_db.username
             session["USERTYPE"] = "customer"
-            return redirect(url_for('appointment_type'))
+            return redirect(url_for('location_type'))
         flash('Incorrect Password')
         return redirect(url_for('index'))
     return render_template('sign_in.html', title='Sign In', form=form)
@@ -323,9 +365,15 @@ def sign_up():
     return render_template('sign_up.html', title='Home')
 
 
-@app.route('/appointment_type')
-def appointment_type():
+@app.route('/appointment_type/<place>')
+def appointment_type(place):
+    session["PLACE"] = place
     return render_template('appointment_type.html', title="home")
+
+
+@app.route('/location_type')
+def location_type():
+    return render_template('location_type.html', title="home")
 
 
 @app.route('/signupC', methods=['GET', 'POST'])
