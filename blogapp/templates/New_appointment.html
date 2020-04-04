@@ -1,4 +1,130 @@
+<!--Yiming Sun(2020/3/14)-->
 {% extends "logged_base.html" %}
+
+{% block styles %}
+    {{ super() }}
+
+    <style>
+
+    </style>
+
+{%  endblock %}
+
+
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+
+        let myDate = new Date;
+        let year = myDate.getFullYear();
+        let month = (myDate.getMonth()+1)<10?"0"+(myDate.getMonth()+1):(myDate.getMonth()+1);
+        let date = myDate.getDate()<10?"0"+myDate.getDate():myDate.getDate();
+
+        function GetDateStr(AddDays) {
+            let today = new Date();
+            today.setDate(today.getDate()+AddDays);//获取AddDays天后的日期
+            let y = today.getFullYear();
+            let m = (today.getMonth()+1)<10?"0"+(today.getMonth()+1):(today.getMonth()+1);//获取当前月份的日期，不足10补0
+            let d = today.getDate()<10?"0"+today.getDate():today.getDate();//获取当前几号，不足10补0
+　　　　
+            return y+"-"+m+"-"+d;
+　　}
+
+    $('#date').datepicker({
+        weekStart: 1,
+        autoclose: true,
+        daysOfWeekHighlighted: "0,6",
+        todayHighlight: true,
+        startDate: GetDateStr(4),
+        endDate: GetDateStr(10),
+        format: "yyyy-mm-dd",
+        language: "zh-CN"
+    });
+
+    $(function(){
+
+        $("#applicant").attr({disabled:"disabled"});
+        $("#phoneNo").attr({disabled:"disabled"});
+
+        $("#doctor").attr({runat:"server"});
+
+        $('#petType').change(function(){
+            let type = $('#petType').val();
+
+            let doctors = $('#doctor');
+            $.ajax({
+                url:"/New_appointment",
+                type:"POST",
+                data:({"type":type}),
+                success:function (data) {
+                    console.log(data);
+
+                    //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
+                    doctors.children().remove();
+                    // for (let i=0; i<selects.length; i++){
+                    //     let a = $('<option></option>');
+                    //     a.text(selects[i]);
+                    //     a.attr({value:selects[i]});
+                    //     console.log(a);
+                    //     doctors.append(a);
+                    // }
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        doctors.append(a);
+                    }
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+
+    });
+
+
+    $(function () {
+        $('#date').change(function () {
+
+            let date_selected = $("#date").val();
+            $.ajax({
+                url:"/New_appointment",
+                type:"POST",
+                data:({"date": date_selected}),
+                success:function (data) {
+                    console.log(data);
+                    //let av_times = JSON.parse(data);//JSON字符串转换为JSON对象
+                    $('#appointment_time').children().remove();
+                    // for (let i=0; i<data.length; i++){
+                    //     let a = $('<option></option>');
+                    //     a.text(data[i]);
+                    //     a.attr({value:i});
+                    //     $('#appointment_time').append(a);
+                    // }
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        $('#appointment_time').append(a);
+                    }
+
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+    })
+
+
+    </script>
+{%  endblock %}
+
+
 {% block content %}
 
 <div class="container" style="margin-top: 100px">

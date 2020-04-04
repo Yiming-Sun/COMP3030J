@@ -1,5 +1,47 @@
 {% extends "logged_base.html" %}
-{% block content %}
 
+{% block scripts %}
+{{super()}}
+
+    <script>
+
+        $(document).ready(function () {
+            let p = $("#photo");
+            p.attr({src:"data:;base64,{{ img }}"});
+            // p.src = "blogapp/Picture/home2.jpg";
+            // let aa = $("#a");
+            // aa.src = "blogapp/Picture/home2.jpg";
+            // var p = document.getElementById("photo");
+            // p.src = "data:;base64,{{ img }}";
+
+            $("#picture").change(function () {
+                let file = this.files[0];
+                if (window.FileReader) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    //监听文件读取结束后事件
+                    reader.onloadend = function (e) {
+                        //e.target.result就是最后的路径地址
+                        $("#photo").attr("src", e.target.result);
+                    };
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block content %}
+<div class="container" style="margin-top: 100px">
+    <div class="row">
+        <div class="col-lg-4" style="float: left">
+
+            <img src="../static/Picture/default.jpg" alt="#Your photo" class="img-circle"
+                 style="height: 200px;width: 200px;margin-top: 10px" id="photo" name="photo">
+        </div>
+         <div class="col-md-6 " style="float: left;margin: 60px 0px">
+            {% import 'bootstrap/wtf.html' as wtf%}
+             {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
 

@@ -1,38 +1,254 @@
 {% extends "logged_base.html" %}
 
 
+<!--Yiming Sun(2020/3/14)-->
+{% block scripts %}
+{{super()}}
+
+    <script>
+        function changeURLArg(url,arg,arg_val){
+        var pattern=arg+'=([^&]*)';
+        var replaceText=arg+'='+arg_val;
+        if(url.match(pattern)){
+            var tmp='/('+ arg+'=)([^&]*)/gi';
+            tmp=url.replace(eval(tmp),replaceText);
+            return tmp;
+        }else{
+            if(url.match('[\?]')){
+                return url+'&'+replaceText;
+            }else{
+                return url+'?'+replaceText;
+            }
+        }
+    }
+        function UpdateURL(name,val,id){
+            let target = id.href();
+            target = target+"?"+name+"="+val;
+            $(id).href(target);
+        }
 
 
+         $(document).ready(function () {
+            console.log("asd");
+            $('tbody>tr').each(function () {
+                if ($(this).children('.apt').text()=="2"){
+                    $(this).css({"color": "red"});
+                }
+            });
+
+            $('tbody>tr').each(function () {
+                // console.log("--"+$(this).children('.condition').text()+"--");
+                // console.log("--"+$(this).children('.op_date').text()+"--");
+                if ($(this).children('.condition').text() == "3"  && $(this).children('.op_date').text() == "None"){
+                    let o = $('<span class="badge badge-danger">1</span>');
+                    // console.log($(this).children('td').children('.bt_trace').val());
+                    $(this).children('td').children('a').children('.bt_trace').append(o);
+                }
+            });
+
+            $('button').each(function(){
+                $(this).css({"margin":"0px 30px"})
+            });
+        });
+
+        $(function(){
+            // let path = $("#img_path").text();
+            // console.log(path);
+            // $("#pp").attr({src:path });
+
+            let del =0;
+            $(".delete_btn").click(function(){
+
+                del = $(this).parent().parent();
+                console.log(del);
+            });
+
+
+
+           $("#delbtn").click(function () {
+
+                console.log(del.children(".appointment_id"))
+                let a = del.children(".appointment_id");
+
+
+               $.ajax({
+                   url:"/My_appointment",
+                   type:"POST",
+                   data:{"appointment_id":a.text(), "type":"delete"},
+                   success:function (data) {
+                       del.remove();
+                       del = 0;
+                       console.log(data);
+                   },
+                   error:function () {
+
+                   }
+               })
+           });
+
+
+            $("#search_item").click(function(){//搜寻功能
+                let petName = $("#pet_name").val();
+                console.log(petName);
+                $.ajax({
+                   url:"/My_appointment",
+                   type:"POST",
+                   data:{"pet_name":petName,"type":"query"},
+                   success:function (data) {
+                       let d = JSON.parse(data);//JSON字符串转换为JSON对象
+
+                       $(".row_content").remove();
+                       for (let i=0; i<d.length; i++){
+                           console.log(d[i]);
+
+                           let tr = $('<tr class="row_content"></tr>');
+                           let id = $('<td class="text-center appointment_id"></td>');
+                           id.text(d[i]["id"]);
+
+                           tr.append(id);
+                           let date = $('<td class="text-center"></td>');
+                           date.text(d[i]["date"]);
+                           tr.append(date);
+                           let petType = $('<td class="text-center"></td>');
+                           if (d[i]["date"] == 1){
+                               petType.text("cat");
+                           }
+                           else{
+                               petType.text("dog");
+                           }
+                           tr.append(petType);
+                           let petName = $('<td class="text-center"></td>');
+                           petName.text(d[i]["petName"]);
+                           tr.append(petName);
+                           let doctor = $('<td class="text-center"></td>');
+                           doctor.text("Allen");
+                           tr.append(doctor);
+
+                           let condition = $('<td class="text-center"></td>');
+                           condition.text(d[i]["condition"]);
+                           tr.append(condition);
+                           let op_date = $('<td class="text-center"></td>');
+                           op_date.text(d[i]["op_date"]);
+                           tr.append(op_date);
+                           if(op_date.text() == "null"){
+                               op_date.text("None");
+                           }
+                           else{
+                               op_date.parent().css({"color": "red"});
+                           }
+                           let bt_info = $('<a href="#"><button class="btn btn-default appform_button ">Information</button></a>');
+                           bt_info.css({"margin":"0px 30px"});
+                           bt_info.attr({href:"/appointment_detail/"+d[i]["id"]+d[i]["app_type"]});
+
+
+                           let bt_trace = $('<a><button class="btn btn-primary appform_button">Trace</button></a>');
+                           bt_trace.attr({href:"/appointment_trace/"+d[i]["id"]+d[i]["condition"]});
+
+                           bt_trace.css({"margin":"0px 30px"});
+                           let bt_modify= $('<a><button class="btn btn-success appform_button">Modify</button></a>');
+
+                           bt_modify.attr({href:"/appointment_modify/"+d[i]["id"]});
+
+                           bt_modify.css({"margin":"0px 30px"});
+                           let bt_del = $('<button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>');
+                           bt_del.css({"margin":"0px 30px"});
+                           let operation = $('<td></td>');
+
+                           operation.append(bt_info);
+                           operation.append(bt_trace);
+                           operation.append(bt_modify);
+                           operation.append(bt_del);
+                           tr.append(operation);
+                            $("table>tbody").append(tr);
+
+                       }
+
+                   },
+                   error:function () {
+
+                   }
+               })
+            });
+
+
+        })
+    </script>
+{% endblock %}
+
+
+<!--Yiming Sun(2020/3/14)-->
 {% block content %}
+
 
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
 
-    <table class="table table-striped table-bordered table-hover">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="pet_name">pet name:</label>
+            <input id="pet_name" class="form-control" type="text" name="pet_name" placeholder="Search">
+            <input id="search_item" class="btn btn-default" type="button" value="submit">
+        </div>
+    </form>
+
+
+
+
+    <table id="data_table" class="table table-striped table-bordered table-hover" style="margin-top: 30px">
         <thead>
             <tr>
                 <th class="text-center">Order No</th>
                 <th class="text-center">Order Date</th>
                 <th class="text-center">Pet Type</th>
+                <th class="text-center">Pet Name</th>
                 <th class="text-center">Attending doctor</th>
                 <th class="text-center">Condition</th>
+                <th class="text-center">Operation_date</th>
                 <th class="text-center">Operations</th>
+                <th class="text-center" style="display: none">type</th>
             </tr>
         </thead>
         {% if my_appointments %}
             <tbody>
                 {% for appointment in my_appointments %}
-                <tr>
-                    <td class="text-center">{{appointment.id}}</td>
+                <tr class="row_content">
+                    <td class="text-center apt" style="display: none">{{appointment.app_type}}</td>
+                    <td class="text-center appointment_id">{{appointment.id}}</td>
                     <td class="text-center">{{appointment.date}}</td>
-                    <td class="text-center">{{appointment.petType}}</td>
-                    <td class="text-center">{{appointment.doctor}}</td>
-                    <td class="text-center">暂无</td>
+                    <td class="text-center">{% if appointment.petType==2 %}
+                            cat
+                        {%  elif appointment.petType==1  %}
+                            dog
+                        {% endif %}</td>
+                    <td class="text-center">{{appointment.petName}}</td>
+                    <td class="text-center">{{ doct_list | getDoctor(appointment.doctor) }}</td>
+
+                    <td class="text-center condition">
+                        {{ condition_dict | getCondition(appointment.condition) }}
+                    </td>
+                    <td class="text-center op_date">{{appointment.op_date}}</td>
                     <td>
-                        <button class="btn btn-default appform_button"><a href="#">Information</a></button>
-                        <button class="btn btn-primary appform_button"><a>Trace</a></button>
-                        <button class="btn btn-success appform_button"><a>Modify</a></button>
+                        <a href="{{ url_for('appointment_detail', id=appointment.id, type=appointment.app_type) }}"><button class="btn btn-default appform_button ">Information</button></a>
+                        <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button bt_trace"> Trace</button></a>
+                        {% if appointment.app_type ==1 %}
+
+                            {% if appointment.condition >= 4 %}
+                            <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled">Modify</button></a>
+                            {% else %}
+                            <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button">Modify</button></a>
+                            {% endif %}
+                        {% else %}
+                            {% if appointment.condition >= 4 %}
+                            <a href="{{ url_for('appointment_urgent_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled">Modify</button></a>
+                            {% else %}
+                            <a href="{{ url_for('appointment_urgent_modify', id=appointment.id) }}"><button class="btn btn-success appform_button">Modify</button></a>
+                            {% endif %}
+                        {% endif %}
 <!--    data-toggle表示以什么事件触发， data-target表示事件的目标   -->
-                        <button id="operation" class="btn btn-danger appform_button" type="button" data-toggle="modal" data-target="#my" onclick=""><a>Delete</a></button>
+                        {% if appointment.condition != 1 %}
+                        <button class="btn btn-danger appform_button delete_btn" disabled="disabled" type="button" data-toggle="modal" data-target="#my">Delete</button>
+                        {% else %}
+                        <button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -43,16 +259,6 @@
 
     </table>
 
-
-<!--    <div class="modal-dialog col-lg-4 col-lg-offset-4" role="alert">-->
-<!--        <p class="text-center" style="font-size: large">do you want to delete?</p><br><br>-->
-<!--        <button type="button" class="close" data-dismiss="alert">-->
-<!--            <span >close</span>-->
-<!--        </button>-->
-<!--        <button type="button" class="close" data-dismiss="alert">-->
-<!--            <span style="color: red;margin-right: 10px">sure</span>-->
-<!--        </button>-->
-<!--    </div>-->
 
 
     <div class="modal fade" id="my" tabindex="-1" role="dialog">
@@ -66,7 +272,7 @@
                 </div>
                 <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                        <button id="delbtn" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                 </div>
             </div>
         </div>

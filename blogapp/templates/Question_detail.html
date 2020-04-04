@@ -1,5 +1,13 @@
 {% extends "logged_base.html" %}
 
+{% block scripts %}
+{{super()}}
+    <script>
+        $("#newAppointment").css({"display": "none"});
+        $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+    </script>
+
+{% endblock %}
 
 
 {%block content%}

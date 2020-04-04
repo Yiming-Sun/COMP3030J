@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} 上传文件 {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-lg-8 col-lg-offset-2">
+
+            <h1>上传头像</h1>
+            <hr/>
+            {#   enctype="multipart/form-data"用于接收特殊的数据， 包括视频， 图片， 音乐.....，
+
+           默认只能接收text/plain            #}
+            <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                <input name="faceImg" type="file"><br/>
+                <input type="submit" value="上传">
+            </form>
+        </div>
+    </div>
+{% endblock %}

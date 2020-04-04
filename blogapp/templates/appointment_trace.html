@@ -1,0 +1,262 @@
+{% extends "logged_base.html" %}
+
+
+
+{% block styles %}
+{{super()}}
+
+
+{% endblock %}
+
+
+{% block scripts %}
+{{super()}}
+
+    <script>
+        $(document).ready(function () {
+            let condition = $('#condition').text();
+            let id = $('#id').text();
+            let user_type = $('#user_type').text();
+
+            if (user_type == "employee"){
+                $('#newAppointment').css({"display":"none"});
+                $('#myAppointment').attr({href:"{{ url_for('Doc_appointment') }}"});
+            }
+
+
+            if (condition == 1){
+                if (user_type == "employee"){
+                    $('#hasArrival').css({"display":"block"});
+                }
+
+            }
+            else if (condition == 2){
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                if (user_type == "employee"){
+                    $('#finishDiagnose').css({"display":"block"});
+                }
+
+            }
+            else if(condition == 3){
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                if (user_type == "customer"){
+                    $('#shoushu').css({"display":"block"});
+                }
+            }
+            else if(condition == 4) {
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                if (user_type == "employee"){
+                    $('#finishOperation').css({"display": "block"});
+                }
+
+            }
+            else if(condition == 5){
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
+                if (user_type == "employee"){
+                    $('#makeMedicine').css({"display": "block"});
+                }
+
+            }
+            else if(condition == 6){
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
+                $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
+                if (user_type == "customer"){
+                    $('#fee').css({"display":"block"});
+                }
+
+            }
+            else if(condition == 7){
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
+                $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
+                $('#seventh').attr("src","../static/Picture/out.jpg");
+            }
+
+
+
+            $('#hasArrival').click(function(){//first
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"hasArrival"},
+                   success:function () {
+                       $('#hasArrival').css({"display":"none"});
+                       $('#finishDiagnose').css({"display":"block"});
+
+                       $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+
+            $('#finishDiagnose').click(function(){//second
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"finishDiagnose"},
+                   success:function () {
+                       $('#finishDiagnose').css({"display":"none"});
+
+                       $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+
+            $('#finishOperation').click(function(){//fourth
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"finishOperation"},
+                   success:function () {
+                       $('#finishOperation').css({"display":"none"});
+
+                       $('#fifth').attr("src","../static/Picture/finish_operating.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+            $('#makeMedicine').click(function(){//fifth
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"makeMedicine"},
+                   success:function () {
+                       $('#makeMedicine').css({"display":"none"});
+
+                       $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+
+            $('#fee').click(function(){//sixth
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"fee"},
+                   success:function () {
+                       $('#fee').css({"display":"none"});
+
+                       $('#seventh').attr("src","../static/Picture/out.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+
+
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+<p id="condition" style="display: none">{{condition}}</p>
+<p id="id" style="display: none">{{id}}</p>
+<p id="user_type" style="display: none">{{user_type}}</p>
+
+<div class="container" style="margin-top: 100px">
+    <div><h1 class="text-center">The Process Of Your Appointment:</h1></div>
+    <div style="margin: 100px 30px">
+
+        <div class="col-lg-2 " style="text-align: center">
+            <img id="first" class="img-responsive center-block img-rounded" src="../static/Picture/appoint_success.jpg"><br><br>
+            <p class="text-center">预约成功</p>
+            <button id="hasArrival" style="display: none">用户已到</button>
+        </div>
+        <div class="col-lg-1" style="text-align: center">
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
+        </div>
+        <div class="col-lg-2 " style="text-align: center">
+            <img id="second" class="img-responsive center-block img-rounded" src="../static/Picture/diagnosing_dark.jpg"><br><br>
+            <p class="text-center">确诊中</p>
+            <button id="finishDiagnose" style="display: none">诊断结束</button>
+        </div>
+        <div class="col-lg-1" style="text-align: center">
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
+        </div>
+        <div class="col-lg-2 " style="text-align: center">
+            <img id="third" class="img-responsive center-block img-rounded" src="../static/Picture/reserve_operation_dark.jpg"><br><br>
+            <p class="text-center">预约手术</p>
+
+            <div id="shoushu" style="text-align: center;display: none">
+                {% if app.op_date %}
+                <p>手术时间: {{ app.op_date }}</p>
+                <a href="{{ url_for('appointment_urgent_modify', id=id)}}"><button>去修改</button></a>
+                {% else %}
+                <p>手术时间: 未选定</p>
+                <a href="{{ url_for('appointment_urgent_modify', id=id)}}"><button>去预约</button></a>
+                {% endif %}
+
+
+            </div>
+        </div>
+        <div class="col-lg-1" style="text-align: center">
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
+        </div>
+        <div class="col-lg-2" style="text-align: center">
+            <img id="fourth" class="img-responsive center-block img-rounded" src="../static/Picture/operation_dark.jpg"><br><br>
+            <p class="text-center">手术中</p>
+            <button id="finishOperation" style="display: none">手术结束</button><br>
+            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="font-size: 50px;margin-top: 60px"></span>
+
+        </div><br>
+
+
+
+        <div class="col-lg-2 col-lg-offset-3" style="margin-top: 60px">
+            <img id="seventh" class="img-responsive center-block img-rounded" src="../static/Picture/out_dark.jpg"><br><br>
+            <p class="text-center">出院</p>
+        </div>
+        <div class="col-lg-1" style="text-align: center;margin-top: 60px">
+            <span class="glyphicon glyphicon-triangle-left" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
+        </div>
+        <div class="col-lg-2 " style="margin-top: 60px">
+            <img id="sixth" class="img-responsive center-block img-rounded" src="../static/Picture/pay_for_medicine_dark.jpg"><br><br>
+            <p class="text-center">取药交费</p>
+            <div style="text-align: center">
+                <a href="#"><button style="display: none" id="fee">去缴费</button></a>
+            </div>
+        </div>
+        <div class="col-lg-1" style="text-align: center;margin-top: 60px">
+            <span class="glyphicon glyphicon-triangle-left" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
+        </div>
+        <div class="col-lg-2" style="margin-top: 60px;text-align: center">
+            <img id="fifth" class="img-responsive center-block img-rounded" src="../static/Picture/finishing_operation_dark.jpg"><br><br>
+            <p class="text-center">手术结束</p>
+            <button style="display: none" id="makeMedicine">去开药</button>
+        </div><br>
+
+    </div>
+
+
+
+
+<!--    <div style="border: 1px solid black;margin-top: 500px">-->
+<!--        condition introduce-->
+<!--    </div>-->
+</div>
+
+{% endblock %}

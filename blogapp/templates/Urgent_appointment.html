@@ -1,0 +1,157 @@
+<!--Yiming Sun(2020/3/14)-->
+{% extends "logged_base.html" %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+
+        function GetDateStr(AddDays) {
+            let today = new Date();
+            today.setDate(today.getDate()+AddDays);//获取AddDays天后的日期
+            let y = today.getFullYear();
+            let m = (today.getMonth()+1)<10?"0"+(today.getMonth()+1):(today.getMonth()+1);//获取当前月份的日期，不足10补0
+            let d = today.getDate()<10?"0"+today.getDate():today.getDate();//获取当前几号，不足10补0
+　　　　
+            return y+"-"+m+"-"+d;
+　　}
+
+
+    $('#operationDate').datepicker({
+        weekStart: 1,
+        autoclose: true,
+        daysOfWeekHighlighted: "0,6",
+        todayHighlight: true,
+        startDate: GetDateStr(0),
+        endDate: GetDateStr(10),
+        format: "yyyy-mm-dd",
+        language: "zh-CN"
+    });
+
+        $('#date').datepicker({
+        weekStart: 1,
+        autoclose: true,
+        daysOfWeekHighlighted: "0,6",
+        todayHighlight: true,
+        startDate: GetDateStr(0),
+        endDate: GetDateStr(10),
+        format: "yyyy-mm-dd",
+        language: "zh-CN"
+    });
+
+    $(function(){
+        $("#applicant").attr({disabled:"disabled"});
+        $("#phoneNo").attr({disabled:"disabled"});
+
+
+        $('#petType').change(function(){
+            let type = $('#petType').val();
+            console.log(type);
+            let doctors = $('#doctor');
+            $.ajax({
+                url:"/Urgent_appointment",
+                type:"POST",
+                data:({"type":type}),
+                success:function (data) {
+                    console.log(data);
+                    //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
+                    doctors.children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        doctors.append(a);
+                    }
+
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+
+
+        $('#date').change(function () {
+
+            let date_selected = $("#date").val();
+            $.ajax({
+                url:"/Urgent_appointment",
+                type:"POST",
+                data:({"date": date_selected}),
+                success:function (data) {
+                    console.log(data);
+                    //let av_times = JSON.parse(data);//JSON字符串转换为JSON对象
+                    $('#appointment_time').children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        $('#appointment_time').append(a);
+                    }
+
+                    $('#operationDate').datepicker({//更新手术日的初始日期（不能在确诊之前）
+                        startDate: GetDateStr(5),
+                    });
+
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+
+
+        $('#operationDate').change(function () {
+
+            let opdate_selected = $("#operationDate").val();
+            $.ajax({
+                url:"/Urgent_appointment",
+                type:"POST",
+                data:({"op_date": opdate_selected}),
+                success:function (data) {
+                    console.log(data);
+                    //let av_times = JSON.parse(data);//JSON字符串转换为JSON对象
+                    $('#operationTime').children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        $('#operationTime').append(a);
+                    }
+
+
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+
+
+    });
+
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 100px">
+    <h1>make a new appointment</h1>
+
+    <div class="row">
+         <div class="col-md-6">
+            {% import 'bootstrap/wtf.html' as wtf%}
+             {{ wtf.quick_form(form) }}
+        </div>
+
+        <div class="col-md-4 border col-md-offset-2" style="border: 1px solid grey">
+            {% include 'appointment_flow.html' %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

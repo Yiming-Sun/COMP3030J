@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 
+{% block styles %}
+{{super()}}
+<style>
+	.intro{
+		word-break:break-all;
+		width:800px;
+		float: left;
+		margin: 40px 60px
+	}
+</style>
+
+{% endblock %}
+
+
+
 {% block content %}
 
-<div class="container">
+<div class="container" style="position: relative">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="jumbotron">
@@ -97,7 +112,46 @@
 				 <a class="btn" href="#">View details »</a>
 			</p>
 		</div>
+	</div><br>
+
+
+
+	<div id="introduce" style="margin-top: 80px">
+		<h1 class="text-center">Introduction</h1>
+		<div>
+			<div style="height: 150px;margin: 80px 0px">
+				<img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+                     style="height: 150px;width: 150px;margin-right: 10px;float: left" >
+
+				<p class="intro">adsadddddd dsds s f ds  ds dfa f g af g  fg f gaf g f gsf g mrgaemg mrg nae rgmnragmn rmaen rgmnea rgmne rngm agmner gamner gmae rgmddddddddddddddddddddddddd</p>
+			</div>
+			<div style="height: 150px;margin: 80px 0px">
+				<p class="intro">adsaddddddd ddddddddd  dddddddddddd dddddddddd  dddddddddd dddddddddd  dddddddddddddddd ddddddddddddd  dd dddddd dddddddd dddddddd</p>
+				<img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+                     style="height: 150px;width: 150px;margin-right: 10px;float: left" >
+
+			</div>
+			<div style="height: 150px;margin: 80px 0px">
+				<img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+                     style="height: 150px;width: 150px;margin-right: 10px;float: left" >
+				<p class="intro">adsadd ddd ddddddd awf  m mfa mnr ,amrg , garddd ddd d fsa sdaa w r jlrtj reqtjrh tkj whrjt hwjrh twhtiuhwut  uwrhg gufdgkjf dgh fh lgjhfglhfg f g fg flgsdddddddddd ddd</p>
+			</div>
+
+
+
+		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
 </div>
 {##}
 {#<!--标题-->#}
