@@ -5,7 +5,12 @@
 {{super()}}
 
     <script>
+
+
          $(document).ready(function () {
+             $("#newAppointment").css({"display": "none"});
+             $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+
             $('tbody>tr').each(function () {
 
                 // if ($(this).children('td').eq(6).text()!="None"){

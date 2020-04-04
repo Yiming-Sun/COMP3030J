@@ -1,0 +1,256 @@
+{% extends "logged_base.html" %}
+
+{% block scripts %}
+{{super()}}
+    <script>
+        $("#newAppointment").css({"display": "none"});
+        $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+    </script>
+
+{% endblock %}
+
+
+{%block content%}
+<style>
+ul{
+    list-style:none;
+}
+
+.avatar-group{
+    width:45px;
+    height:100%;
+    float:left;
+}
+
+.avatar-group .avatar{
+    width:40px;
+    height:40px;
+    margin-bottom:6px;
+}
+.avatar2{
+    width:180px;
+    height:180px;
+    margin-bottom:6px;
+}
+.question-title-div{
+    margin-left:5px;
+}
+
+.question-title{
+    font-size: 23px;
+    font-weight: 600;
+    line-height: 3;
+    color: #1a1a1a;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.question-content{
+    float:left;
+    width:680px;
+    line-height: 1.7;
+    font-size: 15px;
+    color: #1a1a1a;
+}
+
+.head_block{
+	background:#FFFFFF;
+	overflow:hidden;
+	border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-sizing: border-box;
+    padding: 1px 8px;
+    margin-bottom: 10px;
+    margin-top:-18px;
+}
+
+.answer-list{
+    padding-left:0;
+}
+
+.answer-list li{
+    list-style: none;
+    border-bottom:1px solid #eee;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+}
+
+.user-info{
+    font-size:16px;
+    color:#9b9b9b;
+    line-height:40px;
+}
+
+.user-info .username{
+    margin-left:20px;
+}
+
+.answer-content{
+    margin-left:60px;
+}
+
+.user-info .create-time{
+    float:right;
+}
+
+.user .content{
+   border-right:1px solid rgba(26,26,26,.1);
+   border-left:1px solid rgba(26,26,26,.1);
+   box-shadow: 2px 2px 0 rgba(26,26,26,.1);
+   height:300px;
+   padding:10px;
+   background:#fff;
+}
+
+.index{
+   display:flex;
+   justify-content: space-between;
+   margin:16px 0;
+   padding:0;
+}
+
+.index .list{
+    padding:0;
+}
+
+.index .list .list-item{
+   padding:16px;
+   margin-bottom:10px;
+   background:#fff;
+   border-right:1px solid rgba(26,26,26,.1);
+   border-left:1px solid rgba(26,26,26,.1);
+   box-shadow: 2px 2px 0 rgba(26,26,26,.1);
+}
+
+.list-group-item{
+    border:0px;
+}
+
+a.list-group-item{
+        color: #8590a6;
+}
+
+
+
+</style>
+
+<div class="row">
+
+    <!--文章标题-->
+    <div class="head_block col-lg-40">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-top:50px ;">
+            <div class="question-title-div col-lg-20">
+                <h2 class="question-title">{{question.title}}</h2>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="index col-lg-18">
+        <ul class="list col-lg-8">
+            <li class="list-item">
+                <div class="avatar-group">
+                    <img  src={{url_for('static', filename='upload_photo/'+user2.username+'.jpg')}} style="margin-bottom:15px;" alt="" class="avatar">
+                </div>
+                <div class="question-information">
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-bottom:8px;">{{question.author.username}}</span>
+                </div>
+                <div class="question-group" style="width:680px;">
+                     <p class="question-content" style="margin-top:10px;margin-right:3px;line-height: 1.7;font-size: 15px;">{{question.content}}</p>
+                    <p style=" margin-top: 4px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">自我介绍</p>
+                </div>
+                <div  style="">
+                    <a>
+                        <span style="font-size: 14px;color: #8590a6;">{{question.create_time}}</span>
+                    </a>
+                </div>
+
+
+            <h5 style="margin-left:10px;margin-top:8px;font-size: 14px;color: #8590a6;">评论</h5>
+            <form action="{{url_for('add_answer')}}" method="post">
+                <div class="form-group">
+                    <input type="text" name='answer_content' style="margin-left:8px;margin-top:4px;" class="form-control" placeholder="请添加评论">
+                    <input type="hidden" name="question_id" value="{{question.id}}">
+                </div>
+                <div class="form-group" style="text-align:right;position:relative;">
+                    <button class="btn btn-primary">提交评论</button>
+                </div>
+            </form>
+            <ul class="answer-list">
+                {%for answer in question.questionAnswer%}
+
+                <li>
+                    <div class="user-info">
+                        <a href=""><img class="avatar" src="{{url_for('static',filename='Picture/'+answer.author.username+'.jpg')}}" alt="" ></a>
+                        <a href=""><span class="username">{{answer.author.username}}</span></a>
+                             <span class="create-time">{{answer.create_time}}</span>
+                    </div>
+                    <p class="answer-content">{{answer.content}}</p>
+
+                    {%if answer.author==user%}
+                    <form action="{{url_for('delete_answer')}}" method="post">
+                        <div class="form-group">
+                            <input type="hidden" name="question_id" value="{{question.id}}">
+                            <input type="hidden" name="answer_id" value="{{answer.id}}">
+                        </div>
+                        <div class="form-group" style="text-align:right;position:relative;">
+                            <button class="btn btn-primary">删除</button>
+                        </div>
+                    </form>
+                    {%endif%}
+
+                </li>
+                {%endfor%}
+            </ul>
+            </li>
+
+        </ul>
+
+        <ul class="list3 col-lg-4">
+            <li class="list-item3" >
+                <div class="user">
+                   <div class="content" style="height:253px;">
+                        <div class="row" style="margin-left:-10px;">
+                          <div class="col-sm-7 col-md-6">
+                            <div class="thumbnail">
+                              <img src={{url_for('static', filename='upload_photo/'+user2.username+'.jpg')}} alt="" class="avatar2" style="">
+                                  <div class="caption">
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+
+                   </div>
+                </div>
+            </li>
+            <div style="clear:both;">
+            <li class="list-item3" style="margin-top:8px;">
+                <div class="user">
+                    <div class="content" style="height:240px;">
+                       <div class="list-group">
+                           <a href="" class="list-group-item">提问</a>
+                           <a href="" class="list-group-item">个人信息修改</a>
+                           <a href="" class="list-group-item"><span class="badge">{{article_num}}</span>我的主页</a>
+                   </div>
+                </div>
+            </li>
+            </div>
+            <div style="clear:both;"></div>
+            <li class="list-item3" style="margin-top:8px;">
+                <div class="user">
+                   <div class="content" style="height:293px;">
+                       <p>头像中心</p>
+                   </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+{%endblock%}

@@ -11,3 +11,5 @@ class Config(object):
     'sqlite:///' + os.path.join(basedir, 'blogdb.db')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    UPLOAD = os.path.join(basedir, 'static\\upload_photo')

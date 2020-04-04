@@ -1,6 +1,14 @@
 {% extends "logged_base.html" %}
 
 
+
+{% block styles %}
+{{super()}}
+
+
+{% endblock %}
+
+
 {% block scripts %}
 {{super()}}
 
@@ -17,74 +25,67 @@
 
 
             if (condition == 1){
-                $('#first').attr("src","../static/Picture/home2.jpg");
                 if (user_type == "employee"){
                     $('#hasArrival').css({"display":"block"});
                 }
 
             }
             else if (condition == 2){
-                $('#first').attr("src","../static/Picture/home2.jpg");
-                $('#second').attr("src","../static/Picture/home2.jpg");
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
                 if (user_type == "employee"){
                     $('#finishDiagnose').css({"display":"block"});
                 }
 
             }
             else if(condition == 3){
-                $('#first').attr("src","../static/Picture/home2.jpg");
-                $('#second').attr("src","../static/Picture/home2.jpg");
-                $('#third').attr("src","../static/Picture/home2.jpg");
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
                 if (user_type == "customer"){
                     $('#shoushu').css({"display":"block"});
                 }
             }
             else if(condition == 4) {
-                $('#first').attr("src", "../static/Picture/home2.jpg");
-                $('#second').attr("src", "../static/Picture/home2.jpg");
-                $('#third').attr("src", "../static/Picture/home2.jpg");
-                $('#fourth').attr("src", "../static/Picture/home2.jpg");
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
                 if (user_type == "employee"){
                     $('#finishOperation').css({"display": "block"});
                 }
 
             }
             else if(condition == 5){
-                $('#first').attr("src","../static/Picture/home2.jpg");
-                $('#second').attr("src","../static/Picture/home2.jpg");
-                $('#third').attr("src","../static/Picture/home2.jpg");
-                $('#fourth').attr("src","../static/Picture/home2.jpg");
-                $('#fifth').attr("src","../static/Picture/home2.jpg");
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
                 if (user_type == "employee"){
                     $('#makeMedicine').css({"display": "block"});
                 }
 
             }
             else if(condition == 6){
-                $('#first').attr("src","../static/Picture/home2.jpg");
-                $('#second').attr("src","../static/Picture/home2.jpg");
-                $('#third').attr("src","../static/Picture/home2.jpg");
-                $('#fourth').attr("src","../static/Picture/home2.jpg");
-                $('#fifth').attr("src","../static/Picture/home2.jpg");
-                $('#sixth').attr("src","../static/Picture/home2.jpg");
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
+                $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
                 if (user_type == "customer"){
                     $('#fee').css({"display":"block"});
                 }
 
             }
             else if(condition == 7){
-                $('#first').attr("src","../static/Picture/home2.jpg");
-                $('#second').attr("src","../static/Picture/home2.jpg");
-                $('#third').attr("src","../static/Picture/home2.jpg");
-                $('#fourth').attr("src","../static/Picture/home2.jpg");
-                $('#fifth').attr("src","../static/Picture/home2.jpg");
-                $('#sixth').attr("src","../static/Picture/home2.jpg");
-                $('#seventh').attr("src","../static/Picture/home2.jpg");
+                $('#second').attr("src","../static/Picture/diagnosing.jpg");
+                $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                $('#fourth').attr("src", "../static/Picture/operation.jpg");
+                $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
+                $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
+                $('#seventh').attr("src","../static/Picture/out.jpg");
             }
 
 
 
-            $('#hasArrival').click(function(){
+            $('#hasArrival').click(function(){//first
                 $.ajax({
                    url:"/appointment_trace/"+id+condition,
                    type:"GET",
@@ -92,7 +93,8 @@
                    success:function () {
                        $('#hasArrival').css({"display":"none"});
                        $('#finishDiagnose').css({"display":"block"});
-                        //     更改图片
+
+                       $('#second').attr("src","../static/Picture/diagnosing.jpg");
                    },
                    error:function () {
                    }
@@ -100,14 +102,15 @@
             });
 
 
-            $('#finishDiagnose').click(function(){
+            $('#finishDiagnose').click(function(){//second
                 $.ajax({
                    url:"/appointment_trace/"+id+condition,
                    type:"GET",
                    data:{"type":"finishDiagnose"},
                    success:function () {
                        $('#finishDiagnose').css({"display":"none"});
-                        //     更改图片
+
+                       $('#third').attr("src","../static/Picture/reserve_operation.jpg");
                    },
                    error:function () {
                    }
@@ -115,7 +118,7 @@
             });
 
 
-            $('#finishOperation').click(function(){
+            $('#finishOperation').click(function(){//fourth
                 $.ajax({
                    url:"/appointment_trace/"+id+condition,
                    type:"GET",
@@ -123,6 +126,38 @@
                    success:function () {
                        $('#finishOperation').css({"display":"none"});
 
+                       $('#fifth').attr("src","../static/Picture/finish_operating.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+            $('#makeMedicine').click(function(){//fifth
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"makeMedicine"},
+                   success:function () {
+                       $('#makeMedicine').css({"display":"none"});
+
+                       $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+
+            $('#fee').click(function(){//sixth
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"fee"},
+                   success:function () {
+                       $('#fee').css({"display":"none"});
+
+                       $('#seventh').attr("src","../static/Picture/out.jpg");
                    },
                    error:function () {
                    }
@@ -147,7 +182,7 @@
     <div style="margin: 100px 30px">
 
         <div class="col-lg-2 " style="text-align: center">
-            <img id="first" class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br>
+            <img id="first" class="img-responsive center-block img-rounded" src="../static/Picture/appoint_success.jpg"><br><br>
             <p class="text-center">预约成功</p>
             <button id="hasArrival" style="display: none">用户已到</button>
         </div>
@@ -155,7 +190,7 @@
             <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
         </div>
         <div class="col-lg-2 " style="text-align: center">
-            <img id="second" class="img-responsive center-block img-rounded" src="../static/Picture/dark.jpg"><br><br>
+            <img id="second" class="img-responsive center-block img-rounded" src="../static/Picture/diagnosing_dark.jpg"><br><br>
             <p class="text-center">确诊中</p>
             <button id="finishDiagnose" style="display: none">诊断结束</button>
         </div>
@@ -163,7 +198,7 @@
             <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
         </div>
         <div class="col-lg-2 " style="text-align: center">
-            <img id="third" class="img-responsive center-block img-rounded" src="../static/Picture/dark.jpg"><br><br>
+            <img id="third" class="img-responsive center-block img-rounded" src="../static/Picture/reserve_operation_dark.jpg"><br><br>
             <p class="text-center">预约手术</p>
 
             <div id="shoushu" style="text-align: center;display: none">
@@ -182,7 +217,7 @@
             <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
         </div>
         <div class="col-lg-2" style="text-align: center">
-            <img id="fourth" class="img-responsive center-block img-rounded" src="../static/Picture/dark.jpg"><br><br>
+            <img id="fourth" class="img-responsive center-block img-rounded" src="../static/Picture/operation_dark.jpg"><br><br>
             <p class="text-center">手术中</p>
             <button id="finishOperation" style="display: none">手术结束</button><br>
             <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" style="font-size: 50px;margin-top: 60px"></span>
@@ -192,14 +227,14 @@
 
 
         <div class="col-lg-2 col-lg-offset-3" style="margin-top: 60px">
-            <img id="seventh" class="img-responsive center-block img-rounded" src="../static/Picture/dark.jpg"><br><br>
+            <img id="seventh" class="img-responsive center-block img-rounded" src="../static/Picture/out_dark.jpg"><br><br>
             <p class="text-center">出院</p>
         </div>
         <div class="col-lg-1" style="text-align: center;margin-top: 60px">
             <span class="glyphicon glyphicon-triangle-left" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
         </div>
         <div class="col-lg-2 " style="margin-top: 60px">
-            <img id="sixth" class="img-responsive center-block img-rounded" src="../static/Picture/dark.jpg"><br><br>
+            <img id="sixth" class="img-responsive center-block img-rounded" src="../static/Picture/pay_for_medicine_dark.jpg"><br><br>
             <p class="text-center">取药交费</p>
             <div style="text-align: center">
                 <a href="#"><button style="display: none" id="fee">去缴费</button></a>
@@ -209,7 +244,7 @@
             <span class="glyphicon glyphicon-triangle-left" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>
         </div>
         <div class="col-lg-2" style="margin-top: 60px;text-align: center">
-            <img id="fifth" class="img-responsive center-block img-rounded" src="../static/Picture/dark.jpg"><br><br>
+            <img id="fifth" class="img-responsive center-block img-rounded" src="../static/Picture/finishing_operation_dark.jpg"><br><br>
             <p class="text-center">手术结束</p>
             <button style="display: none" id="makeMedicine">去开药</button>
         </div><br>

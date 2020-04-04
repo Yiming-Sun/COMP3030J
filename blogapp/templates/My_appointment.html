@@ -6,8 +6,30 @@
 {{super()}}
 
     <script>
-         $(document).ready(function () {
+        function changeURLArg(url,arg,arg_val){
+        var pattern=arg+'=([^&]*)';
+        var replaceText=arg+'='+arg_val;
+        if(url.match(pattern)){
+            var tmp='/('+ arg+'=)([^&]*)/gi';
+            tmp=url.replace(eval(tmp),replaceText);
+            return tmp;
+        }else{
+            if(url.match('[\?]')){
+                return url+'&'+replaceText;
+            }else{
+                return url+'?'+replaceText;
+            }
+        }
+    }
+        function UpdateURL(name,val,id){
+            let target = id.href();
+            target = target+"?"+name+"="+val;
+            $(id).href(target);
+        }
 
+
+         $(document).ready(function () {
+            console.log("asd");
             $('tbody>tr').each(function () {
                 if ($(this).children('.apt').text()=="2"){
                     $(this).css({"color": "red"});
@@ -30,7 +52,9 @@
         });
 
         $(function(){
-
+            // let path = $("#img_path").text();
+            // console.log(path);
+            // $("#pp").attr({src:path });
 
             let del =0;
             $(".delete_btn").click(function(){
@@ -63,7 +87,7 @@
            });
 
 
-            $("#search_item").click(function(){
+            $("#search_item").click(function(){//搜寻功能
                 let petName = $("#pet_name").val();
                 console.log(petName);
                 $.ajax({
@@ -114,11 +138,17 @@
                            }
                            let bt_info = $('<a href="#"><button class="btn btn-default appform_button ">Information</button></a>');
                            bt_info.css({"margin":"0px 30px"});
+                           bt_info.attr({href:"/appointment_detail/"+d[i]["id"]+d[i]["app_type"]});
+
+
                            let bt_trace = $('<a><button class="btn btn-primary appform_button">Trace</button></a>');
+                           bt_trace.attr({href:"/appointment_trace/"+d[i]["id"]+d[i]["condition"]});
 
                            bt_trace.css({"margin":"0px 30px"});
                            let bt_modify= $('<a><button class="btn btn-success appform_button">Modify</button></a>');
-                           bt_modify.attr({href:"{{ url_for('appointment_modify', id=1)}}"});
+
+                           bt_modify.attr({href:"/appointment_modify/"+d[i]["id"]});
+
                            bt_modify.css({"margin":"0px 30px"});
                            let bt_del = $('<button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>');
                            bt_del.css({"margin":"0px 30px"});
@@ -148,6 +178,7 @@
 
 <!--Yiming Sun(2020/3/14)-->
 {% block content %}
+
 
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
 
@@ -189,7 +220,7 @@
                             dog
                         {% endif %}</td>
                     <td class="text-center">{{appointment.petName}}</td>
-                    <td class="text-center">{{appointment.doctor}}</td>
+                    <td class="text-center">{{ doct_list | getDoctor(appointment.doctor) }}</td>
 
                     <td class="text-center condition">
                         {{ condition_dict | getCondition(appointment.condition) }}

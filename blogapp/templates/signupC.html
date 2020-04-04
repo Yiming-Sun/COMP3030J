@@ -1,85 +1,156 @@
 {% extends "base.html" %}
 
+{% block styles %}
+{{super()}}
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%;
+            background-image:url('../static/Picture/signup.jpg');
+            background-repeat:no-repeat;
+            background-size:100% 100%;
+            -moz-background-size:100% 100%;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block scripts %}
+{{super()}}
+    <script>
+        $(document).ready(function(){
+
+
+
+            $("#username").after("<span id='username_msg'></span>");
+            $("#phone").after("<span id='phone_msg'></span>");
+            $("#email").after("<span id='email_msg'></span>");
+            $("#repeat_password").after("<span id='repeat_password_msg'></span>");
+
+            $("#username").change(function () {
+
+                $.ajax({
+                    url:'/signupC',
+                    type:'POST',
+                    data:{"username":$("#username").val(),"type":"username"},
+                    success:function (data) {
+                        if(data == "correct"){
+                            $("#username_msg").removeClass("bg-danger");
+                            $("#username_msg").addClass("bg-success");
+                        }
+                        else{
+                            $("#username_msg").removeClass("bg-success");
+                            $("#username_msg").addClass("bg-danger");
+                        }
+                        $("#username_msg").text(data);
+                   },
+                   error:function () {
+
+                   }
+                })
+            });
+            $("#email").change(function () {
+
+                $.ajax({
+                    url:'/signupC',
+                    type:'POST',
+                    data:{"email":$("#email").val(),"type":"email"},
+                    success:function (data) {
+                        if(data == "correct"){
+                            $("#email_msg").removeClass("bg-danger");
+                            $("#email_msg").addClass("bg-success");
+                        }
+                        else{
+                            $("#email_msg").removeClass("bg-success");
+                            $("#email_msg").addClass("bg-danger");
+                        }
+                        $("#email_msg").text(data);
+                   },
+                   error:function () {
+
+                   }
+                })
+            });
+            $("#phone").change(function () {
+
+                $.ajax({
+                    url:'/signupC',
+                    type:'POST',
+                    data:{"phone":$("#phone").val(),"type":"phone"},
+                    success:function (data) {
+                        if(data == "correct"){
+                            $("#phone_msg").removeClass("bg-danger");
+                            $("#phone_msg").addClass("bg-success");
+                        }
+                        else{
+                            $("#phone_msg").removeClass("bg-success");
+                            $("#phone_msg").addClass("bg-danger");
+                        }
+                        $("#phone_msg").text(data);
+                   },
+                   error:function () {
+
+                   }
+                })
+            });
+            $("#repeat_password").change(function () {
+
+                $.ajax({
+                    url:'/signupC',
+                    type:'POST',
+                    data:{"repeat_password":$("#repeat_password").val(),"password":$("#password").val(),"type":"password"},
+                    success:function (data) {
+                        if(data == "correct"){
+                            $("#repeat_password_msg").removeClass("bg-danger");
+                            $("#repeat_password_msg").addClass("bg-success");
+                        }
+                        else{
+                            $("#repeat_password_msg").removeClass("bg-success");
+                            $("#repeat_password_msg").addClass("bg-danger");
+                        }
+                        $("#repeat_password_msg").text(data);
+                   },
+                   error:function () {
+
+                   }
+                })
+            });
+
+        })
+
+    </script>
+
+
+{% endblock %}
+
 {% block content %}
-    <head>
-{#        <script src="static/js/signup.js"></script>#}
-        <style>
-            #container {
-                margin-top: 150px;
-                width: 45%;
-                margin-left: 55%;
-            }
 
-            #sub {
-                width: 50%;
-                margin-left: 8%;
-            }
-
-
-
-        </style>
-
-    </head>
-
-
-    <body>
-    <div id="container">
-
-
-{#        <form action="" method="post" class="form-horizontal" onsubmit="return validate_form(this)">#}
-        <form action="" method="post" class="form-horizontal">
-            {% for message in get_flashed_messages() %}
-                <div class="alert alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-
-            <div>
-                <div class="form-group">
-                    <label for="inputUsername" class="col-sm-2 control-label">Username</label>
-                    <div class="col-sm-5">
-                        <input type="" name="username" class="form-control" id="inputUsername" placeholder="Username">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-5">
-                        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-5">
-                        <input type="password" name="pass1" class="form-control" id="inputPassword"
-                               placeholder="Password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputRPassword" class="col-sm-2 control-label">Repeat Password</label>
-                    <div class="col-sm-5">
-                        <input type="password" name="pass2" class="form-control" id="inputRPassword"
-                               placeholder="RePassword">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
-                    <div class="col-sm-5">
-                        <input type="" name="phone" class="form-control" id="inputPhone" placeholder="Phone">
-                    </div>
-                </div>
-
-
-
-                <div class="form-group" id="sub">
-                    <div class="col-sm-offset-2 col-sm-10 ">
-                        <button class="btn btn-lg btn-primary btn-block register-btn" type="submit">Sign up Now</button>
-                    </div>
-
-                </div>
-            </div>
-
-        </form>
+<div class="container" >
+    <div class="title col-lg-6 col-lg-offset-6">
+        <h2 class="text-center" style="margin-top: 120px;">Sign up(Customer)</h2>
     </div>
-    </body>
+    <div id="up_form" class="col-lg-6 col-lg-offset-6" style="margin-top: 20px; border: solid black 2px;border-radius:30px;">
+        <div class="flash-message" style="margin: 10px 10px">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul  class="col-lg-10">
+                {% for message in messages %}
+                    <li class="alert alert-danger" role="alert" style="list-style-type:none;">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <br>
+
+    <div class="col-lg-10 col-lg-offset-2" style="margin: 20px 10px">
+        {% import 'bootstrap/wtf.html' as wtf%}
+        {{ wtf.quick_form(form) }}
+    </div>
+    </div>
+
+
+</div>
+
 {% endblock %}
