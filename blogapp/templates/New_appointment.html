@@ -14,6 +14,7 @@
 
 {% block scripts %}
     {{ super() }}
+
     <script type="text/javascript">
 
         let myDate = new Date;
@@ -62,13 +63,6 @@
 
                     //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
                     doctors.children().remove();
-                    // for (let i=0; i<selects.length; i++){
-                    //     let a = $('<option></option>');
-                    //     a.text(selects[i]);
-                    //     a.attr({value:selects[i]});
-                    //     console.log(a);
-                    //     doctors.append(a);
-                    // }
                     for (let key in data){
                         let a = $('<option></option>');
                         a.text(data[key]);
@@ -118,10 +112,27 @@
             })
 
         });
-    })
+    });
+
+
+        $(function () {
+
+            // console.log(doc_list);
+            let doctors = $('#doctor');
+            doctors.children().remove();
+            let doc_list = "{{doc_list}}";
+            console.log(doc_list);
+            for (let key in doc_list){
+                let a = $('<option></option>');
+                a.text(doc_list[key]);
+                a.attr({value:key});
+                doctors.append(a);
+            }
+        })
 
 
     </script>
+
 {%  endblock %}
 
 

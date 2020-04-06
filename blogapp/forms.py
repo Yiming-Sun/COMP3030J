@@ -66,9 +66,12 @@ class AppointmentForm(FlaskForm):
     doctor = SelectField('Select Doctor', coerce=int, choices=[(1, 'Allen'), (2, 'Fred')])
     # doctor = QuerySelectField(label='Select Doctor', validators=[validators.required()], query_factory=poss_name,
     #                           allow_blank=True)
-
     comment = StringField('Symptom')
     submit = SubmitField('Submit')
+
+    def __init__(self, *args, **kwargs):
+        super(AppointmentForm, self).__init__(*args, **kwargs)
+        self.doctor.choices = [(v.id, v.username) for v in Employee.query.all()]
 
     def select_doctor(self, place):
         # super(AppointmentForm, self).__init__(*args, **kwargs)
@@ -95,9 +98,10 @@ class UrgentAppointment(FlaskForm):
     comment = StringField('Symptom')
     submit = SubmitField('Submit')
 
-    # def __init__(self, *args, **kwargs):
-    #     super(UrgentAppointment, self).__init__(*args, **kwargs)
-    #     self.doctor.choices = [(v.id, v.username) for v in Employee.query.filter(Employee.animal == "Dog").all()]
+    def __init__(self, *args, **kwargs):
+        super(UrgentAppointment, self).__init__(*args, **kwargs)
+        self.doctor.choices = [(v.id, v.username) for v in Employee.query.all()]
+
     def select_doctor(self, place):
         # super(AppointmentForm, self).__init__(*args, **kwargs)
         self.doctor.choices = [(v.id, v.username) for v in
@@ -133,3 +137,10 @@ class SignForm_E(FlaskForm):
     animal = SelectField('Animal', coerce=int, choices=[(1, 'Dog'), (2, 'Cat')])
     workplace = SelectField('Workplace', coerce=int, choices=[(1, 'Beijing'), (2, 'Shnaghai'), (3, 'Chengdu')])
     submit = SubmitField('Sign Up')
+
+
+class modify_password(FlaskForm):
+    pre_password = StringField('previous password', validators=[DataRequired()])
+    new_password = StringField('new password', validators=[DataRequired()])
+    comfirm_password = StringField('Confirm password', validators=[DataRequired()])
+    submit = SubmitField('Modify Password')

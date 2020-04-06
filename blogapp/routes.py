@@ -1,6 +1,7 @@
 from blogapp import app, db
 from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
-from blogapp.forms import AppointmentForm, LoginForm, UrgentAppointment, C_personal_space, E_personal_space, SignForm_E, SignForm_C
+from blogapp.forms import AppointmentForm, LoginForm, UrgentAppointment, C_personal_space, E_personal_space, SignForm_E, \
+    SignForm_C, modify_password
 from blogapp.models import Employee,NewAppointment, Customer,Id, AlchemyJsonEncoder, Question, AnswerQuestion
 
 from sqlalchemy import and_, or_
@@ -8,6 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from blogapp.config import Config
 import os
 import json
+from flask import jsonify
 import datetime
 import base64
 import io
@@ -223,18 +225,21 @@ def appointment_trace(id,condition):
 @app.route('/New_appointment', methods=['GET', 'POST'])
 def New_appointment():
     form = AppointmentForm()
-    form.select_doctor(session.get("PLACE"))
+    doctors = Employee.query.filter(and_("Dog" == Employee.animal, session.get("PLACE") == Employee.workplace)).all()
+    doc_list = {}
+    for doctor in doctors:
+        doc_list[doctor.id] = doctor.username
+    print(doc_list)
+    #form.select_doctor(session.get("PLACE"))
     if not session.get("USERNAME") is None:
 
         user = Customer.query.filter(Customer.username == session.get("USERNAME")).first()
         form.applicant.data = user.username
         form.phoneNo.data = user.phone
 
-        print(form.applicant.data)
         print(form.date.data)
-        print(form.appointment_time.data)
+        print(form.petType.data)
         print(form.doctor.data)
-        print(form.phoneNo.data)
 
 
         if form.validate_on_submit():
@@ -251,17 +256,14 @@ def New_appointment():
             appointment = NewAppointment(appoint_time=appoint_time,app_type=1,applicant=name,petName=petName,user_id=user_id,date=date,petType=petType,doctor=doctor,phoneNo=phoneNo,comment=comment)
             db.session.add(appointment)
             db.session.commit()
-            flash('done')
             return redirect(url_for('My_appointment'))
         else:
 
             if request.values.get("date"):
-                print("date")
+
                 date = request.values.get("date")
                 appointments = NewAppointment.query.filter(NewAppointment.date == date).all()
                 appointments1 = NewAppointment.query.filter(NewAppointment.op_date == date).all()
-                print(appointments)
-                print(appointments1)
 
                 result_time = {
                     1:"8:00 - 10:00",
@@ -293,7 +295,7 @@ def New_appointment():
                 return name_list
 
 
-    return render_template('New_appointment.html', title='Home',form=form)
+    return render_template('New_appointment.html', title='Home',form=form, doc_list=doc_list)
 
 
 
@@ -301,6 +303,7 @@ def New_appointment():
 @app.route('/Urgent_appointment', methods=['GET', 'POST'])
 def Urgent_appointment():
     form = UrgentAppointment()
+    form.init_doctor()
     form.select_doctor(session.get("PLACE"))
     if not session.get("USERNAME") is None:
         user = Customer.query.filter(Customer.username == session.get("USERNAME")).first()
@@ -322,7 +325,6 @@ def Urgent_appointment():
             appointment = NewAppointment(app_type=2, appoint_time=appoint_time, op_time=op_time, op_date=op_date, applicant=name,petName=petName,user_id=user_id,date=date,petType=petType,doctor=doctor,phoneNo=phoneNo,comment=comment)
             db.session.add(appointment)
             db.session.commit()
-            flash('done')
             return redirect(url_for('My_appointment'))
         else:
 
@@ -996,3 +998,51 @@ def delete_question():
     db.session.delete(question)
     db.session.commit()
     return redirect(url_for('question'))
+
+
+@app.route('/password_modify',methods=['GET','POST'])
+def password_modify():
+    form = modify_password()
+    username = session.get("USERNAME")
+    customer = Customer.query.filter(Customer.username == username).first()
+    employee = Employee.query.filter(Employee.username == username).first()
+    if request.method == 'GET':
+        return render_template('password_modify.html',form=form)
+
+    if request.method == 'POST':
+        pre = request.values.get("pre_password")
+        new1 = request.values.get("new_password")
+        new2 = request.values.get("comfirm_password")
+        prepre = generate_password_hash(new1)
+        if customer is not None:
+            if check_password_hash(customer.password_hash, pre):
+                print(customer.password_hash)
+                print(prepre)
+                if new1 == new2:
+                    customer.password_hash = prepre
+                    db.session.commit()
+                    print(customer.password_hash)
+                    print(prepre)
+                    flash("Password changed successfully")
+                    return redirect(url_for('Configuration'))
+                else:
+                    flash("Two Password are not equal")
+                    return redirect(url_for('password_modify'))
+            else:
+                flash("The previous password is not correct")
+                return redirect(url_for('password_modify'))
+        if employee is not None:
+            if check_password_hash(pre, employee.password_hash):
+                if new1 == new2:
+                    employee.password_hash = prepre
+                    db.session.commit()
+                    flash("Password changed successfully")
+                    return redirect(url_for('Configuration'))
+                else:
+                    flash("Two Password are not equal")
+                    return redirect(url_for('password_modify'))
+            else:
+                flash("The previous password is not correct")
+                return redirect(url_for('password_modify'))
+
+

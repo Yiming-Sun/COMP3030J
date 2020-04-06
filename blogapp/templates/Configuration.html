@@ -36,6 +36,8 @@
 
             <img src="../static/Picture/default.jpg" alt="#Your photo" class="img-circle"
                  style="height: 200px;width: 200px;margin-top: 10px" id="photo" name="photo">
+
+            <a type="button" class="btn-default" href="{{ url_for('password_modify') }}">change password</a>
         </div>
          <div class="col-md-6 " style="float: left;margin: 60px 0px">
             {% import 'bootstrap/wtf.html' as wtf%}
