@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">宠物医院</string>
+    <string name="loginTag">用户登录</string>
+    <string name="tv_username">用户：</string>
+    <string name="ed_username">请输入用户名</string>
+    <string name="tv_password">密码：</string>
+    <string name="ed_password">请输入密码</string>
+    <string name="bt_log">登录</string>
+    <string name="bt_register1">注册</string>
+    <string name="bt_register2">注册</string>
+    <string name="registerTag">用户注册</string>
+    <string name="identity_text">账号：</string>
+    <string name="password_text">密码：</string>
+    <string name="phonenumber_text">电话：</string>
+    <string name="title_activity_hotel">Hotel</string>
+    <string name="title_home">主页</string>
+    <string name="title_dashboard">预订</string>
+    <string name="title_notifications">服务</string>
+    <string name="title_information">我的</string>
+    <string name="My_Pet">我的宠物</string>
+    <string name="City">城市</string>
+    <string name="Submit">提交</string>
+    <string name="My_Ask">我的提问</string>
+    <string name="My_Setting">设置</string>
+    <string name="My_Doc">我的医生</string>
+    <string name="My_Appointment">我的预约</string>
+    <string name="My_Information">个人信息></string>
+    <string name="Pet_Info">添加宠物信息</string>
+    <string name="Doc">医生</string>
+    <string name="Date">日期</string>
+    <string name="operation_appointment">手术预约</string>
+
+
+    <string-array name="seasceneroom">
+        <item>101</item>
+        <item>102</item>
+        <item>103</item>
+        <item>104</item>
+        <item>105</item>
+    </string-array>
+    <string-array name="bigbedroom">
+        <item>201</item>
+        <item>202</item>
+        <item>203</item>
+        <item>204</item>
+        <item>205</item>
+    </string-array>
+    <string-array name="twopeoplesea">
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+    </string-array>
+</resources>
