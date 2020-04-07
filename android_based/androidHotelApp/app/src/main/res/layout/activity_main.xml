@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loginTag"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_username"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/ed_username"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/ed_username"
+            android:inputType="text"
+            android:text="admin"
+            android:singleLine="true"
+            android:textColorHint="#757272"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_password"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/ed_password"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/ed_password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:text="admin"
+            android:textColorHint="#757272"
+            android:textColor="#FFFFFF"/>
+    ></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bt_log" />
+
+        <Button
+            android:id="@+id/surface1_register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bt_register1" />
+    </LinearLayout>
+
+</LinearLayout>

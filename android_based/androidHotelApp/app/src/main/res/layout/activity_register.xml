@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@mipmap/bg"
+    android:orientation="vertical"
+    tools:context=".Register">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registerTag"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/identity_text"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"/>
+
+        <EditText
+            android:id="@+id/input_identity_text"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="20dp"
+            android:maxLines="1"
+            android:hint="请输入手机号"
+            android:textColorHint="@color/tianchongse"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="@string/password_text"
+            android:textSize="30dp"
+            android:layout_marginLeft="30dp"/>
+
+        <EditText
+            android:id="@+id/input_password_text"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:hint="******"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/surface2_register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:background="#3B493B"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/bt_register2"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
