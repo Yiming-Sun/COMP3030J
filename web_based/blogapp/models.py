@@ -52,19 +52,40 @@ class Employee(db.Model):
 class Id(db.Model):
     cid = db.Column(db.String(120), unique=True, primary_key=True)
 
+# 发布的问题
+class Question(db.Model):
+    __tablename__ = 'question'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    question_title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.now)
+    author_name = db.Column(db.String(64), db.ForeignKey('customer.username'))
+    author = db.relationship('Customer', backref=db.backref('realquestions'))
+
+
+# 针对发布的问题进行的回答
+class AnswerQuestion(db.Model):
+    __tablename__ = 'answer_question'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    content = db.Column(db.Text, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.now)
+    author_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
+    answer_question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+    author = db.relationship('Employee', backref=db.backref('realanswer'))
+    question = db.relationship('Question', backref=db.backref('questionAnswer'))
 
 class NewAppointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     applicant = db.Column(db.String(20), index=True, nullable=False)
-    date = db.Column(db.String, index=True, nullable=False)
+    date = db.Column(db.String(20), index=True, nullable=False)
     appoint_time = db.Column(db.Integer, index=True, nullable=False)
     petType = db.Column(db.Integer, index=True, nullable=False)
     petName = db.Column(db.String(20), index=True, nullable=False)
     doctor = db.Column(db.Integer, index=True, nullable=False)
     phoneNo = db.Column(db.String(20), index=True, nullable=False)
-    comment = db.Column(db.String, default="")
+    comment = db.Column(db.String(20), default="")
     condition = db.Column(db.Integer, index=True, default=1, nullable=False)
-    op_date = db.Column(db.String, index=True)
+    op_date = db.Column(db.String(20), index=True)
     op_time = db.Column(db.Integer, index=True)
     app_type = db.Column(db.Integer, index=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
@@ -109,46 +130,6 @@ class AlchemyJsonEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-# 发布的问题
-class Question(db.Model):
-    __tablename__ = 'question'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    question_title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    create_time = db.Column(db.DateTime, default=datetime.now)
-    author_name = db.Column(db.Integer, db.ForeignKey('customer.username'))
-    author = db.relationship('Customer', backref=db.backref('realquestions'))
 
 
-# 针对发布的问题进行的回答
-class AnswerQuestion(db.Model):
-    __tablename__ = 'answer_question'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    content = db.Column(db.Text, nullable=False)
-    create_time = db.Column(db.DateTime, default=datetime.now)
-    author_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
-    answer_question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
-    author = db.relationship('Employee', backref=db.backref('realanswer'))
-    question = db.relationship('Question', backref=db.backref('questionAnswer'))
 
-# class ConfigurationC(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(64), index=True)
-#     password_hash = db.Column(db.String(128))
-#     email = db.Column(db.String(120), index=True)
-#     phone = db.Column(db.String(120), index=True)
-#     Location = db.Column(db.String(120), index=True)
-#     times = db.Column(db.String(120), index=True)
-#
-#
-#
-# class ConfigurationE(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(64), index=True)
-#     email = db.Column(db.String(120), index=True)
-#     password_hash = db.Column(db.String(128))
-#     phone = db.Column(db.String(120), index=True)
-#     animal = db.Column(db.String(120), index=True)
-#     workplace = db.Column(db.String(120), index=True)
-#     Location = db.Column(db.String(120), index=True)
-#     times = db.Column(db.String(120), index=True)

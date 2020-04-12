@@ -6,11 +6,42 @@
 
 
     <script type="text/javascript">
+
+
+        let myDate = new Date;
+        let year = myDate.getFullYear();
+        let month = (myDate.getMonth()+1)<10?"0"+(myDate.getMonth()+1):(myDate.getMonth()+1);
+        let date = myDate.getDate()<10?"0"+myDate.getDate():myDate.getDate();
+
+        function GetDateStr(AddDays) {
+            let today = new Date();
+            today.setDate(today.getDate()+AddDays);//获取AddDays天后的日期
+            let y = today.getFullYear();
+            let m = (today.getMonth()+1)<10?"0"+(today.getMonth()+1):(today.getMonth()+1);//获取当前月份的日期，不足10补0
+            let d = today.getDate()<10?"0"+today.getDate():today.getDate();//获取当前几号，不足10补0
+　　　　
+            return y+"-"+m+"-"+d;
+　　}
+
+        function addDateStr(AddDays){
+            appoint_date = $('#date').val();
+            let a = appoint_date.split('-');
+            let today = new Date();
+            today.setFullYear(a[0],a[1]-1,a[2]);
+            today.setDate(today.getDate()+AddDays);//获取AddDays天后的日期
+            let y = today.getFullYear();
+            let m = (today.getMonth()+1)<10?"0"+(today.getMonth()+1):(today.getMonth()+1);//获取当前月份的日期，不足10补0
+            let d = today.getDate()<10?"0"+today.getDate():today.getDate();//获取当前几号，不足10补0
+            　　　　
+            return y+"-"+m+"-"+d;
+        }
+
         $('#date').datepicker({
             weekStart: 1,
             autoclose: true,
             daysOfWeekHighlighted: "0,6",
-
+            startDate: addDateStr(1),
+            endDate: addDateStr(7),
             default: "1200-01-01",
             format: "yyyy-mm-dd",
             language: "zh-CN"
@@ -20,6 +51,106 @@
 
         $("#applicant").attr({disabled:"disabled"});
         $("#phoneNo").attr({disabled:"disabled"});
+
+        $(function () {
+            let doctors = $('#doctor');
+            let type = $('#petType').val();
+            $.ajax({
+                url:"/New_appointment",
+                type:"POST",
+                data:({"type":type}),
+                success:function (data) {
+                    console.log(data);
+
+                    //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
+                    doctors.children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        doctors.append(a);
+                    }
+                },
+                error:function () {
+
+                }
+            });
+
+
+            $("#doctor").attr({runat:"server"});
+
+            $('#petType').change(function(){
+            let doctors = $('#doctor');
+            let type = $('#petType').val();
+
+
+            $.ajax({
+                url:"/New_appointment",
+                type:"POST",
+                data:({"type":type}),
+                success:function (data) {
+
+                    //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
+                    doctors.children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        doctors.append(a);
+                    }
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+
+
+
+
+
+            $('#date').change(function () {
+            let date_selected = $("#date").val();
+            console.log(date_selected);
+            $.ajax({
+                url:"/appointment_modify/{{id}}",
+                type:"POST",
+                data:({"date": date_selected}),
+                success:function (data) {
+                    console.log(data);
+                    let list = [];
+                    let index = 0;
+                    for (let key in data){
+                        list[index] = key;
+                        index = index+1;
+                    }
+                    if(list.length == 1){
+                        $("#appointment_time").after($("<span id='msg' class='bg-danger'>no available</span>"));
+                    }
+                    else{
+                        $("#msg").remove();
+                    }
+                    //let av_times = JSON.parse(data);//JSON字符串转换为JSON对象
+                    $('#appointment_time').children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        $('#appointment_time').append(a);
+                    }
+
+                },
+                error:function () {
+
+                }
+            })
+
+        });
+    });
+
+
+
 
     </script>
 
@@ -52,6 +183,12 @@
                 <label class="col-lg-2 col-lg-offset-2 control-label">{{form.date.label}}</label>
                 <div class="col-sm-4 col-lg-offset-1">
                     {{form.date(class='in_form')}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-lg-offset-2 control-label">{{form.appointment_time.label}}</label>
+                <div class="col-sm-4 col-lg-offset-1">
+                    {{form.appointment_time(class='in_form')}}
                 </div>
             </div>
             <div class="form-group">

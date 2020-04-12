@@ -44,6 +44,29 @@
     });
 
     $(function(){
+        let doctors = $('#doctor');
+        let type = $('#petType').val();
+        $.ajax({
+                url:"/New_appointment",
+                type:"POST",
+                data:({"type":type}),
+                success:function (data) {
+                    console.log(data);
+
+                    //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
+                    doctors.children().remove();
+                    for (let key in data){
+                        let a = $('<option></option>');
+                        a.text(data[key]);
+                        a.attr({value:key});
+                        doctors.append(a);
+                    }
+                },
+                error:function () {
+
+                }
+            });
+
 
         $("#applicant").attr({disabled:"disabled"});
         $("#phoneNo").attr({disabled:"disabled"});
@@ -51,15 +74,15 @@
         $("#doctor").attr({runat:"server"});
 
         $('#petType').change(function(){
+            let doctors = $('#doctor');
             let type = $('#petType').val();
 
-            let doctors = $('#doctor');
+
             $.ajax({
                 url:"/New_appointment",
                 type:"POST",
                 data:({"type":type}),
                 success:function (data) {
-                    console.log(data);
 
                     //let selects = JSON.parse(data);//JSON字符串转换为JSON对象
                     doctors.children().remove();
@@ -90,14 +113,20 @@
                 data:({"date": date_selected}),
                 success:function (data) {
                     console.log(data);
+                    let list = [];
+                    let index = 0;
+                    for (let key in data){
+                        list[index] = key;
+                        index = index+1;
+                    }
+                    if(list.length == 1){
+                        $("#appointment_time").after($("<span id='msg' class='bg-danger'>no available</span>"));
+                    }
+                    else{
+                        $("#msg").remove();
+                    }
                     //let av_times = JSON.parse(data);//JSON字符串转换为JSON对象
                     $('#appointment_time').children().remove();
-                    // for (let i=0; i<data.length; i++){
-                    //     let a = $('<option></option>');
-                    //     a.text(data[i]);
-                    //     a.attr({value:i});
-                    //     $('#appointment_time').append(a);
-                    // }
                     for (let key in data){
                         let a = $('<option></option>');
                         a.text(data[key]);
@@ -113,24 +142,6 @@
 
         });
     });
-
-
-        $(function () {
-
-            // console.log(doc_list);
-            let doctors = $('#doctor');
-            doctors.children().remove();
-            let doc_list = "{{doc_list}}";
-            console.log(doc_list);
-            for (let key in doc_list){
-                let a = $('<option></option>');
-                a.text(doc_list[key]);
-                a.attr({value:key});
-                doctors.append(a);
-            }
-        })
-
-
     </script>
 
 {%  endblock %}
@@ -139,7 +150,19 @@
 {% block content %}
 
 <div class="container" style="margin-top: 100px">
-    <h1>make a new appointment</h1>
+    <h1 class="col-lg-6 text-center" >make a new appointment</h1>
+
+    <div class="flash-message col-lg-6" style="margin: 10px 10px">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li class="alert alert-danger" role="alert" style="list-style-type:none;">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
 
     <div class="row">
          <div class="col-md-6">
