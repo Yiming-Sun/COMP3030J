@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        >
+        <com.example.myapplication.CircleImageView
+        android:id="@+id/image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/touxiang"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        />
+
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/info"
+         android:layout_marginLeft="80dp"
+         android:layout_marginTop="80dp"
+         android:text="@string/My_Information"
+         android:background="@null"
+         android:textColor="#f00"
+         android:textSize="30sp"
+         >
+     </Button>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/My_Pet"
+            android:background="@color/white"
+            android:text="@string/My_Pet"
+            >
+
+
+        </Button>
+
+        <Button
+            android:id="@+id/My_Ask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:background="@color/white"
+            android:text="@string/My_Ask">
+
+
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/My_Setting"
+            android:text="@string/My_Setting"
+            android:layout_marginTop="-10dp"
+            android:background="@color/white"
+            >
+
+
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/My_Doc"
+            android:text="@string/My_Doc"
+            android:background="@color/white"
+            android:layout_marginTop="-10dp"
+            >
+
+
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/My_Appointment"
+            android:text="@string/My_Appointment"
+            android:background="@color/white"
+            android:layout_marginTop="-10dp"
+            >
+
+
+        </Button>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
