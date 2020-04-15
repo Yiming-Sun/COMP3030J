@@ -1,144 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e55c321d-2f3f-4723-9f94-11400042b824" name="Default Changelist" comment="" />
+    <list default="true" id="4a8b43af-0279-47c0-821e-589eabef2855" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/templates/Configuration.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/templates/password_modify.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-              <folding>
-                <element signature="e#151#176#0#HTML" expanded="true" />
-                <element signature="e#292#299#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/blogapp/routes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="1021" column="47" selection-start-line="1021" selection-start-column="47" selection-end-line="1021" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="134" column="33" lean-forward="true" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="blogdb" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="blogdb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="blogdb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="blogdb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="customer: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="blogdb" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="new_appointment: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>signupC</find>
-      <find>log</find>
-      <find>login</find>
-      <find>login_c</find>
-      <find>signupc</find>
-    </findStrings>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/blogapp/templates/Configuration.html" />
-        <option value="$PROJECT_DIR$/blogapp/templates/password_modify.html" />
-        <option value="$PROJECT_DIR$/blogapp/routes.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="447" />
-    <option name="y" value="64" />
-    <option name="width" value="1439" />
-    <option name="height" value="1086" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="microblog3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="microblog3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="microblog3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="microblog3" type="462c0819:PsiDirectoryNode" />
-              <item name="blogapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="microblog3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="microblog3" type="462c0819:PsiDirectoryNode" />
-              <item name="blogapp" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
+  <component name="ProjectId" id="1YZ85f9TxGiCQvvQWzJiqNFvaSC" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../microblog1" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/blogapp/static/Picture" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static\Picture" />
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static\js" />
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static\upload_photo" />
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static\css" />
+      <recent name="C:\Users\84240\Desktop\second\blogapp\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static\Picture" />
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static\js" />
+      <recent name="C:\Users\84240\Desktop\second\blogapp\static" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -152,15 +93,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="microblog3" type="Python.FlaskServer">
-      <module name="microblog3" />
-      <option name="target" value="$PROJECT_DIR$/blogapp/__init__.py" />
+  <component name="RunManager" selected="Flask server.Flask (blogapp/__init__.py)">
+    <configuration name="Unnamed" type="FirefoxRemoteDebugType" nameIsGenerated="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="Flask (blogapp/__init__.py)" type="Python.FlaskServer" nameIsGenerated="true">
+      <module name="second" />
+      <option name="target" value="C:\Users\84240\Desktop\second\blogapp\__init__.py" />
       <option name="targetType" value="PATH" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="SDK_HOME" value="C:\Users\84240\Desktop\second\flaskenv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -168,152 +112,112 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Firefox Remote.Unnamed" />
+      <item itemvalue="Flask server.Flask (blogapp/__init__.py)" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e55c321d-2f3f-4723-9f94-11400042b824" name="Default Changelist" comment="" />
-      <created>1586180843193</created>
+      <changelist id="4a8b43af-0279-47c0-821e-589eabef2855" name="Default Changelist" comment="" />
+      <created>1583138573065</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1586180843193</updated>
-      <workItem from="1586180844540" duration="1128000" />
-      <workItem from="1586181985671" duration="5603000" />
+      <updated>1583138573065</updated>
+      <workItem from="1583138575031" duration="731000" />
+      <workItem from="1583139377341" duration="985000" />
+      <workItem from="1583140379918" duration="5689000" />
+      <workItem from="1583146128349" duration="3616000" />
+      <workItem from="1583219965425" duration="5697000" />
+      <workItem from="1583225846134" duration="1168000" />
+      <workItem from="1583227106758" duration="3693000" />
+      <workItem from="1583243321642" duration="2478000" />
+      <workItem from="1583290836289" duration="16538000" />
+      <workItem from="1583329825356" duration="1829000" />
+      <workItem from="1583391193643" duration="388000" />
+      <workItem from="1583392218326" duration="2028000" />
+      <workItem from="1583502329868" duration="6554000" />
+      <workItem from="1583556709682" duration="2485000" />
+      <workItem from="1583566315972" duration="15550000" />
+      <workItem from="1583740915983" duration="167000" />
+      <workItem from="1583748065014" duration="10194000" />
+      <workItem from="1583900854942" duration="9573000" />
+      <workItem from="1583998419834" duration="6459000" />
+      <workItem from="1584007009453" duration="398000" />
+      <workItem from="1584018754216" duration="1511000" />
+      <workItem from="1584157907559" duration="6868000" />
+      <workItem from="1584178696716" duration="7472000" />
+      <workItem from="1584261031174" duration="29419000" />
+      <workItem from="1584429632587" duration="3007000" />
+      <workItem from="1584447784674" duration="7031000" />
+      <workItem from="1584516379202" duration="13057000" />
+      <workItem from="1584603271704" duration="1516000" />
+      <workItem from="1584628362078" duration="761000" />
+      <workItem from="1584690370531" duration="6369000" />
+      <workItem from="1584883031956" duration="1213000" />
+      <workItem from="1585229510241" duration="4383000" />
+      <workItem from="1585293524206" duration="10668000" />
+      <workItem from="1585316023055" duration="1775000" />
+      <workItem from="1585466534957" duration="7706000" />
+      <workItem from="1585483323309" duration="980000" />
+      <workItem from="1585484407304" duration="547000" />
+      <workItem from="1585488962871" duration="2433000" />
+      <workItem from="1585533137564" duration="12062000" />
+      <workItem from="1585557174668" duration="15621000" />
+      <workItem from="1585624316000" duration="20414000" />
+      <workItem from="1585658789794" duration="3234000" />
+      <workItem from="1585662835386" duration="124000" />
+      <workItem from="1585662960631" duration="604000" />
+      <workItem from="1585663580904" duration="1546000" />
+      <workItem from="1585725274187" duration="13437000" />
+      <workItem from="1585747309463" duration="3783000" />
+      <workItem from="1585801635017" duration="1688000" />
+      <workItem from="1585816939143" duration="11658000" />
+      <workItem from="1585914714871" duration="12067000" />
+      <workItem from="1585960815148" duration="10516000" />
+      <workItem from="1585986935227" duration="2012000" />
+      <workItem from="1586002935728" duration="48000" />
+      <workItem from="1586002985416" duration="2786000" />
+      <workItem from="1586097663196" duration="87000" />
+      <workItem from="1586138360907" duration="852000" />
+      <workItem from="1586174367253" duration="5554000" />
+      <workItem from="1586180003114" duration="630000" />
+      <workItem from="1586265167037" duration="6134000" />
+      <workItem from="1586315359988" duration="23164000" />
+      <workItem from="1586432190091" duration="9211000" />
+      <workItem from="1586498415682" duration="3063000" />
+      <workItem from="1586501510003" duration="724000" />
+      <workItem from="1586571501077" duration="1693000" />
+      <workItem from="1586573219152" duration="3423000" />
+      <workItem from="1586588690993" duration="5501000" />
+      <workItem from="1586607770635" duration="5103000" />
+      <workItem from="1586670252979" duration="37000" />
+      <workItem from="1586670301115" duration="12000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6731000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/microblog3$microblog3.coverage" NAME="microblog3 Coverage Results" MODIFIED="1586187571646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../to/blogapp/__init__.py</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/Appointment_doc.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="127" column="24" lean-forward="true" selection-start-line="127" selection-start-column="24" selection-end-line="127" selection-end-column="24" />
-          <folding>
-            <element signature="e#4274#4312#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/logged_navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="79" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_modify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1790">
-          <caret line="79" column="18" lean-forward="true" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_urgent_modify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/signupC.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="149" column="10" lean-forward="true" selection-start-line="149" selection-start-column="10" selection-end-line="149" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/ConfigurationC.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/password_modify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#151#176#0#HTML" expanded="true" />
-            <element signature="e#292#299#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/Configuration.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="134" column="33" lean-forward="true" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="1021" column="47" selection-start-line="1021" selection-start-column="47" selection-end-line="1021" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/second$Flask__blogapp___init___py_.coverage" NAME="Flask (blogapp/__init__.py) Coverage Results" MODIFIED="1585820895254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/second$Unnamed.coverage" NAME="__init__ Coverage Results" MODIFIED="1585562389603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/second$hos.coverage" NAME="hos Coverage Results" MODIFIED="1585749514133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blogapp" />
+    <SUITE FILE_PATH="coverage/second$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1585316980415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/second$forms.coverage" NAME="hos Coverage Results" MODIFIED="1585663367585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/blogapp" />
+    <SUITE FILE_PATH="coverage/second$app.coverage" NAME="app Coverage Results" MODIFIED="1585749594788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/flaskenv/Lib/site-packages/flask" />
   </component>
 </project>
