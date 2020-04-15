@@ -47,7 +47,7 @@
             });
 
             $('button').each(function(){
-                $(this).css({"margin":"0px 30px"})
+                $(this).css({"margin":"0px 20px"})
             });
         });
 
@@ -96,21 +96,39 @@
                    data:{"pet_name":petName,"type":"query"},
                    success:function (data) {
                        let d = JSON.parse(data);//JSON字符串转换为JSON对象
-
+                        console.log(d[0].length)
                        $(".row_content").remove();
-                       for (let i=0; i<d.length; i++){
-                           console.log(d[i]);
+                       for (let i=0; i<d[0].length; i++){
+
 
                            let tr = $('<tr class="row_content"></tr>');
                            let id = $('<td class="text-center appointment_id"></td>');
-                           id.text(d[i]["id"]);
+                           id.text(d[0][i]["id"]);
 
                            tr.append(id);
                            let date = $('<td class="text-center"></td>');
-                           date.text(d[i]["date"]);
+                           date.text(d[0][i]["date"]);
                            tr.append(date);
+                           let date_time = $('<td class="text-center"></td>');
+
+                           if(d[0][i]["appoint_time"] == 2){
+                               date_time.text("8:00-10:00");
+                           }
+                           else if(d[0][i]["appoint_time"] == 3){
+                               date_time.text("10:00-12:00");
+                           }
+                           else if(d[0][i]["appoint_time"] == 4){
+                               date_time.text("13:00-15:00");
+                           }
+                           else if(d[0][i]["appoint_time"] == 5){
+                               date_time.text("15:00-17:00");
+                           }
+
+                           tr.append(date_time);
+
+
                            let petType = $('<td class="text-center"></td>');
-                           if (d[i]["date"] == 1){
+                           if (d[0][i]["date"] == 1){
                                petType.text("cat");
                            }
                            else{
@@ -118,17 +136,17 @@
                            }
                            tr.append(petType);
                            let petName = $('<td class="text-center"></td>');
-                           petName.text(d[i]["petName"]);
+                           petName.text(d[0][i]["petName"]);
                            tr.append(petName);
                            let doctor = $('<td class="text-center"></td>');
-                           doctor.text("Allen");
+                           doctor.text(d[1][i]);
                            tr.append(doctor);
 
                            let condition = $('<td class="text-center"></td>');
-                           condition.text(d[i]["condition"]);
+                           condition.text(d[2][i]);
                            tr.append(condition);
                            let op_date = $('<td class="text-center"></td>');
-                           op_date.text(d[i]["op_date"]);
+                           op_date.text(d[0][i]["op_date"]);
                            tr.append(op_date);
                            if(op_date.text() == "null"){
                                op_date.text("None");
@@ -137,21 +155,21 @@
                                op_date.parent().css({"color": "red"});
                            }
                            let bt_info = $('<a href="#"><button class="btn btn-default appform_button ">Information</button></a>');
-                           bt_info.css({"margin":"0px 30px"});
-                           bt_info.attr({href:"/appointment_detail/"+d[i]["id"]+d[i]["app_type"]});
+                           bt_info.css({"margin":"0px 20px"});
+                           bt_info.attr({href:"/appointment_detail/"+d[0][i]["id"]+d[0][i]["app_type"]});
 
 
                            let bt_trace = $('<a><button class="btn btn-primary appform_button">Trace</button></a>');
                            bt_trace.attr({href:"/appointment_trace/"+d[i]["id"]+d[i]["condition"]});
 
-                           bt_trace.css({"margin":"0px 30px"});
+                           bt_trace.css({"margin":"0px 20px"});
                            let bt_modify= $('<a><button class="btn btn-success appform_button">Modify</button></a>');
 
                            bt_modify.attr({href:"/appointment_modify/"+d[i]["id"]});
 
-                           bt_modify.css({"margin":"0px 30px"});
+                           bt_modify.css({"margin":"0px 20px"});
                            let bt_del = $('<button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>');
-                           bt_del.css({"margin":"0px 30px"});
+                           bt_del.css({"margin":"0px 20px"});
                            let operation = $('<td></td>');
 
                            operation.append(bt_info);
@@ -198,6 +216,7 @@
             <tr>
                 <th class="text-center">Order No</th>
                 <th class="text-center">Order Date</th>
+                <th class="text-center">Date time</th>
                 <th class="text-center">Pet Type</th>
                 <th class="text-center">Pet Name</th>
                 <th class="text-center">Attending doctor</th>
@@ -214,6 +233,7 @@
                     <td class="text-center apt" style="display: none">{{appointment.app_type}}</td>
                     <td class="text-center appointment_id">{{appointment.id}}</td>
                     <td class="text-center">{{appointment.date}}</td>
+                    <td class="text-center">{{ time_dict | getTime(appointment.appoint_time) }}</td>
                     <td class="text-center">{% if appointment.petType==2 %}
                             cat
                         {%  elif appointment.petType==1  %}
@@ -230,8 +250,8 @@
                         <a href="{{ url_for('appointment_detail', id=appointment.id, type=appointment.app_type) }}"><button class="btn btn-default appform_button ">Information</button></a>
                         <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button bt_trace"> Trace</button></a>
                         {% if appointment.app_type ==1 %}
-
-                            {% if appointment.condition >= 4 %}
+                            <!--普通门诊-->
+                            {% if appointment.condition >= 2 %}
                             <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled">Modify</button></a>
                             {% else %}
                             <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button">Modify</button></a>
@@ -245,9 +265,9 @@
                         {% endif %}
 <!--    data-toggle表示以什么事件触发， data-target表示事件的目标   -->
                         {% if appointment.condition != 1 %}
-                        <button class="btn btn-danger appform_button delete_btn" disabled="disabled" type="button" data-toggle="modal" data-target="#my">Delete</button>
+                            <button class="btn btn-danger appform_button delete_btn" disabled="disabled" type="button" data-toggle="modal" data-target="#my">Delete</button>
                         {% else %}
-                        <button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>
+                            <button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>
                         {% endif %}
                     </td>
                 </tr>

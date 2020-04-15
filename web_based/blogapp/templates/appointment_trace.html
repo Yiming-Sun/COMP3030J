@@ -43,6 +43,9 @@
                 if (user_type == "customer"){
                     $('#shoushu').css({"display":"block"});
                 }
+                if(user_type == "employee"){
+                    $('#shoushu_d').css({"display":"block"});
+                }
             }
             else if(condition == 4) {
                 $('#second').attr("src","../static/Picture/diagnosing.jpg");
@@ -82,7 +85,7 @@
                 $('#sixth').attr("src","../static/Picture/pay_for_medicine.jpg");
                 $('#seventh').attr("src","../static/Picture/out.jpg");
             }
-
+f
 
 
             $('#hasArrival').click(function(){//first
@@ -109,8 +112,32 @@
                    data:{"type":"finishDiagnose"},
                    success:function () {
                        $('#finishDiagnose').css({"display":"none"});
+                       if ($('#app_type').text()=='1'){
+                           $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                           $('#fourth').attr("src","../static/Picture/operation.jpg");
+                           $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
+                           $('#makeMedicine').css({"display":"block"});
+                       }
+                       else{
+                           $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                           $('#shoushu_d').css({"display":"block"});
+                       }
 
-                       $('#third').attr("src","../static/Picture/reserve_operation.jpg");
+                   },
+                   error:function () {
+                   }
+               })
+            });
+
+            $('#shoushu_d').click(function(){//second
+                $.ajax({
+                   url:"/appointment_trace/"+id+condition,
+                   type:"GET",
+                   data:{"type":"shoushu_d"},
+                   success:function () {
+                       $('#shoushu_d').css({"display":"none"});
+                       $('#finishOperation').css({"display":"block"});
+                       $('#fourth').attr("src","../static/Picture/operation.jpg");
                    },
                    error:function () {
                    }
@@ -125,8 +152,8 @@
                    data:{"type":"finishOperation"},
                    success:function () {
                        $('#finishOperation').css({"display":"none"});
-
-                       $('#fifth').attr("src","../static/Picture/finish_operating.jpg");
+                       $('#makeMedicine').css({"display":"block"});
+                       $('#fifth').attr("src","../static/Picture/finishing_operation.jpg");
                    },
                    error:function () {
                    }
@@ -176,6 +203,7 @@
 <p id="condition" style="display: none">{{condition}}</p>
 <p id="id" style="display: none">{{id}}</p>
 <p id="user_type" style="display: none">{{user_type}}</p>
+<p id="app_type" style="display: none">{{app.app_type}}</p>
 
 <div class="container" style="margin-top: 100px">
     <div><h1 class="text-center">The Process Of Your Appointment:</h1></div>
@@ -209,9 +237,17 @@
                 <p>手术时间: 未选定</p>
                 <a href="{{ url_for('appointment_urgent_modify', id=id)}}"><button>去预约</button></a>
                 {% endif %}
-
-
             </div>
+            <div id="shoushu_d" style="text-align: center;display: none">
+                {% if app.op_date %}
+                <p>手术时间: {{ app.op_date }}</p>
+                <button>去手术</button>
+                {% else %}
+                <p>手术时间: 未选定</p>
+
+                {% endif %}
+            </div>
+
         </div>
         <div class="col-lg-1" style="text-align: center">
             <span class="glyphicon glyphicon-triangle-right" aria-hidden="true" style="font-size: 50px;margin-top: 20px"></span>

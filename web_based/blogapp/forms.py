@@ -59,8 +59,8 @@ class AppointmentForm(FlaskForm):
     phoneNo = StringField('Phone Number', validators=[DataRequired()])
     date = DateField('Date(tip: you can just select the next ten days)', format='%Y-%m-%d', validators=[DataRequired()])
     appointment_time = SelectField('Appointment Time', coerce=int,
-                                   choices=[(1, '8:00 - 10:00'), (2, '10:00 - 12:00'), (3, '13:00 - 15:00'),
-                                            (4, '15:00 - 17:00')])
+                                   choices=[(1, '--choose time--'),(2, '8:00 - 10:00'), (3, '10:00 - 12:00'), (4, '13:00 - 15:00'),
+                                            (5, '15:00 - 17:00')])
     petType = SelectField('Pet Type', coerce=int, choices=[(1, 'dog'), (2, 'cat')])
     petName = StringField('Pet Name', validators=[DataRequired()])
     doctor = SelectField('Select Doctor', coerce=int, choices=[(1, 'Allen'), (2, 'Fred')])
@@ -86,15 +86,15 @@ class UrgentAppointment(FlaskForm):
     date = DateField('Date(tip: you can just select the next ten days, including today)', format='%Y-%m-%d',
                      validators=[DataRequired()])
     appointment_time = SelectField('Appointment Time', coerce=int,
-                                   choices=[(1, '8:00 - 10:00'), (2, '10:00 - 12:00'), (3, '13:00 - 15:00'),
-                                            (4, '15:00 - 17:00')])
+                                   choices=[(1, '--choose time--'),(2, '8:00 - 10:00'), (3, '10:00 - 12:00'), (4, '13:00 - 15:00'),
+                                            (5, '15:00 - 17:00')])
     petType = SelectField('Pet Type', coerce=int, choices=[(1, 'dog'), (2, 'cat')])
     petName = StringField('Pet Name', validators=[DataRequired()])
     doctor = SelectField('Select Doctor', coerce=int, choices=[(1, 'Allen'), (2, 'Fred')], )
-    operationDate = DateField('Date', format='%Y-%m-%d')
+    operationDate = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
     operationTime = SelectField('Time', coerce=int,
-                                choices=[(1, '8:00 - 10:00'), (2, '10:00 - 12:00'), (3, '13:00 - 15:00'),
-                                         (4, '15:00 - 17:00')])
+                                choices=[(1, '--choose time--'),(2, '8:00 - 10:00'), (3, '10:00 - 12:00'), (4, '13:00 - 15:00'),
+                                            (5, '15:00 - 17:00')])
     comment = StringField('Symptom')
     submit = SubmitField('Submit')
 
