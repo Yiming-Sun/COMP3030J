@@ -23,26 +23,13 @@
     <string name="My_Ask">我的提问</string>
     <string name="My_Setting">设置</string>
     <string name="My_Doc">我的医生</string>
-    <string name="app_type">预约种类</string>
     <string name="My_Appointment">我的预约</string>
     <string name="My_Information">个人信息></string>
-    <string name="PetType">选择宠物种类</string>
+    <string name="Pet_Info">添加宠物信息</string>
     <string name="Doc">医生</string>
     <string name="Date">日期</string>
-    <string name="Time">时间段</string>
     <string name="operation_appointment">手术预约</string>
-    <string name="doctor_recommend">医生推荐</string>
-    <string name="doctor_name">医生名字:</string>
-    <string name="doctor_fans">粉丝数:</string>
-    <string name="doctor_hosipital">所在医院:</string>
-    <string name="doctor_recent_reply">近期回答:</string>
-    <string name="selsect_your_city_first">请先选择你的城市</string>
 
-    <string name="save">保存</string>
-    <string name="cancel">取消</string>
-    <string name="ok">确认</string>
-
-    <string name="PetName">您的宠物叫什么？</string>
 
     <string-array name="seasceneroom">
         <item>101</item>

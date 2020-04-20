@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/ed_username"
             android:inputType="text"
-            android:text="123"
+            android:text="admin"
             android:singleLine="true"
             android:textColorHint="#757272"
             android:textColor="#FFFFFF"/>
@@ -64,7 +64,7 @@
             android:hint="@string/ed_password"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:text="123"
+            android:text="admin"
             android:textColorHint="#757272"
             android:textColor="#FFFFFF"/>
     ></LinearLayout>

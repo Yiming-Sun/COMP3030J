@@ -14,7 +14,6 @@
         <activity android:name=".ui.appointment.appointment"></activity>
         <activity android:name=".ui.appointment.appointment_details"></activity>
         <activity android:name=".ui.appointment.MoveList"></activity>
-        <activity android:name=".ui.doctor.doctor_details"></activity>
         <activity
             android:name=".Hos"
             android:label="@string/title_activity_hotel" />

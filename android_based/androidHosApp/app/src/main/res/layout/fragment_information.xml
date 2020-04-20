@@ -10,12 +10,13 @@
         android:layout_height="200dp"
         android:orientation="horizontal"
         >
-        <com.example.myapplication.CircleImageView
+
+    <com.example.myapplication.CircleImageView
         android:id="@+id/image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/touxiang"
+        android:src="@drawable/touxiang"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         />
@@ -31,6 +32,7 @@
          android:textColor="#f00"
          android:textSize="30sp"
          >
+
      </Button>
 
 
@@ -59,12 +61,13 @@
         </Button>
 
         <Button
-            android:id="@+id/My_Ask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/My_Ask"
+            android:text="@string/My_Ask"
             android:layout_marginTop="-10dp"
             android:background="@color/white"
-            android:text="@string/My_Ask">
+            >
 
 
         </Button>

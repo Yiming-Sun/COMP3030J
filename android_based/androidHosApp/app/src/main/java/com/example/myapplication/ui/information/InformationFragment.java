@@ -9,7 +9,6 @@ import android.widget.Button;
 
 import com.example.myapplication.R;
 import com.example.myapplication.ui.appointment.appointment_details;
-import com.example.myapplication.ui.doctor.doctor_details;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,15 +32,6 @@ public class InformationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), appointment_details.class);
-                startActivity(intent);
-            }
-        });
-
-        Button doctor = root.findViewById(R.id.My_Doc);
-        doctor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), doctor_details.class);
                 startActivity(intent);
             }
         });
