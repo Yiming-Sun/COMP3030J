@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block styles %}
+{{super()}}
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%;
+            background-repeat:no-repeat;
+            background-size:100% 100%;
+            -moz-background-size:100% 100%;
+        }
+    </style>
+
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+    <div class="title col-lg-6 col-lg-offset-6">
+        <h2 class="text-center" style="margin-top: 180px;">
+    Change password</h2>
+    </div>
+    <div id="up_form" class="col-lg-6 col-lg-offset-6" style="margin-top: 20px; border: solid black 2px;border-radius:30px;">
+        <div class="flash-message" style="margin: 10px 10px">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul  class="col-lg-10">
+                {% for message in messages %}
+                    <li class="alert alert-danger" role="alert" style="list-style-type:none;">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <br>
+
+    <div class="col-lg-10 col-lg-offset-2" style="margin: 20px 10px">
+        {% import 'bootstrap/wtf.html' as wtf%}
+        {{ wtf.quick_form(form) }}
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
