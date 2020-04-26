@@ -15,6 +15,7 @@ public class Database extends SQLiteOpenHelper {
     // Contacts table name
     // table name
     static final String Customer_TABLE = "customer";
+<<<<<<< HEAD
     static final String Employee_TABLE = "employee";
     static final String Answer_question_TABLE = "answer_question";
     static final String ID_TABLE = "id";
@@ -51,6 +52,12 @@ public class Database extends SQLiteOpenHelper {
     private static final String KEY_APP_TYPE = "app_type";
     private static final String KEY_USER_ID = "user_id";
 
+=======
+    // Contacts Table Columns names
+    public static final String KEY_ID = "id";
+
+    public static final String KEY_USERNAME = "username";
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,6 +66,7 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+<<<<<<< HEAD
         String customer = "create table " + Customer_TABLE + " ( "
                 + KEY_ID + " integer primary key , "
                 + KEY_USERNAME + " text,"
@@ -153,6 +161,16 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(id);
         db.execSQL(new_appointment);
         db.execSQL(question);
+=======
+        String sql = "create table " + Customer_TABLE + " ( "
+                + KEY_ID + " integer primary key , "
+                + KEY_USERNAME + " text,"
+//                +  + " text, "
+//                +  + " text "
+                + " ) ";
+
+        db.execSQL(sql);
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
     }
 
     @Override

@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, SelectField, DateField, PasswordField, BooleanField, SubmitField, validators, FileField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -12,6 +12,12 @@ from blogapp.models import Employee, NewAppointment, Customer, Id, AnswerQuestio
 from wtforms import form, fields, validators, widgets
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
+from flask_babel import Babel, gettext as _
+from blogapp import app
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+babel = Babel(app)
+
+
 
 def possible_doc():
     return Employee.query
@@ -23,51 +29,51 @@ def poss_name():
 
 # Yiming Sun(2020/3/30)
 class C_personal_space(FlaskForm):
-    picture = FileField('picture')
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('E-mail', validators=[DataRequired()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    nickname = StringField('Nickname')
-    gender = SelectField('Gender', coerce=int, choices=[(1, 'male'), (2, 'female')])
-    nationality = StringField('Nationality')
-    city = StringField('City')
-    address = StringField('Address')
-    personal_signature = StringField('Personal signature')
-    submit = SubmitField("Save")
+    picture = FileField(_('picture'))
+    username = StringField(_('Username'), validators=[DataRequired()])
+    email = StringField(_('E-mail'), validators=[DataRequired()])
+    phone = StringField(_('Phone Number'), validators=[DataRequired()])
+    nickname = StringField(_('Nickname'))
+    gender = SelectField(_('Gender'), coerce=int, choices=[(1, 'male'), (2, 'female')])
+    nationality = StringField(_('Nationality'))
+    city = StringField(_('City'))
+    address = StringField(_('Address'))
+    personal_signature = StringField(_('Personal signature'))
+    submit = SubmitField(_("Save"))
 
 
 # Yiming Sun(2020/3/30)
 class E_personal_space(FlaskForm):
-    picture = FileField('picture', default=None)
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('E-mail', validators=[DataRequired()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    nickname = StringField('Nickname')
-    gender = SelectField('Gender', coerce=int, choices=[(1, 'male'), (2, 'female')])
-    animal = StringField('Animal type', validators=[DataRequired()])
-    workplace = StringField('Workplace', validators=[DataRequired()])
-    nationality = StringField('Nationality')
-    city = StringField('City')
-    address = StringField('Address')
-    personal_signature = StringField('Personal signature')
-    submit = SubmitField("Save")
+    picture = FileField(_('picture'), default=None)
+    username = StringField(_('Username'), validators=[DataRequired()])
+    email = StringField(_('E-mail'), validators=[DataRequired()])
+    phone = StringField(_('Phone Number'), validators=[DataRequired()])
+    nickname = StringField(_('Nickname'))
+    gender = SelectField(_('Gender'), coerce=int, choices=[(1, _('male')), (2, _('female'))])
+    animal = StringField(_('Animal type'), validators=[DataRequired()])
+    workplace = StringField(_('Workplace'), validators=[DataRequired()])
+    nationality = StringField(_('Nationality'))
+    city = StringField(_('City'))
+    address = StringField(_('Address'))
+    personal_signature = StringField(_('Personal signature'))
+    submit = SubmitField(_("Save"))
 
 
 # Yiming Sun(2020/3/14)
 class AppointmentForm(FlaskForm):
-    applicant = StringField('Applicant', validators=[DataRequired()])
-    phoneNo = StringField('Phone Number', validators=[DataRequired()])
-    date = DateField('Date(tip: you can just select the next ten days)', format='%Y-%m-%d', validators=[DataRequired()])
-    appointment_time = SelectField('Appointment Time', coerce=int,
-                                   choices=[(1, '8:00 - 10:00'), (2, '10:00 - 12:00'), (3, '13:00 - 15:00'),
-                                            (4, '15:00 - 17:00')])
-    petType = SelectField('Pet Type', coerce=int, choices=[(1, 'dog'), (2, 'cat')])
-    petName = StringField('Pet Name', validators=[DataRequired()])
-    doctor = SelectField('Select Doctor', coerce=int, choices=[(1, 'Allen'), (2, 'Fred')])
+    applicant = StringField(_('Applicant'), validators=[DataRequired()])
+    phoneNo = StringField(_('Phone Number'), validators=[DataRequired()])
+    date = DateField(_('Date(tip: you can just select the next ten days)'), format='%Y-%m-%d', validators=[DataRequired()])
+    appointment_time = SelectField(_('Appointment Time'), coerce=int,
+                                   choices=[(1, _('--choose time--')),(2, '8:00 - 10:00'), (3, '10:00 - 12:00'), (4, '13:00 - 15:00'),
+                                            (5, '15:00 - 17:00')])
+    petType = SelectField(_('Pet Type'), coerce=int, choices=[(1, _('dog')), (2, _('cat'))])
+    petName = StringField(_('Pet Name'), validators=[DataRequired()])
+    doctor = SelectField(_('Select Doctor'), coerce=int, choices=[(1, _('Allen')), (2, _('Fred'))])
     # doctor = QuerySelectField(label='Select Doctor', validators=[validators.required()], query_factory=poss_name,
     #                           allow_blank=True)
-    comment = StringField('Symptom')
-    submit = SubmitField('Submit')
+    comment = StringField(_('Symptom'))
+    submit = SubmitField(_('Submit'))
 
     def __init__(self, *args, **kwargs):
         super(AppointmentForm, self).__init__(*args, **kwargs)
@@ -81,22 +87,22 @@ class AppointmentForm(FlaskForm):
 
 # Yiming Sun(2020/3/14)
 class UrgentAppointment(FlaskForm):
-    applicant = StringField('Applicant', validators=[DataRequired()])
-    phoneNo = StringField('Phone Number', validators=[DataRequired()])
-    date = DateField('Date(tip: you can just select the next ten days, including today)', format='%Y-%m-%d',
+    applicant = StringField(_('Applicant'), validators=[DataRequired()])
+    phoneNo = StringField(_('Phone Number'), validators=[DataRequired()])
+    date = DateField(_('Date(tip: you can just select the next ten days, including today)'), format='%Y-%m-%d',
                      validators=[DataRequired()])
-    appointment_time = SelectField('Appointment Time', coerce=int,
-                                   choices=[(1, '8:00 - 10:00'), (2, '10:00 - 12:00'), (3, '13:00 - 15:00'),
-                                            (4, '15:00 - 17:00')])
-    petType = SelectField('Pet Type', coerce=int, choices=[(1, 'dog'), (2, 'cat')])
-    petName = StringField('Pet Name', validators=[DataRequired()])
-    doctor = SelectField('Select Doctor', coerce=int, choices=[(1, 'Allen'), (2, 'Fred')], )
-    operationDate = DateField('Date', format='%Y-%m-%d')
-    operationTime = SelectField('Time', coerce=int,
-                                choices=[(1, '8:00 - 10:00'), (2, '10:00 - 12:00'), (3, '13:00 - 15:00'),
-                                         (4, '15:00 - 17:00')])
-    comment = StringField('Symptom')
-    submit = SubmitField('Submit')
+    appointment_time = SelectField(_('Appointment Time'), coerce=int,
+                                   choices=[(1, _('--choose time--')),(2, '8:00 - 10:00'), (3, '10:00 - 12:00'), (4, '13:00 - 15:00'),
+                                            (5, '15:00 - 17:00')])
+    petType = SelectField(_('Pet Type'), coerce=int, choices=[(1, _('dog')), (2, _('cat'))])
+    petName = StringField(_('Pet Name'), validators=[DataRequired()])
+    doctor = SelectField(_('Select Doctor'), coerce=int, choices=[(1, 'Allen'), (2, 'Fred')], )
+    operationDate = DateField(_('Date'), format='%Y-%m-%d', validators=[DataRequired()])
+    operationTime = SelectField(_('Time'), coerce=int,
+                                choices=[(1, _('--choose time--')),(2, '8:00 - 10:00'), (3, '10:00 - 12:00'), (4, '13:00 - 15:00'),
+                                            (5, '15:00 - 17:00')])
+    comment = StringField(_('Symptom'))
+    submit = SubmitField(_('Submit'))
 
     def __init__(self, *args, **kwargs):
         super(UrgentAppointment, self).__init__(*args, **kwargs)
@@ -109,38 +115,40 @@ class UrgentAppointment(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Sign In')
+    username = StringField(_('Username'), validators=[DataRequired()])
+    password = PasswordField(_('Password'), validators=[DataRequired()])
+    submit = SubmitField(_('Sign In'))
 
 
 class SignForm_C(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    repeat_password = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password',
-                                                                                           message="two passwords are not equal")])
-    nickname = StringField('Nickname', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    phone = StringField("Phone", validators=[DataRequired()])
-    submit = SubmitField('Sign Up')
+    username = StringField(_('Username'), validators=[DataRequired()])
+    password = PasswordField(_('Password'), validators=[DataRequired()])
+    repeat_password = PasswordField(_('Repeat Password'), validators=[DataRequired(), EqualTo('password',
+                                                                                           message=_("two passwords are not equal"))])
+    nickname = StringField(_('Nickname'), validators=[DataRequired()])
+    email = StringField(_('Email'), validators=[DataRequired(), Email()])
+    phone = StringField(_("Phone"), validators=[DataRequired()])
+    #recaptcha = RecaptchaField()
+    submit = SubmitField(_('Sign Up'))
 
 
 class SignForm_E(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    id = StringField('Employee ID', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    repeat_password = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password', message="not "
-                                                                                                               "equal")])
-    nickname = StringField('Nickname', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    phone = StringField("Phone", validators=[DataRequired()])
-    animal = SelectField('Animal', coerce=int, choices=[(1, 'Dog'), (2, 'Cat')])
-    workplace = SelectField('Workplace', coerce=int, choices=[(1, 'Beijing'), (2, 'Shnaghai'), (3, 'Chengdu')])
-    submit = SubmitField('Sign Up')
+    username = StringField(_('Username'), validators=[DataRequired()])
+    id = StringField(_('Employee ID'), validators=[DataRequired()])
+    password = PasswordField(_('Password'), validators=[DataRequired()])
+    repeat_password = PasswordField(_('Repeat Password'), validators=[DataRequired(), EqualTo('password', message=_("not "
+                                                                                                               "equal"))])
+    nickname = StringField(_('Nickname'), validators=[DataRequired()])
+    email = StringField(_('Email'), validators=[DataRequired(), Email()])
+    phone = StringField(_("Phone"), validators=[DataRequired()])
+    animal = SelectField(_('Animal'), coerce=int, choices=[(1, _('Dog')), (2, _('Cat'))])
+    workplace = SelectField(_('Workplace'), coerce=int, choices=[(1, _('Beijing')), (2, _('Shnaghai')), (3, _('Chengdu'))])
+    #recaptcha = RecaptchaField()
+    submit = SubmitField(_('Sign Up'))
 
 
 class modify_password(FlaskForm):
-    pre_password = StringField('previous password', validators=[DataRequired()])
-    new_password = StringField('new password', validators=[DataRequired()])
-    comfirm_password = StringField('Confirm password', validators=[DataRequired()])
-    submit = SubmitField('Modify Password')
+    pre_password = StringField(_('previous password'), validators=[DataRequired()])
+    new_password = StringField(_('new password'), validators=[DataRequired()])
+    comfirm_password = StringField(_('Confirm password'), validators=[DataRequired()])
+    submit = SubmitField(_('Modify Password'))

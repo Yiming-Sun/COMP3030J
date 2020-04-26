@@ -1,6 +1,31 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}This is an example page{% endblock %}
 
+{% block head %}
+    {{ super() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script>
+    $(window).scroll(function () {
+  //小屏幕下的导航条折叠
+  if ($(window).width() < 768) {
+    //点击导航链接之后，把导航选项折叠起来
+    $("#navbar a").click(function () {
+      $("#navbar").collapse('hide');
+    });
+    //滚动屏幕时，把导航选项折叠起来
+    $(window).scroll(function () {
+      $("#navbar").collapse('hide');
+    });
+  }
+});
+</script>
+{% endblock %}
+
+
 {% block navbar %}
   {% include 'base_navbar.html' %}
 {% endblock %}

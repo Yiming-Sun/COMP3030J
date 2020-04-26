@@ -6,6 +6,13 @@
     <script>
 
         $(document).ready(function () {
+            let type = $("#type").text();
+            if (type == "employee"){
+                $("#newAppointment").css({"display": "none"});
+                $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+            }
+
+
             let p = $("#photo");
             p.attr({src:"data:;base64,{{ img }}"});
             // p.src = "blogapp/Picture/home2.jpg";
@@ -30,15 +37,19 @@
     </script>
 {% endblock %}
 {% block content %}
+<p id="type" style="display: none">{{user_type}}</p>
 <div class="container" style="margin-top: 100px">
     <div class="row">
-        <div class="col-lg-4" style="float: left">
+        <div class="col-lg-2" style="float: left">
 
             <img src="../static/Picture/default.jpg" alt="#Your photo" class="img-circle"
                  style="height: 200px;width: 200px;margin-top: 10px" id="photo" name="photo">
+            <br><br><br><br><br><br>
+            <p class="text-center" style="font-size: larger">total appoint times: {{times}}</p>
 
-            <a type="button" class="btn-default" href="{{ url_for('password_modify') }}">change password</a>
+            <a type="button" class="btn-default" href="{{ url_for('password_modify') }}"><button class="btn btn-success">Modify Password</button></a>
         </div>
+        <div class="col-lg-2" style="float: left"></div>
          <div class="col-md-6 " style="float: left;margin: 60px 0px">
             {% import 'bootstrap/wtf.html' as wtf%}
              {{ wtf.quick_form(form) }}

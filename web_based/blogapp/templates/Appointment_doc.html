@@ -36,14 +36,21 @@
             $("#changeType").click(function () {
 
                 let id = a.children(".appointment_id");
-                console.log(id.text());
+                console.log(a.attr("color"));
 
                $.ajax({
                    url:"/Doc_appointment",
                    type:"POST",
                    data:{"appointment_id":id.text()},
-                   success:function () {
-                        a.css({"color": "red"});
+                   success:function (data) {
+                       if (data == 2){
+                           a.css({"color": "red"});
+
+                       }
+                       else{
+                           a.css({"color": "black"});
+                       }
+
                    },
                    error:function () {
 
@@ -57,20 +64,22 @@
 
 {% block content %}
 
+
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
 
     <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th class="text-center">Order No</th>
-                <th class="text-center">Order Date</th>
-                <th class="text-center">Applicant</th>
-                <th class="text-center">Pet Type</th>
-                <th class="text-center">Condition</th>
-                <th class="text-center">Operation Date</th>
-                <th class="text-center">Operation Time</th>
-                <th class="text-center">Operations</th>
-                <th class="text-center" style="display: none">type</th>
+                <th class="text-center">{{ _("Order No") }}</th>
+                <th class="text-center">{{ _("Order Date") }}</th>
+                <th class="text-center">{{ _("Date time") }}</th>
+                <th class="text-center">{{ _("Applicant") }}</th>
+                <th class="text-center">{{ _("Pet Type") }}</th>
+                <th class="text-center">{{ _("Condition") }}</th>
+                <th class="text-center">{{ _("Operation Date") }}</th>
+                <th class="text-center">{{ _("Operation Time") }}</th>
+                <th class="text-center">{{ _("Operations") }}</th>
+                <th class="text-center" style="display: none">{{ _("type") }}</th>
             </tr>
         </thead>
         {% if my_appointments %}
@@ -80,22 +89,32 @@
 
                     <td class="text-center appointment_id">{{appointment.id}}</td>
                     <td class="text-center">{{appointment.date}}</td>
+                    <td class="text-center">{{ time_dict | getTime(appointment.appoint_time) }}</td>
                     <td class="text-center">{{appointment.applicant}}</td>
-                    <td class="text-center">{{appointment.petType}}</td>
-                    <td class="text-center">{{appointment.condition}}</td>
+                    <td class="text-center">{% if appointment.petType==2 %}
+                            {{ _("cat") }}
+                        {%  elif appointment.petType==1  %}
+                            {{ _("dog") }}
+                        {% endif %}</td>
+                    <td class="text-center">{{ condition_dict | getCondition(appointment.condition) }}</td>
                     <td class="text-center">{{appointment.op_date}}</td>
-                    <td class="text-center">{{appointment.op_time}}</td>
+                    <td class="text-center">{{ time_dict | getTime(appointment.op_time) }}</td>
                     <td class="text-center apt" style="display: none">{{appointment.app_type}}</td>
                     <td>
-                        <a href="#"><button class="btn btn-default appform_button">Detail</button></a>
-                        <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button">Trace</button></a>
-                        <button class="btn btn-default appform_button changeT" type="button" data-toggle="modal" data-target="#my">change type</button>
+                        <a href="{{ url_for('appointment_detail', id=appointment.id, type=appointment.app_type)}}"><button class="btn btn-default appform_button">{{ _("Detail") }}</button></a>
+                        <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button">{{ _("Trace") }}</button></a>
+
+                        {% if appointment.condition == 2%}
+                            <button class="btn btn-default appform_button changeT" type="button" data-toggle="modal" data-target="#my">{{ _("change type") }}</button>
+                        {% else %}
+                            <button class="btn btn-default appform_button changeT" type="button" data-toggle="modal" data-target="#my"  disabled="disabled">{{ _("change type") }}</button>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         {% else %}
-            <p>you don't have any appointments before!</p>
+            <p>{{ _("you don't have any appointments before!") }}</p>
         {% endif %}
 
     </table>
@@ -106,14 +125,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">change type</h4>
+                    <h4 class="modal-title">{{ _("change type") }}</h4>
                 </div>
                 <div class="modal-body">
-                    <p>do you want to change the type?</p>
+                    <p>{{ _("do you want to change the type?") }}</p>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button id="changeType" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ _("Close") }}</button>
+                        <button id="changeType" type="button" class="btn btn-primary" data-dismiss="modal">{{ _("Save changes") }}</button>
                 </div>
             </div>
         </div>

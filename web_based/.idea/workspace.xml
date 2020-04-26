@@ -8,35 +8,27 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/templates/Configuration.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/templates/password_modify.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-              <folding>
-                <element signature="e#151#176#0#HTML" expanded="true" />
-                <element signature="e#292#299#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blogapp/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="1021" column="47" selection-start-line="1021" selection-start-column="47" selection-end-line="1021" selection-end-column="47" />
+            <state relative-caret-position="-1673">
+              <caret line="48" column="14" lean-forward="true" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -45,25 +37,58 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blogapp/templates/CGL.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="3" column="104" lean-forward="true" selection-start-line="3" selection-start-column="104" selection-end-line="3" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/blogapp/translations/zh/LC_MESSAGES/messages.po">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="551" column="10" selection-start-line="551" selection-start-column="10" selection-end-line="551" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blogapp/templates/base_navbar.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-824">
+              <caret line="53" column="69" selection-start-line="53" selection-start-column="69" selection-end-line="53" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogapp/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="134" column="33" lean-forward="true" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
+            <state relative-caret-position="199">
+              <caret line="63" column="72" lean-forward="true" selection-start-line="63" selection-start-column="72" selection-end-line="63" selection-end-column="72" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#47#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blogapp/models.py">
+        <entry file="file://$PROJECT_DIR$/blogapp/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="196">
+              <caret line="146" column="26" selection-start-line="146" selection-start-column="26" selection-end-line="146" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blogapp/templates/My_appointment.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="216" column="59" selection-start-line="216" selection-start-column="54" selection-end-line="216" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -73,34 +98,88 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>signupC</find>
-      <find>log</find>
-      <find>login</find>
-      <find>login_c</find>
-      <find>signupc</find>
+      <find>data</find>
+      <find>&lt;/div&gt;</find>
+      <find>confi</find>
+      <find>Configuration</find>
+      <find>configurat</find>
+      <find>signup</find>
+      <find>Confi</find>
+      <find>BABEL_DEFAULT_LOCALE</find>
+      <find>index</find>
+      <find>base</find>
+      <find>sign</find>
+      <find>Sign in(Customer)</find>
+      <find>Username</find>
+      <find>Workplace</find>
+      <find>Order No</find>
+      <find>Modify</find>
+      <find>Trace</find>
+      <find>work_place</find>
+      <find>finish operation</find>
+      <find>diagnosing</find>
+      <find>condition</find>
+      <find>Applicant</find>
+      <find>Please choose your location:</find>
+      <find>Please choose your appointment type:</find>
+      <find>My question</find>
+      <find>Add question</find>
+      <find>The first step</find>
+      <find>{{(</find>
+      <find>search</find>
+      <find>Healing Paws Veterinary Hospital is an animal specialty hospital that treats dogs and cats only. Its business covers pet health care, remote Internet diagnosis and pet condition laboratory diagnosis. The hospital is located in three locations: Beijing, Shanghai and Chengdu.</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/blogapp/templates/app.py" />
+        <option value="$PROJECT_DIR$/blogapp/app.py" />
+        <option value="$PROJECT_DIR$/blogapp/templates/languagetest.py" />
+        <option value="$PROJECT_DIR$/blogapp/templates/languagetest.html" />
+        <option value="$PROJECT_DIR$/blogapp/hello.py" />
+        <option value="$PROJECT_DIR$/blogapp/babel.cfg.py" />
+        <option value="$PROJECT_DIR$/blogapp/templates/ConfigurationC.html" />
+        <option value="$PROJECT_DIR$/blogapp/babel.cfg" />
+        <option value="$PROJECT_DIR$/blogapp/templates/test.html" />
         <option value="$PROJECT_DIR$/blogapp/templates/Configuration.html" />
-        <option value="$PROJECT_DIR$/blogapp/templates/password_modify.html" />
+        <option value="$PROJECT_DIR$/blogapp/messages.pot" />
+        <option value="$PROJECT_DIR$/blogapp/translations/zh_Hans-CN/LC_MESSAGES/messages.po" />
+        <option value="$PROJECT_DIR$/blogapp/templates/signupC.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/signupE.html" />
         <option value="$PROJECT_DIR$/blogapp/routes.py" />
+        <option value="$PROJECT_DIR$/blogapp/templates/logged_navbar.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/Appointment_doc.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/appointment_flow.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/appointment_modify.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/location_type.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/appointment_trace.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/Question.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/urgent_flow.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/appointment_type.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/My_appointment.html" />
+        <option value="$PROJECT_DIR$/blogapp/forms.py" />
+        <option value="$PROJECT_DIR$/blogapp/templates/index.html" />
+        <option value="$PROJECT_DIR$/blogapp/templates/base_navbar.html" />
+        <option value="$PROJECT_DIR$/blogapp/translations/zh/LC_MESSAGES/messages.po" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="447" />
-    <option name="y" value="64" />
-    <option name="width" value="1439" />
-    <option name="height" value="1086" />
+    <option name="x" value="368" />
+    <option name="y" value="40" />
+    <option name="width" value="1372" />
+    <option name="height" value="1096" />
   </component>
+  <component name="ProjectId" id="1azgB6bQl0Q3UwnqvLTwepUvWfB" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -124,6 +203,27 @@
               <item name="blogapp" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="microblog3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microblog3" type="462c0819:PsiDirectoryNode" />
+              <item name="blogapp" type="462c0819:PsiDirectoryNode" />
+              <item name="translations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microblog3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microblog3" type="462c0819:PsiDirectoryNode" />
+              <item name="blogapp" type="462c0819:PsiDirectoryNode" />
+              <item name="translations" type="462c0819:PsiDirectoryNode" />
+              <item name="zh" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="microblog3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="microblog3" type="462c0819:PsiDirectoryNode" />
+              <item name="blogapp" type="462c0819:PsiDirectoryNode" />
+              <item name="translations" type="462c0819:PsiDirectoryNode" />
+              <item name="zh" type="462c0819:PsiDirectoryNode" />
+              <item name="LC_MESSAGES" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -134,11 +234,19 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../microblog1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MSI-PC\Desktop\microblog3\blogapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MSI-PC\Desktop\microblog3\blogapp" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -152,15 +260,118 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="microblog3" type="Python.FlaskServer">
+  <component name="RunManager" selected="Flask server.microblog3">
+    <configuration name="lab5" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="microblog3" />
-      <option name="target" value="$PROJECT_DIR$/blogapp/__init__.py" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab5" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab5/lab5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="worksheet-5-advanced" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="microblog3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab5" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab5/worksheet-5-advanced.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="worksheet-5-solution" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="microblog3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab5" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab5/worksheet-5-solution.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ws4" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="microblog3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab4" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="D:/大三下/COMP3009J Infomation Retrieval/IR lab4/ws4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Flask" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
+      <module name="microblog3" />
+      <option name="target" value="$PROJECT_DIR$/blogapp/hello.py" />
       <option name="targetType" value="PATH" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="microblog3" type="Python.FlaskServer">
+      <module name="microblog3" />
+      <option name="target" value="C:\Users\MSI-PC\Desktop\microblog3\blogapp\routes.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\MSI-PC\Desktop\microblog3\flaskenv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -168,6 +379,14 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Flask server.microblog3" />
+      <item itemvalue="Flask server.Flask" />
+      <item itemvalue="Python.lab5" />
+      <item itemvalue="Python.worksheet-5-advanced" />
+      <item itemvalue="Python.worksheet-5-solution" />
+      <item itemvalue="Python.ws4" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -181,137 +400,284 @@
       <updated>1586180843193</updated>
       <workItem from="1586180844540" duration="1128000" />
       <workItem from="1586181985671" duration="5603000" />
+      <workItem from="1586340027350" duration="599000" />
+      <workItem from="1586516736111" duration="599000" />
+      <workItem from="1586701593469" duration="1015000" />
+      <workItem from="1586779812829" duration="20000" />
+      <workItem from="1586938417558" duration="2848000" />
+      <workItem from="1587201341623" duration="6791000" />
+      <workItem from="1587376123683" duration="3829000" />
+      <workItem from="1587744209406" duration="1553000" />
+      <workItem from="1587748159072" duration="1421000" />
+      <workItem from="1587750429233" duration="318000" />
+      <workItem from="1587751717981" duration="274000" />
+      <workItem from="1587806700921" duration="3224000" />
+      <workItem from="1587809948610" duration="3517000" />
+      <workItem from="1587813516626" duration="3429000" />
+      <workItem from="1587820822001" duration="762000" />
+      <workItem from="1587821585668" duration="5000" />
+      <workItem from="1587821615856" duration="208000" />
+      <workItem from="1587821839645" duration="294000" />
+      <workItem from="1587823296089" duration="3696000" />
+      <workItem from="1587892203610" duration="7128000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6731000" />
+    <option name="totallyTimeSpent" value="48261000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23827292" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.2936078" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32936078" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32936078" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" visible="true" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32995737" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/microblog3$microblog3.coverage" NAME="microblog3 Coverage Results" MODIFIED="1586187571646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/microblog3$Flask__blogapp_hello_py_.coverage" NAME="Flask (blogapp/hello.py) Coverage Results" MODIFIED="1587807037469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/microblog3$microblog3.coverage" NAME="microblog3 Coverage Results" MODIFIED="1587899501439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/Appointment_doc.html">
+    <entry file="file://$PROJECT_DIR$/app.py" />
+    <entry file="file://$PROJECT_DIR$/blogapp/app.py" />
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/languagetest.html" />
+    <entry file="file://$PROJECT_DIR$/blogapp/hello.py" />
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/ConfigurationC.html" />
+    <entry file="file://$PROJECT_DIR$/blogapp/models.py" />
+    <entry file="file://$PROJECT_DIR$/blogapp/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/blogapp/config.py" />
+    <entry file="file://$PROJECT_DIR$/m.py" />
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/test.html" />
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/Configuration.html" />
+    <entry file="file://$PROJECT_DIR$/blogapp/blogdb.db">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/blogapp/translations/zh_Hans-CN/LC_MESSAGES/messages.po" />
+    <entry file="file://$PROJECT_DIR$/blogapp/babel.cfg">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="127" column="24" lean-forward="true" selection-start-line="127" selection-start-column="24" selection-end-line="127" selection-end-column="24" />
+        <state relative-caret-position="60">
+          <caret line="2" column="49" lean-forward="true" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/bar.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/logged_base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/sign_in.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1230">
+          <caret line="41" column="50" lean-forward="true" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
           <folding>
-            <element signature="e#4274#4312#0#HTML" expanded="true" />
+            <element signature="e#1021#1050#0#HTML" expanded="true" />
+            <element signature="e#1231#1256#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/signupC.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="133" column="62" lean-forward="true" selection-start-line="133" selection-start-column="62" selection-end-line="133" selection-end-column="62" />
+          <folding>
+            <element signature="e#4529#4598#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/Appointment_doc.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2130">
+          <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+          <folding>
+            <element signature="n#style#0;n#th#9;n#tr#0;n#thead#0;n#table#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blogapp/templates/logged_navbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="79" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="79" />
+        <state relative-caret-position="150">
+          <caret line="5" column="116" selection-start-line="5" selection-start-column="116" selection-end-line="5" selection-end-column="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/signupE.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-691">
+          <caret line="144" column="13" lean-forward="true" selection-start-line="144" selection-start-column="13" selection-end-line="144" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_flow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_modify.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1790">
-          <caret line="79" column="18" lean-forward="true" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
+        <state relative-caret-position="209">
+          <caret line="221" column="70" selection-start-line="221" selection-start-column="70" selection-end-line="221" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_urgent_modify.html">
+    <entry file="file://$PROJECT_DIR$/blogapp/messages.pot">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/signupC.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="149" column="10" lean-forward="true" selection-start-line="149" selection-start-column="10" selection-end-line="149" selection-end-column="10" />
+        <state relative-caret-position="387">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/ConfigurationC.html">
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_trace.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/password_modify.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="152">
+          <caret line="209" column="36" selection-start-line="209" selection-start-column="36" selection-end-line="209" selection-end-column="36" />
           <folding>
-            <element signature="e#151#176#0#HTML" expanded="true" />
-            <element signature="e#292#299#1#HTML" expanded="true" />
+            <element signature="e#8705#8726#0#HTML" expanded="true" />
+            <element signature="e#10533#10554#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/templates/Configuration.html">
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/Question.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="43" column="23" lean-forward="true" selection-start-line="43" selection-start-column="23" selection-end-line="43" selection-end-column="23" />
+        <state relative-caret-position="70">
+          <caret line="26" column="93" selection-start-line="26" selection-start-column="93" selection-end-line="26" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/models.py">
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/urgent_flow.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="90">
+          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blogapp/forms.py">
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_type.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="134" column="33" lean-forward="true" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/location_type.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-241">
+          <caret line="48" column="57" selection-start-line="48" selection-start-column="57" selection-end-line="48" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/appointment_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="28" column="28" lean-forward="true" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blogapp/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="1021" column="47" selection-start-line="1021" selection-start-column="47" selection-end-line="1021" selection-end-column="47" />
+        <state relative-caret-position="-1673">
+          <caret line="48" column="14" lean-forward="true" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/CGL.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="3" column="104" lean-forward="true" selection-start-line="3" selection-start-column="104" selection-end-line="3" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Users/MSI-PC/AppData/Local/Programs/Python/Python37/Lib/runpy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="63" column="72" lean-forward="true" selection-start-line="63" selection-start-column="72" selection-end-line="63" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskenv/Lib/site-packages/pylint/pyreverse/diadefslib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="71" column="29" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/My_appointment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="216" column="59" selection-start-line="216" selection-start-column="54" selection-end-line="216" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="146" column="26" selection-start-line="146" selection-start-column="26" selection-end-line="146" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/templates/base_navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-824">
+          <caret line="53" column="69" selection-start-line="53" selection-start-column="69" selection-end-line="53" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogapp/translations/zh/LC_MESSAGES/messages.po">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="551" column="10" selection-start-line="551" selection-start-column="10" selection-end-line="551" selection-end-column="10" />
         </state>
       </provider>
     </entry>

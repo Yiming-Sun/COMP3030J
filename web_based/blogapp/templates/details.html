@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+
+  <!-- Demo styles -->
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+    p{
+        color: #0f0f0f;
+    }
+    .subtitle{
+        color: #8590a6;
+    }
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+
+      color:#000;
+      margin: 0;
+      padding: 0;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+    .swiper-slide {
+      font-size: 18px;
+      color:#fff;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 40px 60px;
+    }
+    .parallax-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 130%;
+      height: 100%;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: center;
+    }
+    .swiper-slide .title {
+      font-size: 41px;
+      font-weight: 300;
+    }
+    .swiper-slide .subtitle {
+      font-size: 21px;
+    }
+    .swiper-slide .text {
+      font-size: 14px;
+      max-width: 400px;
+      line-height: 1.3;
+
+    }
+    .title{
+        color: #122b40;
+    }
+  </style>
+</head>
+<body>
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="parallax-bg" style="background-image:url(../static/Picture/banner3.jpg)" data-swiper-parallax="-23%"></div>
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="title" data-swiper-parallax="-300">What to do if the dog has cataract?</div>
+        <div class="subtitle" data-swiper-parallax="-200"></div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>Dog cataract is actually the turbidity of the lens capsule. The lens in the normal eye is transparent and colorless, and if it is cloudy, white and opaque.<br>
+For dogs, cataract is a common disease that can cause visual impairment or even blindness and this disease has a significant negative impact on the dog's behavior and visual function.<br>
+1. Causes of dog cataract include first congenital and hereditary. Second, senile which means the lens of middle-aged and old animals will develop turbidity due to aging. Third secondary which means cataracts are often secondary to other eye diseases, such as eye trauma.<br>
+2. Clinical symptoms of canine cataracts: A whitening area can be seen at the pupils. Sick animals have visual impairment or even blindness. Walking will hit furniture or things, and the flexibility of movement is reduced.<br>
+3. Canine cataract detection and diagnosis method: The animal should be taken to a hospital with ophthalmological experience and equipment, and the doctor will carefully use the ophthalmic instrument to check the entire eye.<br>
+4. Treatment of canine cataracts: At present, veterinary ophthalmologists in the world all unanimously recommend that surgical removal of cataract is the only reliable treatment.</p>
+        </div>
+
+      </div>
+      <div class="swiper-slide">
+        <div class="title" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">Cat sterilization</div>
+        <div class="subtitle" data-swiper-parallax="-200">What are the benefits of cat sterilization?</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>
+1. Large-scale breeding can be avoided, which will lead to a large increase in stray cats.<br>
+2. It can reduce the stray situation caused by cat estrus, because cats may find spouses everywhere because of estrus, it is easy to get lost, not to go home and get lost.<br>
+3. It can effectively reduce the suffering of cats. Non-sterile cats may cause temper tantrums, damage furniture, and pee around when they are in heat.<br>
+4. Sterilizing the cat can make the cat healthier. After sterilization, cats will not suffer from genital diseases, effectively reducing the possibility of cats ’physiological diseases.<br>
+          </p>
+        </div>
+
+      </div>
+      <div class="swiper-slide">
+        <div class="title" data-swiper-parallax="-300">Cat illness</div>
+        <div class="subtitle" data-swiper-parallax="-200" >How to judge?</div>
+        <div class="text" data-swiper-parallax="-100">
+          <p>When cats are sick, they usually hide in the corner alone.
+              When they are sick, they will also shrink their body into a circle. <br>
+              This is their defense mechanism. Some cats like to lick their hair very much, but they don't do it when they are sick. <br>
+              Instead, they whine alone, as if they are crying. Other cats may block their heads on the wall or put them on your shoes. <br>
+              Don't think it's cute. It's a sign of asking for help. Although most cats eat less when they get sick, if they get some serious diseases, they will eat more. <br>
+              If the cat has abnormal diet, it should be noted. When it comes to excretion, if the cat only urinates a little or more times at a time, pay attention to whether it has diabetes</p>
+        </div>
+          <h3>
+              <a href="{{ url_for('index') }}">
+                  <b>
+                  Back</b>
+              </a>
+          </h3>
+      </div>
+
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination-white"></div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev swiper-button-white"></div>
+    <div class="swiper-button-next swiper-button-white"></div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="../static/js/swiper.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      speed: 600,
+      parallax: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+</body>
+</html>

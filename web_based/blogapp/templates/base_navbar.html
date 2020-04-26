@@ -1,20 +1,34 @@
 <!--导航栏-->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><!--role="navigation"有助于增加访问性-->
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<nav class="navbar  navbar-inverse navbar-expand-md navbar-fixed-top" role="navigation"><!--role="navigation"有助于增加访问性-->
     <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" style="font-size:30px"><b>Project</b></a>
+        <div class="navbar-header ">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{{ url_for('index') }}" class="navbar-brand" style="font-size:30px"><b>Healing Paws</b></a>
         </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav ">
-                <li><a href="#introduce">Introduction</a></li>
+        <ul class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#introduce">{{ _("Introduction") }}</a></li>
+
+            </ul>
+
+            <ul class="nav navbar-nav">
+                <button type="button" id="zh">中文</button>
+                <button type="button" id="en">english</button>
             </ul>
 
 
-            <div class="nav navbar-nav navbar-right navbar-collapse">
-{#                <button type="button" class="btn btn-default navbar-btn"><a href="{{ url_for('sign_in') }}">Sign in</a>#}
-{#                </button>#}
-            <div class="btn-group">
-                    <button type="button" class="btn btn-default">Sign in</button>
+            <ul class="nav navbar-nav navbar-right navbar-collapse">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">{{ _("Sign in") }}</button>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>
@@ -22,13 +36,13 @@
                     </button>
                     <ul class="dropdown-menu" style="min-width:100px">
                         <!-- divided into two sign up page-->
-                        <li><a href="{{ url_for('sign_in_c') }}">Customer</a></li>
-                        <li><a href="{{ url_for('sign_in_d') }}">Employee</a></li>
+                        <li><a href="{{ url_for('sign_in_c') }}">{{ _("Customer") }}</a></li>
+                        <li><a href="{{ url_for('sign_in_d') }}">{{ _("Employee") }}</a></li>
                     </ul>
                 </div>
                 <!-- Split button -->
                 <div class="btn-group" style="margin: 10px">
-                    <button type="button" class="btn btn-danger">Sign up</button>
+                    <button type="button" class="btn btn-danger">{{ _("Sign up") }}</button>
                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>
@@ -36,15 +50,54 @@
                     </button>
                     <ul class="dropdown-menu" style="min-width:100px">
                         <!-- divided into two sign up page-->
-                        <li><a href="{{ url_for('signupC') }}">Customer</a></li>
-                        <li><a href="{{ url_for('signupE') }}">Employee</a></li>
+                        <li><a href="{{ url_for('signupC') }}">{{ _("Customer") }}</a></li>
+                        <li><a href="{{ url_for('signupE') }}">{{ _("Employee") }}</a></li>
                     </ul>
                 </div>
 
-            </div>
+            </ul>
 
 
-        </div>
+        </ul>
     </div>
 </nav>
+
+
+
+<script>
+    $("#en").click(function () {
+        $.ajax({
+            url: '/Language',
+            type: 'GET',
+            data: {"language": "en"},
+            success: function (data) {
+                 alert('ok！');
+            },
+            error: function () {
+                alert('服务器超时，请重试！');
+            }
+        })
+
+        location.reload([true])
+
+    });
+
+    $("#zh").click(function () {
+        $.ajax({
+            url: '/Language',
+            type: 'GET',
+            data: {"language": "zh"},
+            success: function (data) {
+                alert("成功");
+            },
+            error: function () {
+                alert('服务器超时，请重试！');
+            }
+        })
+
+        location.reload([true])
+    });
+
+
+</script>
 

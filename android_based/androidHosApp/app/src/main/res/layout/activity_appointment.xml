@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:orientation="vertical">
 
 
@@ -23,12 +24,45 @@
 
 
 <!--    </LinearLayout>-->
+=======
+    android:orientation="vertical" >
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        >
+
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="45dp"
+            android:background="@color/white"
+            />
+
+
+
+
+
+
+
+
+    </LinearLayout>
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+<<<<<<< HEAD
 
 
         <Button
@@ -53,11 +87,27 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="@string/PetName">
+=======
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/My_Pet"
+            android:text="@string/Pet_Info"
+            android:background="@color/white"
+            >
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
 
         </Button>
 
         <Button
+<<<<<<< HEAD
             android:id="@+id/City"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,6 +117,17 @@
 
         </Button>
 
+=======
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/City"
+            android:text="@string/City"
+            android:background="@color/white"
+            >
+
+
+        </Button>
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
         <Button
             android:id="@+id/Doc"
             android:layout_width="match_parent"
@@ -79,17 +140,28 @@
         </Button>
 
         <Button
+<<<<<<< HEAD
             android:id="@+id/Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"
             android:background="@color/white"
             android:text="@string/Date">
+=======
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Date"
+            android:text="@string/Date"
+            android:layout_marginTop="-10dp"
+            android:background="@color/white"
+            >
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
 
         </Button>
 
         <Button
+<<<<<<< HEAD
             android:id="@+id/Time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,18 +177,34 @@
             android:layout_marginTop="100dp"
             android:background="@color/white"
             android:text="@string/Submit">
+=======
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Submit"
+            android:text="@string/Submit"
+            android:layout_marginTop="100dp"
+            android:background="@color/white"
+            >
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
 
         </Button>
 
+<<<<<<< HEAD
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+=======
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
     </LinearLayout>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 </LinearLayout>

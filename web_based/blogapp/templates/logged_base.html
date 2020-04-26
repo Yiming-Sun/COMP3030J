@@ -5,12 +5,29 @@
 {% block head %}
     {{ super() }}
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script>
+        $(window).scroll(function () {
+      //小屏幕下的导航条折叠
+      if ($(window).width() < 768) {
+        //点击导航链接之后，把导航选项折叠起来
+        $("#navbar a").click(function () {
+          $("#navbar").collapse('hide');
+        });
+        //滚动屏幕时，把导航选项折叠起来
+        $(window).scroll(function () {
+          $("#navbar").collapse('hide');
+        });
+      }
+    });
+
+    </script>
 {% endblock %}
 
 

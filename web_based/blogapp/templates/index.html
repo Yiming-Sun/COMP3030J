@@ -3,6 +3,7 @@
 {% block styles %}
 {{super()}}
 <style>
+
 	.intro{
 		word-break:break-all;
 		width:800px;
@@ -17,18 +18,18 @@
 
 {% block content %}
 
+
 <div class="container" style="position: relative">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 			<div class="jumbotron">
 				<h2>
-					Hello, world!
+					{{ _("Welcome to Healing Paws Veterinary Hospital !") }}
 				</h2>
 				<p>
-					This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-				</p>
+					{{ _("Healing Paws Veterinary Hospital is an animal specialty hospital that treats dogs and cats only. Its business covers pet health care, remote Internet diagnosis and pet condition laboratory diagnosis. The hospital is located in three locations: Beijing, Shanghai and Chengdu.") }}</p>
 				<p>
-					 <a class="btn btn-primary btn-large" href="#">Learn more</a>
+					 <a class="btn btn-primary btn-large" href="#">{{ _("Learn more") }}</a>
 				</p>
 			</div>
 			<div class="carousel slide" id="carousel-258238">
@@ -45,10 +46,10 @@
 						<img alt="" src="../static/Picture/home1.jpg" />
 						<div class="carousel-caption">
 							<h4>
-								First Thumbnail label
+								{{ _("First Thumbnail label") }}
 							</h4>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								{{ _("Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.") }}
 							</p>
 						</div>
 					</div>
@@ -56,10 +57,10 @@
 						<img alt="" src="../static/Picture/home2.jpg" />
 						<div class="carousel-caption">
 							<h4>
-								Second Thumbnail label
+								{{ _("Second Thumbnail label") }}
 							</h4>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								{{ _("Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.") }}
 							</p>
 						</div>
 					</div>
@@ -67,49 +68,45 @@
 						<img alt="" src="../static/Picture/home3.jpg" />
 						<div class="carousel-caption">
 							<h4>
-								Third Thumbnail label
+								{{ _("Third Thumbnail label") }}
 							</h4>
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+								{{ _("Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.") }}
 							</p>
 						</div>
 					</div>
-				</div> <a class="left carousel-control" href="#carousel-258238" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-258238" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+				</div>
+                <a class="left carousel-control" href="#carousel-258238" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                <a class="right carousel-control" href="#carousel-258238" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
 		</div>
 	</div>
 	<div class="row clearfix">
 		<div class="col-md-4 column">
 			<h2>
-				Heading
+				{{ _("Dog cataract") }}
 			</h2>
 			<p>
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-			</p>
+				{{ _("Dog cataract is actually the turbidity of the lens capsule. The lens in the normal eye is transparent and colorless, and if it is cloudy, white and opaque.") }}</p>
+
+		</div>
+		<div class="col-md-4 column">
+			<h2>
+				{{ _("cat sterilization") }}
+			</h2>
 			<p>
-				 <a class="btn" href="#">View details »</a>
+				{{ _("Whether you want to sterilize cats are always confusing the owners, so do you need to sterilize cats? What are the benefits of cat sterilization?") }}
 			</p>
 		</div>
 		<div class="col-md-4 column">
 			<h2>
-				Heading
+				{{ _("cat's illness") }}
 			</h2>
 			<p>
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-			</p>
+				{{ _("How to judge a cat's illness? Is there any difference between the behavior of a cat when it is ill and that of a normal cat") }}
+            </p>
 			<p>
-				 <a class="btn" href="#">View details »</a>
-			</p>
-		</div>
-		<div class="col-md-4 column">
-			<h2>
-				Heading
-			</h2>
-			<p>
-				Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-			</p>
-			<p>
-				 <a class="btn" href="#">View details »</a>
+				 <a class="btn" href="{{ url_for('detail') }}">{{ _("View details") }} »</a>
 			</p>
 		</div>
 	</div><br>
@@ -117,24 +114,38 @@
 
 
 	<div id="introduce" style="margin-top: 80px">
-		<h1 class="text-center">Introduction</h1>
+		<h1 class="text-center">{{ _("Doc Introduction") }}</h1>
 		<div>
 			<div style="height: 150px;margin: 80px 0px">
-				<img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+				<img src="../static/Picture/d1.jpg" alt="N" class="img-circle"
                      style="height: 150px;width: 150px;margin-right: 10px;float: left" >
 
-				<p class="intro">adsadddddd dsds s f ds  ds dfa f g af g  fg f gaf g f gsf g mrgaemg mrg nae rgmnragmn rmaen rgmnea rgmne rngm agmner gamner gmae rgmddddddddddddddddddddddddd</p>
+				<p class="intro">Dr. Alex<br>
+                    {{ _("Age") }}: 33<br>
+                    {{ _("Male") }}<br>
+                    {{ _("Graduate from Milan Brera Academy of Fine Arts which is a college has the most popular Veterinary profession of the world. Also he passed the national unified veterinary qualification examination ten years ago and good at animal diagnosis, treatment, surgery.") }}
+                </p>
 			</div>
 			<div style="height: 150px;margin: 80px 0px">
-				<p class="intro">adsaddddddd ddddddddd  dddddddddddd dddddddddd  dddddddddd dddddddddd  dddddddddddddddd ddddddddddddd  dd dddddd dddddddd dddddddd</p>
-				<img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+				<p class="intro">
+                    Dr. Jesus<br>
+                    {{ _("Age: 40") }}<br>
+                    {{ _("Female") }}<br>
+                    {{ _("The Master of Clinical Veterinary Medicine, China Agricultural University, also the chairman of the Pet Veterinary Association of China Veterinary Association, proficient in animal anatomy, animal histology and embryology, animal histology and embryology experiments.") }}
+                </p>
+				<img src="../static/Picture/d2.jpg" alt="N" class="img-circle"
                      style="height: 150px;width: 150px;margin-right: 10px;float: left" >
 
 			</div>
 			<div style="height: 150px;margin: 80px 0px">
-				<img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+				<img src="../static/Picture/d3.jpg" alt="N" class="img-circle"
                      style="height: 150px;width: 150px;margin-right: 10px;float: left" >
-				<p class="intro">adsadd ddd ddddddd awf  m mfa mnr ,amrg , garddd ddd d fsa sdaa w r jlrtj reqtjrh tkj whrjt hwjrh twhtiuhwut  uwrhg gufdgkjf dgh fh lgjhfglhfg f g fg flgsdddddddddd ddd</p>
+				<p class="intro">
+                    Dr. William<br>
+                    {{ _("Age") }}: 55<br>
+                    {{ _("Male") }}<br>
+                    {{ _("He has accumulated a wealth of clinical experience, especially in canine infectious diseases, obstetrics and surgical diseases. Over the years, he has published more than 20 papers, two of which won the second prize, and many of them won the third prize.") }}
+                </p>
 			</div>
 
 
@@ -144,64 +155,7 @@
 
 
 
-
-
-
-
-
-
-
-
 </div>
-{##}
-{#<!--标题-->#}
-{#    <div class="container">#}
-{#        <div  style="margin-top: 80px;">#}
-{#            <h1 class="text-center">Welcome to the XXX</h1>#}
-{#        </div>#}
-{##}
-{#    </div>#}
-{##}
-{#<!--轮播效果-->#}
-{#        <div class="container">#}
-{#            <!--    data-ride="carousel"指在页面加载好了以后还是轮播  -->#}
-{#            <div id="slidershow" class="carousel slide" data-ride="carousel" style="width: 100%;height: 100%; margin-left:auto; margin-right:auto;">#}
-{##}
-{#                <ol class="carousel-indicators">#}
-{#                    <li class="active" data-target="#slidershow" data-slide-to="0" ></li>#}
-{#                    <li data-target="#slidershow" data-slide-to="1"></li>#}
-{#                    <li data-target="#slidershow" data-slide-to="2"></li>#}
-{#                </ol>#}
-{##}
-{#            <div  class="carousel-inner" role="listbox">#}
-{#		        <div class="item active">#}
-{#		            <a href="##"><img src="../static/Picture/home1.jpg" alt="cat1"></a>#}
-{#		        </div>#}
-{#                <div class="item">#}
-{#		            <a href="##"><img src="../static/Picture/home2.jpg" alt="cat2"></a>#}
-{#		        </div>#}
-{#		        <div class="item">#}
-{#		            <a href="##"><img src="../static/Picture/home3.jpg" alt="cat3"></a>#}
-{#		        </div>#}
-{#		    </div>#}
-{##}
-{#            <a class="left carousel-control" href="#slidershow" role="button" data-slide="prev" >#}
-{#		        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>#}
-{#                <span class="sr-only">Previous</span>#}
-{#		    </a>#}
-{#		    <a class="right carousel-control" href="#slidershow" role="button" data-slide="next">#}
-{#	            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>#}
-{#                <span class="sr-only">Next</span>#}
-{#	        </a>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#<!--标题-->#}
-{#    <div class="container">#}
-{#        <div  style="margin-top: auto;">#}
-{#            <h1 class="text-center">Introduction</h1>#}
-{#        </div>#}
-{#    </div>#}
 
 {% endblock %}
 

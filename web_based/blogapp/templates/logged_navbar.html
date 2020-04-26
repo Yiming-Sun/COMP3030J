@@ -1,18 +1,29 @@
 <meta name="referrer" content="never">
-
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<nav class="navbar navbar-inverse navbar-expand-md navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a href="#" class="navbar-brand"><b>Project</b></a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand" style="font-size:30px"><b>Healing Paws</b></a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav ">
                 <li><a id="myAppointment" href="{{ url_for('My_appointment') }}">My Appointment</a></li>
                 <li id="newAppointment"><a href="{{ url_for('location_type') }}">New Appointment</a></li>
                 <li><a href="{{ url_for('question') }}">Question</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right navbar-collapse">
-                <button type="button" class="btn btn-default navbar-btn"><a href="{{ url_for('index') }}">log out</a>
+            <ul class="nav navbar-nav">
+                <button type="button" id="zh">中文</button>
+                <button type="button" id="en">english</button>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-collapse" style="margin: 10px">
+                <button id="logout" type="button" class="btn btn-default navbar-btn" ><a href="{{ url_for('logout') }}">log out</a>
                 </button>
             </ul>
             <a href="{{ url_for('Configuration') }}" class="navbar-right navbar-collapse">
@@ -27,5 +38,43 @@
 <script>
     var p = document.getElementById("pp");
     p.src = "data:;base64,{{ img }}";
+
+
+
+    $("#en").click(function () {
+        $.ajax({
+            url: '/Language',
+            type: 'GET',
+            data: {"language": "en"},
+            success: function (data) {
+                 alert('ok！');
+            },
+            error: function () {
+                alert('服务器超时，请重试！');
+            }
+        })
+
+        location.reload([true])
+
+    });
+
+    $("#zh").click(function () {
+        $.ajax({
+            url: '/Language',
+            type: 'GET',
+            data: {"language": "zh"},
+            success: function (data) {
+                alert("成功");
+            },
+            error: function () {
+                alert('服务器超时，请重试！');
+            }
+        })
+
+        location.reload([true])
+    });
+
+
+
 
 </script>

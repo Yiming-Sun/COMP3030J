@@ -4,12 +4,18 @@ package com.example.myapplication.ui.appointment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.SharedPreferences;
+=======
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.EditText;
+=======
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -25,12 +31,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+<<<<<<< HEAD
 public class appointment extends AppCompatActivity implements View.OnClickListener {
+=======
+public class appointment extends AppCompatActivity implements View.OnClickListener{
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
     private Button Submit_button;
     private Button mButton1;
     private Button mButton2;
     private Button mButton3;
     private Button mButton4;
+<<<<<<< HEAD
     private Button mButton5;
     private Button mButton6;
     private Button mButton7;
@@ -43,10 +54,17 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
     Fragment fragment = null;
     FragmentManager fragmentManager = getSupportFragmentManager();
 
+=======
+    private boolean city = false;
+
+    Fragment fragment = null;
+    FragmentManager fragmentManager = getSupportFragmentManager();
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
+<<<<<<< HEAD
         Submit_button = findViewById(R.id.Submit);
         mButton1 =  findViewById(R.id.PetType);
         mButton2 = findViewById(R.id.City);
@@ -55,10 +73,18 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
         mButton5 = findViewById(R.id.PetName);
         mButton6 = findViewById(R.id.Time);
         mButton7 = findViewById(R.id.appType);
+=======
+        Submit_button=(Button) findViewById(R.id.Submit);
+        mButton1 = (Button) findViewById(R.id.My_Pet);
+        mButton2 = (Button) findViewById(R.id.City);
+        mButton3 = (Button) findViewById(R.id.Doc);
+        mButton4 = (Button) findViewById(R.id.Date);
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
         mButton1.setOnClickListener(this);
         mButton2.setOnClickListener(this);
         mButton3.setOnClickListener(this);
         mButton4.setOnClickListener(this);
+<<<<<<< HEAD
         mButton5.setOnClickListener(this);
         mButton6.setOnClickListener(this);
         mButton7.setOnClickListener(this);
@@ -114,10 +140,19 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
     public boolean test() {
         new Thread() {
             public void run() {
+=======
+        Submit_button.setOnClickListener(this);
+    }
+
+    public boolean test(){
+        new  Thread(){
+            public  void run(){
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
                 try {
 //                    Log.i("调试","sssss");
                     String driver = "com.mysql.jdbc.Driver";
 
+<<<<<<< HEAD
                     Log.i("cnm", "samfan");
 //                    String url = "jdbc:jtds:sqlserver://49.235.31.130:8000/blogdb/customer";
                     String url = "jdbc:mysql://cdb-ezakhzhc.cd.tencentcdb.com:10140/score";
@@ -173,6 +208,35 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
                         stmt.executeUpdate(insert);
                     } else {
                         Log.i("wrong", "wwwwwwwwwwwwwwwwww");
+=======
+                    Log.i("cnm","samfan");
+                    String url = "jdbc:mysql://49.235.31.130:7777/blogdb/customer";
+//                    String url = "jdbc:mysql://cdb-6jo4m3hi.bj.tencentcdb.com:10019/score";
+//                    Connection conn = DriverManager.getConnection(url, "root", "wywcj123");
+//                    "jdbc:mysql://cdb-6jo4m3hi.bj.tencentcdb.com:10019/score";
+                    Class.forName("com.mysql.jdbc.Driver");
+//                    Connection conn = DriverManager.getConnection(url, "root", "wywcj123");
+                    Connection conn = DriverManager.getConnection(url, "", "");
+                    Log.i("是吧","samfan");
+                    if(conn!=null){
+                        Log.i("success","ccccccccccccccc");
+                        Statement stmt = conn.createStatement();
+                        String sql = "select username from customer" ; //要sql
+//                        stmt.executeUpdate(sql);
+                        ResultSet st= stmt.executeQuery(sql);
+//                        String s= st.getString(1);
+//                        Log.i("所有",s);
+                        while(st.next()){
+                            //有数据
+                            //取数据:getXXX
+                            String id = st.getString(1);//获得第一列的值
+                            //int id rs.getInt("id");// 获得id列的值
+                            Log.i("所有",id+"==>");
+                            //rs.gettimestamp(columnIndex)
+                        }
+                    }else{
+                        Log.i("wrong","wwwwwwwwwwwwwwwwww");
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -196,6 +260,7 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
 
                 showSingDialog();
                 break;
+<<<<<<< HEAD
 
             case R.id.PetType:
                 showpetdialog();
@@ -221,12 +286,15 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
 
+=======
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
             case R.id.Date:
                 CalendarFragment calendarFragment = new CalendarFragment();
                 calendarFragment.show(fragmentManager, "Calendar");
         }
     }
 
+<<<<<<< HEAD
     int choice; //0 cat 1 dog
     int choiceTime;
     int choiceDoctor;
@@ -265,22 +333,41 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
         items = new String[]{"shanghai", "chengndu", "beijing"};
         AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(appointment.this);
         singleChoiceDialog.setIcon(R.mipmap.touxiang);
+=======
+    int choice;
+    private void showSingDialog(){
+        final String[] items = {"shanghai","chengndu","beijing"};
+        AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(appointment.this);
+        singleChoiceDialog.setIcon(R.drawable.touxiang);
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
         singleChoiceDialog.setTitle("City");
         //第二个参数是默认的选项
         singleChoiceDialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+<<<<<<< HEAD
                 choice = which;
+=======
+                choice= which;
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
             }
         });
         singleChoiceDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+<<<<<<< HEAD
                 if (choice != -1) {
                     Toast.makeText(appointment.this,
                             "你选择了" + items[choice],
                             Toast.LENGTH_SHORT).show();
                     city = true;
+=======
+                if (choice!=-1){
+                    Toast.makeText(appointment.this,
+                            "你选择了" + items[choice],
+                            Toast.LENGTH_SHORT).show();
+                    city=true;
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
                 }
             }
         });
@@ -288,6 +375,7 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
     }
 
 
+<<<<<<< HEAD
     private void showdoctor() {
         final String[] whichDoctor = new String[]{"a", "b", "c"};
         AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(appointment.this);
@@ -391,5 +479,8 @@ public class appointment extends AppCompatActivity implements View.OnClickListen
 
 
 }
+=======
+        }
+>>>>>>> 937ceb6fe6d7ad31becf0929e01472a1db7965fa
 
 

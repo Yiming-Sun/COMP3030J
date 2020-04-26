@@ -1,0 +1,49 @@
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<p>{{ _("Hello, world!") }}</p>
+<p>{{ _("It's %(day)s today", day=day) }}</p>
+
+<button type="button" id="zh">中文</button>
+<button type="button" id="en">english</button>
+
+<button type="button">{{ _("Hello, world!") }} </button>
+
+<script>
+    $("#en").click(function () {
+        $.ajax({
+            url: '/Language',
+            type: 'GET',
+            data: {"language": "en"},
+            success: function (data) {
+            },
+            error: function () {
+                alert('服务器超时，请重试！');
+            }
+        })
+
+        location.reload([true])
+
+    });
+
+    $("#zh").click(function () {
+        $.ajax({
+            url: '/Language',
+            type: 'GET',
+            data: {"language": "zh"},
+            success: function (data) {
+                {#alert("成功");#}
+            },
+            error: function () {
+                alert('服务器超时，请重试！');
+            }
+        })
+
+        location.reload([true])
+    });
+
+
+</script>

@@ -32,30 +32,36 @@
 {% block content %}
 
     <div class="container col-lg-offset-2 col-lg-8" style="margin-top: 100px">
+        <div class="col-lg-1" style="margin-top: 100px">
+            <a href="{{ url_for('My_appointment') }}" class="navbar-right navbar-collapse">
+                <img src="../static/Picture/back.jpg" alt="N" class="img-circle"
+                style="height: 80px;width: 80px;margin-right: 10px" id="pp">
+        </a>
+        </div>
         <div style="margin-top: 100px;">
             <h1 class="text-center">
-                <b>Please choose your location:</b>
+                <b>{{ _("Please choose your location:")}}</b>
             </h1>
         </div>
 
         <div class="container col-lg-3" style="margin-top: 80px;">
             <a class="btn btn-default" href="{{ url_for('appointment_type', place='Beijing') }}" role="button" style="border: 2px solid black;border-radius:30px;">
-                <h3 class="text-center">Beijing</h3><br><br>
-                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+                <h3 class="text-center">{{ _("Beijing")}}</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/beijing.jpg" style="width: 250px;height: 220px"><br><br><br>
             </a>
         </div>
 
         <div class="container col-lg-offset-1 col-lg-3" style="margin-top: 80px;">
             <a class="btn btn-default" href="{{ url_for('appointment_type', place='Shanghai') }}" role="button" style="border: 2px solid black;border-radius:30px;">
-                <h3 class="text-center">Shanghai</h3><br><br>
-                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+                <h3 class="text-center">{{ _("Shanghai")}}</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/shanghai.jpg" style="width: 250px;height: 220px"><br><br><br>
             </a>
         </div>
 
         <div class="container col-lg-offset-1 col-lg-3" style="margin-top: 80px;">
             <a class="btn btn-default" href="{{ url_for('appointment_type', place='Chengdu') }}" role="button" style="border: 2px solid black;border-radius:30px;">
-                <h3 class="text-center">Chengdu</h3><br><br>
-                <img class="img-responsive center-block img-rounded" src="../static/Picture/home2.jpg"><br><br><br>
+                <h3 class="text-center">{{ _("Chengdu")}}</h3><br><br>
+                <img class="img-responsive center-block img-rounded" src="../static/Picture/chengdu.jpg" style="width: 250px;height: 220px"><br><br><br>
 
             </a>
         </div>

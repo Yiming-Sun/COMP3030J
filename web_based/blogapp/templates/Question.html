@@ -3,8 +3,15 @@
 {% block scripts %}
 {{super()}}
     <script>
-        $("#newAppointment").css({"display": "none"});
-        $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+        $(function () {
+            let type = $("#type").text();
+            if (type == "employee"){
+                $("#newAppointment").css({"display": "none"});
+                $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+            }
+        });
+
+
     </script>
 
 {% endblock %}
@@ -13,14 +20,15 @@
 
 {% block content %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+<p id="type" style="display: none">{{type}}</p>
 
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
-      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">My question
+      <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">{{_("Home")}}</a></li>
+      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">{{_("My question")}}
          <span class="badge">{{question_num}}</span></a></li>
-      <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
-        <li role="presentation"><a href="#new_question" role="tab" data-toggle="tab">New question</a></li>
+      <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">{{_("Messages")}}</a></li>
+        <li role="presentation"><a href="#new_question" role="tab" data-toggle="tab">{{_("New question")}}</a></li>
     </ul>
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="home">
@@ -38,7 +46,7 @@
                      </a>
                 </div>
                 <div class="question-information">
-                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">information</span>
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{_("information")}}</span>
                 </div>
                 <div style="margin-left:15px;">
                     <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{question.author_name}}</p>
@@ -82,7 +90,7 @@
                      </a>
                 </div>
                 <div class="question-information">
-                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">information</span>
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{_("information")}}</span>
                 </div>
 
                     <form action="{{url_for('delete_question')}}" method="post">
@@ -90,7 +98,7 @@
                             <input type="hidden" name="question_id" value="{{question.id}}">
                         </div>
                         <div class="form-group" style="text-align:right;position:relative;">
-                            <button class="btn btn-primary">Delete</button>
+                            <button class="btn btn-primary">{{_("Delete")}}</button>
                         </div>
                     </form>
 
@@ -134,7 +142,7 @@ dddddddddd
       {# ---------------------------------------------------------------------------#}
 
 
-    <h3 class="page-title">Add question</h3>
+    <h3 class="page-title">{{_("Add question")}}</h3>
     <form action="" method="post">
     <div class="form-container">
         <div class="form-group">
@@ -144,7 +152,7 @@ dddddddddd
             <textarea name="content" rows="10" placeholder="Content" class="form-control" ></textarea>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary">{{_("Submit")}}</button>
         </div>
 
     </div>
