@@ -3,7 +3,8 @@
 <nav class="navbar navbar-inverse navbar-expand-md navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -13,21 +14,19 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav ">
-                <li><a id="myAppointment" href="{{ url_for('My_appointment') }}">My Appointment</a></li>
-                <li id="newAppointment"><a href="{{ url_for('location_type') }}">New Appointment</a></li>
-                <li><a href="{{ url_for('question') }}">Question</a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <button type="button" id="zh">中文</button>
-                <button type="button" id="en">english</button>
+                <li><a id="myAppointment" href="{{ url_for('My_appointment') }}">{{ _("My Appointment") }}</a></li>
+                <li id="newAppointment"><a href="{{ url_for('location_type') }}">{{ _("New Appointment") }}</a></li>
+                <li><a href="{{ url_for('question') }}">{{ _("Question") }}</a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right navbar-collapse" style="margin: 10px">
-                <button id="logout" type="button" class="btn btn-default navbar-btn" ><a href="{{ url_for('logout') }}">log out</a>
+
+            <ul class="nav navbar-nav navbar-right navbar-collapse">
+                <button id="logout" type="button" class="btn btn-default navbar-btn"><a
+                        href="{{ url_for('logout') }}">{{ _("log out") }}</a>
                 </button>
             </ul>
             <a href="{{ url_for('Configuration') }}" class="navbar-right navbar-collapse">
-                <img src="../static/upload_photo/default.jpg" alt="N" class="img-circle"
+                <img src="../static/upload_photo/default.jpg" onError="javascript:this.src='../static/Picture/default.jpg'" alt="N" class="img-circle"
                      style="height: 50px;width: 50px;margin-right: 10px" id="pp">
             </a>
 
@@ -40,14 +39,13 @@
     p.src = "data:;base64,{{ img }}";
 
 
-
     $("#en").click(function () {
         $.ajax({
             url: '/Language',
             type: 'GET',
             data: {"language": "en"},
             success: function (data) {
-                 alert('ok！');
+                alert('ok！');
             },
             error: function () {
                 alert('服务器超时，请重试！');
@@ -73,8 +71,6 @@
 
         location.reload([true])
     });
-
-
 
 
 </script>

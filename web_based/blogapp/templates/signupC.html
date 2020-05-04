@@ -21,7 +21,16 @@
 {{super()}}
     <script>
         $(document).ready(function(){
-
+            let lan = $('#language').text();
+            if (lan == 'zh'){
+                $("label[for='username']").text("账号");
+                $("label[for='password']").text("密码");
+                $("label[for='repeat_password']").text("重复密码");
+                $("label[for='nickname']").text("昵称");
+                $("label[for='email']").text("邮箱");
+                $("label[for='phone']").text("电话");
+                $("input[name='submit']").attr("value","注册");
+            }
 
 
             $("#username").after("<span id='username_msg'></span>");
@@ -126,7 +135,7 @@
 {% endblock %}
 
 {% block content %}
-
+<p id="language">{{language}}</p>
 <div class="container" >
     <div class="title col-lg-6 col-lg-offset-6">
         <h2 class="text-center" style="margin-top: 120px;">{{ _("Sign up(Customer)") }}</h2>

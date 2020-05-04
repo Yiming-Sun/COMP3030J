@@ -10,6 +10,9 @@
             if (type == "employee"){
                 $("#newAppointment").css({"display": "none"});
                 $("#myAppointment").attr({href:"{{ url_for('Doc_appointment') }}"});
+                $("#times").css({"display":"none"});
+                $("#animal").attr({disabled:"disabled"});
+                $("#workplace").attr({disabled:"disabled"});
             }
 
 
@@ -34,9 +37,29 @@
                 }
             });
         });
+
+
+        let lan = $('#language').text();
+            if (lan == 'zh'){
+                $("label[for='picture']").text("选择头像");
+                $("label[for='username']").text("账号");
+                $("label[for='email']").text("邮箱");
+                $("label[for='gender']").text("性别");
+                $("label[for='nationality']").text("国籍");
+                $("label[for='city']").text("城市");
+                $("label[for='address']").text("地址");
+                $("label[for='nickname']").text("昵称");
+                $("label[for='animal']").text("宠物类型");
+                $("label[for='workplace']").text("工作地点");
+                $("label[for='email']").text("邮箱");
+                $("label[for='phone']").text("电话");
+                $("label[for='personal_signature']").text("个人签名");
+                $("input[name='submit']").attr("value","提交");
+            }
     </script>
 {% endblock %}
 {% block content %}
+<p id="language">{{language}}</p>
 <p id="type" style="display: none">{{user_type}}</p>
 <div class="container" style="margin-top: 100px">
     <div class="row">
@@ -45,7 +68,7 @@
             <img src="../static/Picture/default.jpg" alt="#Your photo" class="img-circle"
                  style="height: 200px;width: 200px;margin-top: 10px" id="photo" name="photo">
             <br><br><br><br><br><br>
-            <p class="text-center" style="font-size: larger">total appoint times: {{times}}</p>
+            <p class="text-center" id="times" style="font-size: larger">total appoint times: {{times}}</p>
 
             <a type="button" class="btn-default" href="{{ url_for('password_modify') }}"><button class="btn btn-success">Modify Password</button></a>
         </div>

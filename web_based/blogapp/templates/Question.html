@@ -24,11 +24,15 @@
 
 <div class="table-responsive" style="margin-top: 100px;margin-right: 200px;margin-left: 200px">
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">{{_("Home")}}</a></li>
-      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">{{_("My question")}}
+      <li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">{{ _("Home") }}</a></li>
+    {% if types==0 %}
+      <li role="presentation"><a href="#question" role="tab" data-toggle="tab">{{ _("My question") }}
          <span class="badge">{{question_num}}</span></a></li>
-      <li role="presentation"><a href="#messages" role="tab" data-toggle="tab">{{_("Messages")}}</a></li>
-        <li role="presentation"><a href="#new_question" role="tab" data-toggle="tab">{{_("New question")}}</a></li>
+    {% endif %}
+      <li role="presentation"><a href="#doctor" role="tab" data-toggle="tab">{{ _("Doctors") }}</a></li>
+        {% if types==0 %}
+        <li role="presentation"><a href="#new_question" role="tab" data-toggle="tab">{{ _("New question") }}</a></li>
+        {% endif %}
     </ul>
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="home">
@@ -39,23 +43,21 @@
              {% for question in question_ground%}
              <li class="list-item">
                  <div class="avatar-group">
-                     <a href="">
-                         <img src={{url_for('static', filename='upload_photo/'+question.author.username+'.jpg')}} alt="N" class="avatar" >
-{#                         <p>../upload_photo/{{question.author.username}}.jpg</p>#}
-{#                         <p>{{url_for('static',filename='uploads/'+article.author.telephone+'头像.jpg')}}</p>#}
-                     </a>
+                         <img src={{url_for('static', filename='upload_photo/'+question.author.username+'.jpg')}} onError="javascript:this.src='../static/Picture/default.jpg'" alt="N" class="avatar" >
                 </div>
                 <div class="question-information">
-                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{_("information")}}</span>
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{ _("Nickname") }}:{{question.author.nickname}}</span>
                 </div>
                 <div style="margin-left:15px;">
-                    <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{question.author_name}}</p>
+                    {% if question.author.personal_signature%}
+                    <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{ _("Personal signature") }}:{{question.author.personal_signature}}</p>
+                    {% endif %}
                 </div>
                 <div>
-                    <h2 class="question-title" ><a href="{{url_for('question_detail',question_id=question.id)}}" style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;">{{question.question_title}}</a></h2>
+                    <h2 class="question-title" ><a href="{{url_for('question_detail',question_id=question.id)}}" style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;">{{ _("Title") }}:{{question.question_title}}</a></h2>
                 </div>
                 <div class="question-group">
-                     <p class="question-content" style="margin-left:0px;line-height: 1.7;font-size: 13px">{{ question.content }}</p>
+                     <h3 class="question-content" style="margin-left:0px;line-height: 1.7;font-size: 13px">{{ question.content }}</h3>
                      <div class="question-info"  style="text-align:right;">
                          <span class="question-time">{{question.create_time}}</span>
                      </div>
@@ -84,13 +86,11 @@
              <li class="list-item">
                  <div class="avatar-group">
                      <a href="">
-                         <img src={{url_for('static', filename='upload_photo/'+question.author.username+'.jpg')}} alt="N" class="avatar" >
-{#                         <p>../upload_photo/{{question.author.username}}.jpg</p>#}
-{#                         <p>{{url_for('static',filename='uploads/'+article.author.telephone+'头像.jpg')}}</p>#}
+                         <img src={{url_for('static', filename='upload_photo/'+question.author.username+'.jpg')}} onError="javascript:this.src='../static/Picture/default.jpg'" alt="N" class="avatar" >
                      </a>
                 </div>
                 <div class="question-information">
-                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{_("information")}}</span>
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{ _("information") }}</span>
                 </div>
 
                     <form action="{{url_for('delete_question')}}" method="post">
@@ -98,7 +98,7 @@
                             <input type="hidden" name="question_id" value="{{question.id}}">
                         </div>
                         <div class="form-group" style="text-align:right;position:relative;">
-                            <button class="btn btn-primary">{{_("Delete")}}</button>
+                            <button class="btn btn-primary">{{ _("Delete") }}</button>
                         </div>
                     </form>
 
@@ -132,27 +132,74 @@
   </div>
 
 
-  <div role="tabpanel" class="tab-pane" id="messages">
-      {# ---------------------------------------------------------------------------#}
-dddddddddd
+  <div role="tabpanel" class="tab-pane" id="doctor">
+      {# -------------------------doc--------------------------------------------------#}
+            <div class="index col-lg-12">
+
+         <ul class="list col-lg-8" >
+             {%if employee%}
+
+             {% for employee1 in employee%}
+             <li class="list-item">
+                 <div class="avatar-group">
+                     <a href="{{url_for('Doc_info',employee_username=employee1.username)}}">
+                         <img src={{url_for('static', filename='upload_photo/'+employee1.username+'.jpg')}} onError="javascript:this.src='../static/Picture/default.jpg'"  alt="N" class="avatar" >
+                     </a>
+                </div>
+                <div class="question-information">
+                    <span class="question-author" style="font-weight: 600;color:#444;margin-left:6px;margin-bottom:8px;">{{ _("Nickname") }}: {{ employee1.nickname }}</span>
+                </div>
+                <div style="margin-left:15px;">
+                    <p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">
+                    {% if  employee1.gender %}
+                        {% if  employee1.gender==1 %}
+                        男
+                        {% endif %}
+                        {% if  employee1.gender==2 %}
+                        女
+                        {% endif %}
+                    {% endif %}
+                    </p>
+                </div>
+                <div>
+                    <h2 class="question-title" > <p style="font-size: 18px;font-weight: 600;line-height: 1.6;color: #1a1a1a;margin-left:-1px;margin-top: 40px;margin-bottom: 4px;"><p style=" margin-top: 2px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">
+
+                        {{ employee1.animal }}
+
+                    </p>
+                    </h2>
+                </div>
+{#                <div class="question-group">#}
+{#                     <p class="question-content" style="margin-left:0px;line-height: 1.7;font-size: 13px">{{ question.content }}</p>#}
+{#                     <div class="question-info"  style="text-align:right;">#}
+{#                         <span class="question-time">{{question.create_time}}</span>#}
+{#                     </div>#}
+{#                </div>#}
+            </li>
+             {%endfor%}
+             {%endif%}
+
+
+         </ul>
+     </div>
       {# ---------------------------------------------------------------------------#}
   </div>
 
   <div role="tabpanel" class="tab-pane" id="new_question">
-      {# ---------------------------------------------------------------------------#}
+      {# -----------------------add----------------------------------------------------#}
 
 
-    <h3 class="page-title">{{_("Add question")}}</h3>
+    <h3 class="page-title">{{ _("Add question") }}</h3>
     <form action="" method="post">
     <div class="form-container">
         <div class="form-group">
-            <input type="text" placeholder="Question tittle" name="title" class="form-control">
+            <input type="text" placeholder={{ _("Question title") }}  name="title" class="form-control">
         </div>
         <div class="form-group">
-            <textarea name="content" rows="10" placeholder="Content" class="form-control" ></textarea>
+            <textarea name="content" rows="10" placeholder={{ _("Content") }} class="form-control" ></textarea>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary">{{_("Submit")}}</button>
+            <button class="btn btn-primary">{{ _("Submit") }}</button>
         </div>
 
     </div>

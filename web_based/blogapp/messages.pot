@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-26 19:10+0800\n"
+"POT-Creation-Date: 2020-05-05 01:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.8.0\n"
 
 #: forms.py:32 forms.py:47
-msgid "picture"
+msgid "choose picture"
 msgstr ""
 
 #: forms.py:33 forms.py:48 forms.py:118 forms.py:124 forms.py:136
@@ -33,7 +33,8 @@ msgstr ""
 msgid "Phone Number"
 msgstr ""
 
-#: forms.py:36 forms.py:51 forms.py:128 forms.py:141
+#: forms.py:36 forms.py:51 forms.py:128 forms.py:141 templates/Question.html:49
+#: templates/Question.html:150
 msgid "Nickname"
 msgstr ""
 
@@ -53,7 +54,7 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: forms.py:41 forms.py:58
+#: forms.py:41 forms.py:58 templates/Question.html:53
 msgid "Personal signature"
 msgstr ""
 
@@ -89,7 +90,7 @@ msgstr ""
 msgid "Appointment Time"
 msgstr ""
 
-#: forms.py:68 forms.py:95 forms.py:102 routes.py:32
+#: forms.py:68 forms.py:95 forms.py:102 routes.py:35
 msgid "--choose time--"
 msgstr ""
 
@@ -128,7 +129,7 @@ msgstr ""
 msgid "Symptom"
 msgstr ""
 
-#: forms.py:76 forms.py:105 templates/Question.html:155
+#: forms.py:76 forms.py:105 templates/Question.html:202
 msgid "Submit"
 msgstr ""
 
@@ -184,15 +185,15 @@ msgstr ""
 msgid "Animal"
 msgstr ""
 
-#: forms.py:144 routes.py:27
+#: forms.py:144 routes.py:30
 msgid "Dog"
 msgstr ""
 
-#: forms.py:144 routes.py:28
+#: forms.py:144 routes.py:31
 msgid "Cat"
 msgstr ""
 
-#: forms.py:145 routes.py:50 templates/location_type.html:49
+#: forms.py:145 routes.py:53 templates/location_type.html:49
 msgid "Beijing"
 msgstr ""
 
@@ -200,75 +201,59 @@ msgstr ""
 msgid "Shnaghai"
 msgstr ""
 
-#: forms.py:145 routes.py:52 templates/location_type.html:63
+#: forms.py:145 routes.py:55 templates/location_type.html:63
 msgid "Chengdu"
 msgstr ""
 
-#: forms.py:151
-msgid "previous password"
-msgstr ""
-
-#: forms.py:152
-msgid "new password"
-msgstr ""
-
-#: forms.py:153
-msgid "Confirm password"
-msgstr ""
-
-#: forms.py:154
-msgid "Modify Password"
-msgstr ""
-
-#: routes.py:40
+#: routes.py:43
 msgid "appoint success(1)"
 msgstr ""
 
-#: routes.py:41
+#: routes.py:44
 msgid "diagnosing(2)"
 msgstr ""
 
-#: routes.py:42
+#: routes.py:45
 msgid "reserve operation(3)"
 msgstr ""
 
-#: routes.py:43
+#: routes.py:46
 msgid "operating(4)"
 msgstr ""
 
-#: routes.py:44
+#: routes.py:47
 msgid "finish operation(5)"
 msgstr ""
 
-#: routes.py:45
+#: routes.py:48
 msgid "pay for medicine(6)"
 msgstr ""
 
-#: routes.py:46
+#: routes.py:49
 msgid "out(7)"
 msgstr ""
 
-#: routes.py:51 templates/location_type.html:56
+#: routes.py:54 templates/location_type.html:56
 msgid "Shanghai"
 msgstr ""
 
-#: routes.py:108
+#: routes.py:120
 msgid "Saturday"
 msgstr ""
 
-#: routes.py:689
+#: routes.py:710
 msgid "Sign In(Customer)"
 msgstr ""
 
-#: routes.py:689
+#: routes.py:710
 msgid "Sign in(Customer)"
 msgstr ""
 
-#: routes.py:710
+#: routes.py:731
 msgid "Sign In(Employee)"
 msgstr ""
 
-#: routes.py:710
+#: routes.py:731
 msgid "Sign in(Employee)"
 msgstr ""
 
@@ -308,7 +293,8 @@ msgstr ""
 msgid "Detail"
 msgstr ""
 
-#: templates/Appointment_doc.html:105 templates/My_appointment.html:251
+#: templates/Appointment_doc.html:105 templates/My_appointment.html:162
+#: templates/My_appointment.html:251
 msgid "Trace"
 msgstr ""
 
@@ -333,13 +319,28 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: templates/CGL.html:7 templates/CGL.html:13
+#: templates/CGL.html:7 templates/CGL.html:13 templates/CGL.html:16
 msgid "Hello, world!"
 msgstr ""
 
 #: templates/CGL.html:8
 #, python-format
 msgid "It's %(day)s today"
+msgstr ""
+
+#: templates/My_appointment.html:157 templates/My_appointment.html:250
+msgid "Information"
+msgstr ""
+
+#: templates/My_appointment.html:166 templates/My_appointment.html:255
+#: templates/My_appointment.html:257 templates/My_appointment.html:261
+#: templates/My_appointment.html:263
+msgid "Modify"
+msgstr ""
+
+#: templates/My_appointment.html:171 templates/My_appointment.html:268
+#: templates/My_appointment.html:270 templates/Question.html:101
+msgid "Delete"
 msgstr ""
 
 #: templates/My_appointment.html:205
@@ -362,20 +363,6 @@ msgstr ""
 msgid "Operation_date"
 msgstr ""
 
-#: templates/My_appointment.html:250
-msgid "Information"
-msgstr ""
-
-#: templates/My_appointment.html:255 templates/My_appointment.html:257
-#: templates/My_appointment.html:261 templates/My_appointment.html:263
-msgid "Modify"
-msgstr ""
-
-#: templates/My_appointment.html:268 templates/My_appointment.html:270
-#: templates/Question.html:101
-msgid "Delete"
-msgstr ""
-
 #: templates/My_appointment.html:288
 msgid "Appointment delete"
 msgstr ""
@@ -384,28 +371,76 @@ msgstr ""
 msgid "Do you want to delete this appointment?"
 msgstr ""
 
+#: templates/New_appointment.html:174 templates/Urgent_appointment.html:210
+msgid "make a new appointment"
+msgstr ""
+
 #: templates/Question.html:27
 msgid "Home"
 msgstr ""
 
-#: templates/Question.html:28
+#: templates/Question.html:29
 msgid "My question"
 msgstr ""
 
-#: templates/Question.html:30
-msgid "Messages"
+#: templates/Question.html:32
+msgid "Doctors"
 msgstr ""
 
-#: templates/Question.html:31
+#: templates/Question.html:34
 msgid "New question"
 msgstr ""
 
-#: templates/Question.html:49 templates/Question.html:93
+#: templates/Question.html:57
+msgid "Title"
+msgstr ""
+
+#: templates/Question.html:93
 msgid "information"
 msgstr ""
 
-#: templates/Question.html:145
+#: templates/Question.html:192
 msgid "Add question"
+msgstr ""
+
+#: templates/Question.html:196
+msgid "Question title"
+msgstr ""
+
+#: templates/Question.html:199
+msgid "Content"
+msgstr ""
+
+#: templates/Question_detail.html:165
+msgid "Personal Introduciton"
+msgstr ""
+
+#: templates/Question_detail.html:174
+msgid "Commit"
+msgstr ""
+
+#: templates/Question_detail.html:181
+msgid "Submit comments"
+msgstr ""
+
+#: templates/Question_detail.html:202
+msgid "delete"
+msgstr ""
+
+#: templates/Question_detail.html:236
+msgid "Ask"
+msgstr ""
+
+#: templates/Question_detail.html:239
+msgid "Modify Personal Information"
+msgstr ""
+
+#: templates/Question_detail.html:243
+msgid "My Answer"
+msgstr ""
+
+#: templates/Question_detail.html:246 templates/logged_navbar.html:17
+msgid "My Appointment"
 msgstr ""
 
 #: templates/appointment_flow.html:2
@@ -422,7 +457,7 @@ msgid ""
 "confirm the condition of the pet."
 msgstr ""
 
-#: templates/appointment_flow.html:9
+#: templates/appointment_flow.html:9 templates/urgent_flow.html:9
 msgid "The second step"
 msgstr ""
 
@@ -436,6 +471,11 @@ msgstr ""
 
 #: templates/appointment_flow.html:15
 msgid "Finally, you will be discharged from the hospital."
+msgstr ""
+
+#: templates/appointment_modify.html:184
+#: templates/appointment_urgent_modify.html:103
+msgid "Modify your appointment:"
 msgstr ""
 
 #: templates/appointment_trace.html:210
@@ -530,31 +570,31 @@ msgstr ""
 msgid "tip:This is urgent appointment"
 msgstr ""
 
-#: templates/base_navbar.html:18
+#: templates/base_navbar.html:19
 msgid "Introduction"
 msgstr ""
 
-#: templates/base_navbar.html:31
+#: templates/base_navbar.html:34
 msgid "Sign in"
 msgstr ""
 
-#: templates/base_navbar.html:39 templates/base_navbar.html:53
+#: templates/base_navbar.html:42 templates/base_navbar.html:56
 msgid "Customer"
 msgstr ""
 
-#: templates/base_navbar.html:40 templates/base_navbar.html:54
+#: templates/base_navbar.html:43 templates/base_navbar.html:57
 msgid "Employee"
 msgstr ""
 
-#: templates/base_navbar.html:45
+#: templates/base_navbar.html:48
 msgid "Sign up"
 msgstr ""
 
-#: templates/index.html:27
+#: templates/index.html:30
 msgid "Welcome to Healing Paws Veterinary Hospital !"
 msgstr ""
 
-#: templates/index.html:30
+#: templates/index.html:33
 msgid ""
 "Healing Paws Veterinary Hospital is an animal specialty hospital that "
 "treats dogs and cats only. Its business covers pet health care, remote "
@@ -562,77 +602,77 @@ msgid ""
 "is located in three locations: Beijing, Shanghai and Chengdu."
 msgstr ""
 
-#: templates/index.html:32
+#: templates/index.html:35
 msgid "Learn more"
 msgstr ""
 
-#: templates/index.html:49
+#: templates/index.html:52
 msgid "First Thumbnail label"
 msgstr ""
 
-#: templates/index.html:52 templates/index.html:63 templates/index.html:74
+#: templates/index.html:55 templates/index.html:66 templates/index.html:77
 msgid ""
 "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id "
 "elit non mi porta gravida at eget metus. Nullam id dolor id nibh "
 "ultricies vehicula ut id elit."
 msgstr ""
 
-#: templates/index.html:60
+#: templates/index.html:63
 msgid "Second Thumbnail label"
 msgstr ""
 
-#: templates/index.html:71
+#: templates/index.html:74
 msgid "Third Thumbnail label"
 msgstr ""
 
-#: templates/index.html:87
+#: templates/index.html:90
 msgid "Dog cataract"
 msgstr ""
 
-#: templates/index.html:90
+#: templates/index.html:93
 msgid ""
 "Dog cataract is actually the turbidity of the lens capsule. The lens in "
 "the normal eye is transparent and colorless, and if it is cloudy, white "
 "and opaque."
 msgstr ""
 
-#: templates/index.html:95
+#: templates/index.html:98
 msgid "cat sterilization"
 msgstr ""
 
-#: templates/index.html:98
+#: templates/index.html:101
 msgid ""
 "Whether you want to sterilize cats are always confusing the owners, so do"
 " you need to sterilize cats? What are the benefits of cat sterilization?"
 msgstr ""
 
-#: templates/index.html:103
+#: templates/index.html:106
 msgid "cat's illness"
 msgstr ""
 
-#: templates/index.html:106
+#: templates/index.html:109
 msgid ""
 "How to judge a cat's illness? Is there any difference between the "
 "behavior of a cat when it is ill and that of a normal cat"
 msgstr ""
 
-#: templates/index.html:109
+#: templates/index.html:112
 msgid "View details"
 msgstr ""
 
-#: templates/index.html:117
+#: templates/index.html:120
 msgid "Doc Introduction"
 msgstr ""
 
-#: templates/index.html:124 templates/index.html:145
+#: templates/index.html:127 templates/index.html:149
 msgid "Age"
 msgstr ""
 
-#: templates/index.html:125 templates/index.html:146
+#: templates/index.html:128 templates/index.html:150
 msgid "Male"
 msgstr ""
 
-#: templates/index.html:126
+#: templates/index.html:129
 msgid ""
 "Graduate from Milan Brera Academy of Fine Arts which is a college has the"
 " most popular Veterinary profession of the world. Also he passed the "
@@ -640,15 +680,15 @@ msgid ""
 "good at animal diagnosis, treatment, surgery."
 msgstr ""
 
-#: templates/index.html:132
+#: templates/index.html:137
 msgid "Age: 40"
 msgstr ""
 
-#: templates/index.html:133
+#: templates/index.html:138
 msgid "Female"
 msgstr ""
 
-#: templates/index.html:134
+#: templates/index.html:139
 msgid ""
 "The Master of Clinical Veterinary Medicine, China Agricultural "
 "University, also the chairman of the Pet Veterinary Association of China "
@@ -656,7 +696,7 @@ msgid ""
 "and embryology, animal histology and embryology experiments."
 msgstr ""
 
-#: templates/index.html:147
+#: templates/index.html:151
 msgid ""
 "He has accumulated a wealth of clinical experience, especially in canine "
 "infectious diseases, obstetrics and surgical diseases. Over the years, he"
@@ -668,11 +708,27 @@ msgstr ""
 msgid "Please choose your location:"
 msgstr ""
 
-#: templates/signupC.html:132
+#: templates/logged_navbar.html:18
+msgid "New Appointment"
+msgstr ""
+
+#: templates/logged_navbar.html:19
+msgid "Question"
+msgstr ""
+
+#: templates/logged_navbar.html:25
+msgid "log out"
+msgstr ""
+
+#: templates/sign_in.html:64
+msgid "forget password"
+msgstr ""
+
+#: templates/signupC.html:141
 msgid "Sign up(Customer)"
 msgstr ""
 
-#: templates/signupE.html:157
+#: templates/signupE.html:171
 msgid "Sign up(Employee)"
 msgstr ""
 

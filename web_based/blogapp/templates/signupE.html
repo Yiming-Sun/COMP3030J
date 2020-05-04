@@ -22,6 +22,20 @@
     <script>
         $(document).ready(function(){
 
+            let lan = $('#language').text();
+            if (lan == 'zh'){
+                $("label[for='username']").text("账号");
+                $("label[for='id']").text("员工号");
+                $("label[for='password']").text("密码");
+                $("label[for='repeat_password']").text("重复密码");
+                $("label[for='nickname']").text("昵称");
+                $("label[for='email']").text("邮箱");
+                $("label[for='phone']").text("电话");
+                $("label[for='animal']").text("宠物类型");
+                $("label[for='workplace']").text("工作地点");
+                $("input[name='submit']").attr("value","注册");
+            }
+
 
             $("#username").after("<span id='username_msg'></span>");
             $("#id").after("<span id='id_msg'></span>");
@@ -151,7 +165,7 @@
 
 
 {% block content %}
-
+<p id="language">{{language}}</p>
 <div class="container" >
     <div class="title col-lg-6 col-lg-offset-6">
         <h2 class="text-center" style="margin-top: 80px;">{{ _("Sign up(Employee)")}}</h2>

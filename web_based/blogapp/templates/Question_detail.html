@@ -155,14 +155,14 @@ a.list-group-item{
         <ul class="list col-lg-8">
             <li class="list-item">
                 <div class="avatar-group">
-                    <img  src={{url_for('static', filename='upload_photo/'+user2.username+'.jpg')}} style="margin-bottom:15px;" alt="" class="avatar">
+                    <img  src={{url_for('static', filename='upload_photo/'+user2.username+'.jpg')}} onError="javascript:this.src='../static/Picture/default.jpg'" style="margin-bottom:15px;" alt="" class="avatar">
                 </div>
                 <div class="question-information">
                     <span class="question-author" style="font-weight: 600;color:#444;margin-bottom:8px;">{{question.author.username}}</span>
                 </div>
                 <div class="question-group" style="width:680px;">
                      <p class="question-content" style="margin-top:10px;margin-right:3px;line-height: 1.7;font-size: 15px;">{{question.content}}</p>
-                    <p style=" margin-top: 4px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">自我介绍</p>
+                    <p style=" margin-top: 4px;font-size: 14px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #646464;">{{ _("Personal Introduciton") }}</p>
                 </div>
                 <div  style="">
                     <a>
@@ -171,14 +171,14 @@ a.list-group-item{
                 </div>
 
 
-            <h5 style="margin-left:10px;margin-top:8px;font-size: 14px;color: #8590a6;">评论</h5>
+            <h5 style="margin-left:10px;margin-top:8px;font-size: 14px;color: #8590a6;">{{ _("Commit") }}</h5>
             <form action="{{url_for('add_answer')}}" method="post">
                 <div class="form-group">
                     <input type="text" name='answer_content' style="margin-left:8px;margin-top:4px;" class="form-control" placeholder="请添加评论">
                     <input type="hidden" name="question_id" value="{{question.id}}">
                 </div>
                 <div class="form-group" style="text-align:right;position:relative;">
-                    <button class="btn btn-primary">提交评论</button>
+                    <button class="btn btn-primary">{{ _("Submit comments") }}</button>
                 </div>
             </form>
             <ul class="answer-list">
@@ -186,8 +186,8 @@ a.list-group-item{
 
                 <li>
                     <div class="user-info">
-                        <a href=""><img class="avatar" src="{{url_for('static',filename='Picture/'+answer.author.username+'.jpg')}}" alt="" ></a>
-                        <a href=""><span class="username">{{answer.author.username}}</span></a>
+                        <a href=""><img class="avatar" src="{{url_for('static',filename='upload_photo/'+answer.author.username+'.jpg')}}"  onError="javascript:this.src='../static/Picture/default.jpg'"   alt="" ></a>
+                        <span class="username">{{answer.author.username}}</span>
                              <span class="create-time">{{answer.create_time}}</span>
                     </div>
                     <p class="answer-content">{{answer.content}}</p>
@@ -199,7 +199,7 @@ a.list-group-item{
                             <input type="hidden" name="answer_id" value="{{answer.id}}">
                         </div>
                         <div class="form-group" style="text-align:right;position:relative;">
-                            <button class="btn btn-primary">删除</button>
+                            <button class="btn btn-primary">{{ _("delete") }}</button>
                         </div>
                     </form>
                     {%endif%}
@@ -218,7 +218,7 @@ a.list-group-item{
                         <div class="row" style="margin-left:-10px;">
                           <div class="col-sm-7 col-md-6">
                             <div class="thumbnail">
-                              <img src={{url_for('static', filename='upload_photo/'+user2.username+'.jpg')}} alt="" class="avatar2" style="">
+                              <img src={{url_for('static', filename='upload_photo/'+user2.username+'.jpg')}}  onError="javascript:this.src='../static/Picture/default.jpg'" alt="" class="avatar2" style="">
                                   <div class="caption">
                                   </div>
                             </div>
@@ -233,21 +233,22 @@ a.list-group-item{
                 <div class="user">
                     <div class="content" style="height:240px;">
                        <div class="list-group">
-                           <a href="" class="list-group-item">提问</a>
-                           <a href="" class="list-group-item">个人信息修改</a>
-                           <a href="" class="list-group-item"><span class="badge">{{article_num}}</span>我的主页</a>
+                           <a href="{{ url_for('question') }}" class="list-group-item">{{ _("Ask") }}</a>
+
+                           {% if flag==0 %}
+                           <a href=" {{ url_for('Configuration') }}" class="list-group-item">{{ _("Modify Personal Information") }}</a>
+                           {% endif %}
+
+                            {% if flag==1 %}
+                           <a href="{{url_for('Doc_info',employee_username=user.username)}}" class="list-group-item"><span class="badge">{{article_num}}</span>{{ _("My Answer") }}</a>
+                           {% endif %}
+
+                           <a href="{{ url_for('My_appointment') }}" class="list-group-item"><span class="badge">{{article_num}}</span>{{ _("My Appointment") }}</a>
                    </div>
+                </div>
                 </div>
             </li>
             </div>
-            <div style="clear:both;"></div>
-            <li class="list-item3" style="margin-top:8px;">
-                <div class="user">
-                   <div class="content" style="height:293px;">
-                       <p>头像中心</p>
-                   </div>
-                </div>
-            </li>
         </ul>
 
     </div>

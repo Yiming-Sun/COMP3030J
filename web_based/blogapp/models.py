@@ -1,8 +1,14 @@
 import json
 from sqlalchemy.orm import Query
 from datetime import datetime
+from blogapp import db, app
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from time import time
+import blogapp
 from blogapp import db
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
+import jwt
+
 
 
 class Customer(db.Model):
@@ -18,7 +24,36 @@ class Customer(db.Model):
     nationality = db.Column(db.String(120), index=True)
     personal_signature = db.Column(db.String(120), index=True)
     times = db.Column(db.Integer, index=True, default=0)
-    log_con = db.Column(db.Integer,index=True, default=0)
+    log_con = db.Column(db.Integer, index=True, default=0)
+
+    def get_jwt_token(self, expires_in=600):
+        return jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
+                          app.config['SECRET_KEY'],
+                          algorithm='HS256').decode('utf8')
+
+    @staticmethod
+    def verify_jwt_token(token):
+        try:
+            user_id = jwt.decode(token,
+                                 app.config['SECRET_KEY'],
+                                 algorithms='HS256')['reset_password']
+        except Exception as e:
+            print(e)
+            return
+        return Customer.query.get(user_id)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+
+#    关注
+class Followrelationship(db.Model):
+    __tablename__ = 'follow'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+    followed_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
+    follower = db.relationship('Customer', backref=db.backref('follower'))
+    followed = db.relationship('Employee', backref=db.backref('followed'))
 
 
 class Employee(db.Model):
@@ -39,7 +74,6 @@ class Employee(db.Model):
     times = db.Column(db.Integer, index=True, default=0)
     log_con = db.Column(db.Integer, index=True, default=0)
 
-
     def to_dict(self):
 
         result = {}
@@ -53,6 +87,7 @@ class Employee(db.Model):
 
 class Id(db.Model):
     cid = db.Column(db.String(120), unique=True, primary_key=True)
+
 
 # 发布的问题
 class Question(db.Model):
@@ -75,6 +110,7 @@ class AnswerQuestion(db.Model):
     answer_question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
     author = db.relationship('Employee', backref=db.backref('realanswer'))
     question = db.relationship('Question', backref=db.backref('questionAnswer'))
+
 
 class NewAppointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -130,8 +166,3 @@ class AlchemyJsonEncoder(json.JSONEncoder):
             return fields
         # 其他类型的数据按照默认的方式序列化成JSON
         return json.JSONEncoder.default(self, obj)
-
-
-
-
-

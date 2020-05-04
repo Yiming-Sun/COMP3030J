@@ -5,6 +5,21 @@
 
     <script>
         $(function(){
+            //修改语言
+            let lan = $('#language').text();
+            if (lan == 'zh'){
+                $("#title").text("预约详情");
+                $("label[for='applicant']").text("申请人");
+                $("input[for='phoneNo']").text("电话号码");
+                $("label[for='date']").text("预约日期");
+                $("label[for='appointment_time']").text("预约时间");
+                $("label[for='petType']").text("宠物类型");
+                $("label[for='doctor']").text("医生");
+                $("label[for='comment']").text("备注");
+
+            }
+
+
             $("input").attr({disabled:"disabled"});
             $("select").attr({disabled:"disabled"});
             $("#submit").css({"display":"none"});
@@ -25,9 +40,11 @@
 
 
 {% block content %}
+
+<p id="language">{{language}}</p>
 <p id="type" style="display: none">{{user_type}}</p>
 <div class="container" style="margin-top: 100px">
-
+    <h1 id="title" class="text-center" style="margin: 40px auto">Appointment details</h1>
     <div class="row">
          <div class="col-md-8 col-lg-offset-2">
             {% import 'bootstrap/wtf.html' as wtf%}

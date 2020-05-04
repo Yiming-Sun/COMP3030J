@@ -29,7 +29,7 @@ def poss_name():
 
 # Yiming Sun(2020/3/30)
 class C_personal_space(FlaskForm):
-    picture = FileField(_('picture'))
+    picture = FileField(_('choose picture'))
     username = StringField(_('Username'), validators=[DataRequired()])
     email = StringField(_('E-mail'), validators=[DataRequired()])
     phone = StringField(_('Phone Number'), validators=[DataRequired()])
@@ -44,7 +44,7 @@ class C_personal_space(FlaskForm):
 
 # Yiming Sun(2020/3/30)
 class E_personal_space(FlaskForm):
-    picture = FileField(_('picture'), default=None)
+    picture = FileField(_('choose picture'), default=None)
     username = StringField(_('Username'), validators=[DataRequired()])
     email = StringField(_('E-mail'), validators=[DataRequired()])
     phone = StringField(_('Phone Number'), validators=[DataRequired()])
@@ -147,8 +147,21 @@ class SignForm_E(FlaskForm):
     submit = SubmitField(_('Sign Up'))
 
 
+
 class modify_password(FlaskForm):
-    pre_password = StringField(_('previous password'), validators=[DataRequired()])
-    new_password = StringField(_('new password'), validators=[DataRequired()])
-    comfirm_password = StringField(_('Confirm password'), validators=[DataRequired()])
-    submit = SubmitField(_('Modify Password'))
+    pre_password = StringField('previous password', validators=[DataRequired()])
+    new_password = StringField('new password', validators=[DataRequired()])
+    comfirm_password = StringField('Confirm password', validators=[DataRequired()])
+    submit = SubmitField('Modify Password')
+
+
+class ResetPasswordRequestForm(FlaskForm):
+    """重置密码请求表单"""
+    email = StringField('邮箱', validators=[DataRequired(), Email()])
+    submit = SubmitField('请求密码重置')
+
+class ResetPasswordForm(FlaskForm):
+    """重置密码表单"""
+    password = PasswordField('密码', validators=[DataRequired()])
+    password2 = PasswordField('确认密码', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('请求密码重置')

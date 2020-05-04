@@ -22,6 +22,37 @@
     });
   }
 });
+
+    $(function () {
+        $("#en").click(function () {
+            $.ajax({
+                url: '/index',
+                type: 'POST',
+                data: {"language": "en"},
+                success: function (data) {
+                    window.location.reload()
+                },
+                error: function () {
+                }
+            });
+    });
+
+
+        $("#zh").click(function () {
+            $.ajax({
+                url: '/index',
+                type: 'POST',
+                data: {"language": "zh"},
+                success: function (data) {
+                    window.location.reload()
+                },
+                error: function () {
+                }
+            });
+    });
+
+    })
+
 </script>
 {% endblock %}
 

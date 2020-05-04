@@ -154,22 +154,22 @@
                            else{
                                op_date.parent().css({"color": "red"});
                            }
-                           let bt_info = $('<a href="#"><button class="btn btn-default appform_button ">Information</button></a>');
-                           bt_info.css({"margin":"0px 20px"});
+                           let bt_info = $('<a href="#"><button class="btn btn-default appform_button ">{{ _("Information") }}</button></a>');
+                           bt_info.css({"margin":"0px 10px"});
                            bt_info.attr({href:"/appointment_detail/"+d[0][i]["id"]+d[0][i]["app_type"]});
 
 
-                           let bt_trace = $('<a><button class="btn btn-primary appform_button">Trace</button></a>');
+                           let bt_trace = $('<a><button class="btn btn-primary appform_button">{{ _("Trace") }}</button></a>');
                            bt_trace.attr({href:"/appointment_trace/"+d[i]["id"]+d[i]["condition"]});
 
-                           bt_trace.css({"margin":"0px 20px"});
-                           let bt_modify= $('<a><button class="btn btn-success appform_button">Modify</button></a>');
+                           bt_trace.css({"margin":"0px 10px"});
+                           let bt_modify= $('<a><button class="btn btn-success appform_button">{{ _("Modify") }}</button></a>');
 
                            bt_modify.attr({href:"/appointment_modify/"+d[i]["id"]});
 
-                           bt_modify.css({"margin":"0px 20px"});
-                           let bt_del = $('<button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">Delete</button>');
-                           bt_del.css({"margin":"0px 20px"});
+                           bt_modify.css({"margin":"0px 10px"});
+                           let bt_del = $('<button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">{{ _("Delete") }}</button>');
+                           bt_del.css({"margin":"0px 10px"});
                            let operation = $('<td></td>');
 
                            operation.append(bt_info);
@@ -247,27 +247,27 @@
                     </td>
                     <td class="text-center op_date">{{appointment.op_date}}</td>
                     <td>
-                        <a href="{{ url_for('appointment_detail', id=appointment.id, type=appointment.app_type) }}"><button class="btn btn-default appform_button ">{{ _("Information") }}</button></a>
-                        <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button bt_trace"> {{ _("Trace") }}</button></a>
+                        <a href="{{ url_for('appointment_detail', id=appointment.id, type=appointment.app_type) }}"><button class="btn btn-default appform_button " style="margin: 0px 10px">{{ _("Information") }}</button></a>
+                        <a href="{{ url_for('appointment_trace', id=appointment.id, condition=appointment.condition) }}"><button class="btn btn-primary appform_button bt_trace" style="margin: 0px 10px"> {{ _("Trace") }}</button></a>
                         {% if appointment.app_type ==1 %}
                             <!--普通门诊-->
                             {% if appointment.condition >= 2 %}
-                            <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled">{{ _("Modify") }}</button></a>
+                            <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled" style="margin: 0px 10px">{{ _("Modify") }}</button></a>
                             {% else %}
-                            <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button">{{ _("Modify") }}</button></a>
+                            <a href="{{ url_for('appointment_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" style="margin: 0px 10px">{{ _("Modify") }}</button></a>
                             {% endif %}
                         {% else %}
                             {% if appointment.condition >= 4 %}
-                            <a href="{{ url_for('appointment_urgent_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled">{{ _("Modify") }}</button></a>
+                            <a href="{{ url_for('appointment_urgent_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" disabled="disabled" style="margin: 0px 10px">{{ _("Modify") }}</button></a>
                             {% else %}
-                            <a href="{{ url_for('appointment_urgent_modify', id=appointment.id) }}"><button class="btn btn-success appform_button">{{ _("Modify") }}</button></a>
+                            <a href="{{ url_for('appointment_urgent_modify', id=appointment.id) }}"><button class="btn btn-success appform_button" style="margin: 0px 10px">{{ _("Modify") }}</button></a>
                             {% endif %}
                         {% endif %}
 <!--    data-toggle表示以什么事件触发， data-target表示事件的目标   -->
                         {% if appointment.condition != 1 %}
-                            <button class="btn btn-danger appform_button delete_btn" disabled="disabled" type="button" data-toggle="modal" data-target="#my">{{ _("Delete") }}</button>
+                            <button class="btn btn-danger appform_button delete_btn" disabled="disabled" type="button" data-toggle="modal" data-target="#my" style="margin: 0px 10px">{{ _("Delete") }}</button>
                         {% else %}
-                            <button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my">{{ _("Delete") }}</button>
+                            <button class="btn btn-danger appform_button delete_btn" type="button" data-toggle="modal" data-target="#my" style="margin: 0px 10px">{{ _("Delete") }}</button>
                         {% endif %}
                     </td>
                 </tr>

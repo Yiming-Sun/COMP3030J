@@ -1,8 +1,11 @@
 from blogapp import app, db
 from flask import Flask, jsonify, render_template, request, flash, redirect, url_for, session
+
+from blogapp.email import send_email
 from blogapp.forms import AppointmentForm, LoginForm, UrgentAppointment, C_personal_space, E_personal_space, SignForm_E, \
-    SignForm_C, modify_password
-from blogapp.models import Employee,NewAppointment, Customer,Id, AlchemyJsonEncoder, Question, AnswerQuestion
+    SignForm_C, modify_password, ResetPasswordForm, ResetPasswordRequestForm
+from blogapp.models import Employee, NewAppointment, Customer, Id, AlchemyJsonEncoder, Question, AnswerQuestion, \
+    Followrelationship
 
 from sqlalchemy import and_, or_
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -94,9 +97,18 @@ def hash(h,key):
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index',methods=['GET', 'POST'])
 def index():
-
+    if request.method == 'POST':
+        languageame = request.values.get('language')
+        if languageame == "zh":
+            app.config['BABEL_DEFAULT_LOCALE'] = 'zh'
+            print("zh")
+        # return redirect(url_for('index'))
+        if languageame == "en":
+            app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+            print("en")
+        return "adsas"
     return render_template('index.html', title='Home')
 
 
@@ -107,7 +119,7 @@ def index():
 def Language():
     day = _("Saturday")
     languageame = request.args.get('language', '')
-    # print(languageame)
+    print(languageame)
     if languageame == "zh":
         app.config['BABEL_DEFAULT_LOCALE'] = 'zh'
         print("zh")
@@ -208,7 +220,7 @@ def appointment_modify(id):
             form.phoneNo.data = appointment.phoneNo
             form.comment.data = appointment.comment
 
-        return render_template('appointment_modify.html',form=form,id=id)
+        return render_template('appointment_modify.html',form=form,id=id, language=app.config.get('BABEL_DEFAULT_LOCALE'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('index'))
@@ -260,7 +272,7 @@ def appointment_detail(id,type):
 
 
         print(form)
-        return render_template('appointment_detail.html',form=form,user_type=user_type)
+        return render_template('appointment_detail.html',form=form,user_type=user_type, language=app.config.get('BABEL_DEFAULT_LOCALE'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('index'))
@@ -354,7 +366,7 @@ def appointment_urgent_modify(id):
             form.phoneNo.data = appointment.phoneNo
             form.comment.data = appointment.comment
 
-            return render_template('appointment_urgent_modify.html',form=form,condition=appointment.condition)
+            return render_template('appointment_urgent_modify.html',form=form,condition=appointment.condition, language=app.config.get('BABEL_DEFAULT_LOCALE'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('index'))
@@ -408,7 +420,7 @@ def New_appointment():
     #form.select_doctor(session.get("PLACE"))
     if not session.get("USERNAME") is None:
 
-        user = Customer.query.filter(Customer.username == session.get("USERNAME")).first()
+        user = Customer.query.filter(Customer.id == session.get("USERID")).first()
         form.applicant.data = user.username
         form.phoneNo.data = user.phone
 
@@ -424,15 +436,20 @@ def New_appointment():
 
             name = form.applicant.data
             date = form.date.data
+
             appoint_time = form.appointment_time.data
             petType = form.petType.data
             doctor = form.doctor.data
             petName = form.petName.data
             phoneNo = form.phoneNo.data
             comment = form.comment.data
-            user_id = session.get("USERNAME")
+            user_id = session.get("USERID")
             appointment = NewAppointment(appoint_time=appoint_time,app_type=1,applicant=name,petName=petName,user_id=user_id,date=date,petType=petType,doctor=doctor,phoneNo=phoneNo,comment=comment)
             db.session.add(appointment)
+
+            cust = Customer.query.filter(Customer.username == session.get('USERNAME')).first()
+            cust.times = cust.times+1
+
             db.session.commit()
             return redirect(url_for('My_appointment'))
         else:
@@ -474,7 +491,7 @@ def New_appointment():
                 return name_list
 
 
-    return render_template('New_appointment.html', title='New Appointment',form=form, img=img)
+    return render_template('New_appointment.html', title='New Appointment',form=form, img=img, language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
 
 
@@ -487,7 +504,7 @@ def Urgent_appointment():
     id = session.get("USERNAME")
     img = get_img_path(id)
     if not session.get("USERNAME") is None:
-        user = Customer.query.filter(Customer.username == session.get("USERNAME")).first()
+        user = Customer.query.filter(Customer.id == session.get("USERID")).first()
         form.applicant.data = user.username
         form.phoneNo.data = user.phone
 
@@ -506,9 +523,12 @@ def Urgent_appointment():
             #op_date = form.operationDate.data
             op_date = form.operationDate.data.strftime('%Y-%m-%d')
             op_time = form.operationTime.data
-            user_id = session.get("USERNAME")
+            user_id = session.get("USERID")
             appointment = NewAppointment(app_type=2, appoint_time=appoint_time, op_time=op_time, op_date=op_date, applicant=name,petName=petName,user_id=user_id,date=date,petType=petType,doctor=doctor,phoneNo=phoneNo,comment=comment)
             db.session.add(appointment)
+
+            cust = Customer.query.filter(Customer.username == session.get('USERNAME')).first()
+            cust.times = cust.times+1
             db.session.commit()
             return redirect(url_for('My_appointment'))
         else:
@@ -572,7 +592,7 @@ def Urgent_appointment():
 
                 return result_time
 
-    return render_template('Urgent_appointment.html', title='New urgent appointments',form=form,img=img)
+    return render_template('Urgent_appointment.html', title='New urgent appointments',form=form,img=img, language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
 #Yiming Sun(2020/3/14)
 @app.route('/My_appointment',methods=['GET','POST'])
@@ -617,7 +637,7 @@ def My_appointment():
                 return json.dumps(re, ensure_ascii=False)
 
         else:
-            my_appointments = NewAppointment.query.filter(NewAppointment.user_id == session.get("USERNAME")).all()
+            my_appointments = NewAppointment.query.filter(NewAppointment.user_id == session.get("USERID")).order_by(NewAppointment.date).all()
             employees = Employee.query.all()
             doct_list = {}
             for employee in employees:
@@ -651,7 +671,7 @@ def Doc_appointment():
         else:
 
             my_e = Employee.query.filter(Employee.username == session.get("USERNAME")).first()
-            my_appointments = NewAppointment.query.filter(NewAppointment.doctor == my_e.id).all()
+            my_appointments = NewAppointment.query.filter(NewAppointment.doctor == my_e.id).order_by(NewAppointment.date).all()
             return render_template('Appointment_doc.html', title='Doctor Appointments', my_appointments=my_appointments,time_dict=time_dict,condition_dict=condition_dict,img=img,user_type=user_type)
     else:
         flash("User needs to either login or signup first")
@@ -669,6 +689,7 @@ def Doc_appointment():
 @app.route('/login_c', methods=['GET', 'POST'])
 def sign_in_c():
     form = LoginForm()
+
     if form.validate_on_submit():
         user_in_db = Customer.query.filter(Customer.username == form.username.data).first()
         if not user_in_db:
@@ -686,7 +707,7 @@ def sign_in_c():
             return redirect(url_for('My_appointment'))
         flash('Incorrect Password')
         return redirect(url_for('sign_in_c'))
-    return render_template('sign_in.html', title=_('Sign In(Customer)'), form=form, form_title=_("Sign in(Customer)"))
+    return render_template('sign_in.html', title=_('Sign In(Customer)'), form=form, form_title=_("Sign in(Customer)"), language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
 @app.route('/login_d', methods=['GET', 'POST'])
 def sign_in_d():
@@ -707,7 +728,7 @@ def sign_in_d():
             return redirect(url_for('Doc_appointment'))
         flash('Incorrect Password')
         return redirect(url_for('sign_in_d'))
-    return render_template('sign_in.html', title=_('Sign In(Employee)'), form=form, form_title=_("Sign in(Employee)"))
+    return render_template('sign_in.html', title=_('Sign In(Employee)'), form=form, form_title=_("Sign in(Employee)"), language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
 
 
@@ -766,7 +787,7 @@ def Configuration():
                 img = base64.b64encode(figfile.getvalue()).decode('ascii')
 
 
-                return render_template('Configuration.html', title='Configuration', form=form,img=img, times=times,user_type=user_type)
+                return render_template('Configuration.html', title='Configuration', form=form,img=img, times=times,user_type=user_type, language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
         else:
             employee = Employee.query.filter(session.get('USERNAME') == Employee.username).first()
@@ -817,7 +838,7 @@ def Configuration():
                 figfile = io.BytesIO(open(img_path,'rb').read())
                 img = base64.b64encode(figfile.getvalue()).decode('ascii')
 
-                return render_template('Configuration.html', title='Configuration', form=form, img=img, user_type=user_type)
+                return render_template('Configuration.html', title='Configuration', form=form, img=img, user_type=user_type, language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
     else:
         flash("User needs to either login or signup first")
@@ -845,7 +866,7 @@ def signupC():
 
     form = SignForm_C()
     if request.method == 'GET':
-        return render_template('signupC.html', title="Sign up(Customer)",form=form)
+        return render_template('signupC.html', title="Sign up(Customer)",form=form, language=app.config.get('BABEL_DEFAULT_LOCALE'))
     if request.method == 'POST':
         customers = Customer.query.all()
         employees = Employee.query.all()
@@ -918,7 +939,7 @@ def signupC():
                 else:
                     flash("message error")
                     return redirect(url_for('signupC'))
-            return render_template('signupC.html', title="home",form=form)
+            return render_template('signupC.html', title="home",form=form, language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
 
 
@@ -930,7 +951,7 @@ def signupC():
 def signupE():
     form = SignForm_E()
     if request.method == 'GET':
-        return render_template('signupE.html', title="Sign in(Employee)",form=form)
+        return render_template('signupE.html', title="Sign in(Employee)",form=form, language=app.config.get('BABEL_DEFAULT_LOCALE'))
     if request.method == 'POST':
         customers = Customer.query.all()
         employees = Employee.query.all()
@@ -1034,7 +1055,7 @@ def signupE():
                 else:
                     flash("message error")
                     return redirect(url_for('signupE'))
-            return render_template('signupE.html', title="Sign up(Employee)",form=form)
+            return render_template('signupE.html', title="Sign up(Employee)",form=form, language=app.config.get('BABEL_DEFAULT_LOCALE'))
 
 
 
@@ -1069,32 +1090,18 @@ def tsest():
 def question():
     un = session.get('USERNAME')
     type = session.get('USERTYPE')
-
-    userC = Customer.query.filter(Customer.username == un).first()
-    userE = Employee.query.filter(Employee.username == un).first()
-    if userC is not None:
-
-        if os.path.exists('blogapp/static/upload_photo/%s.jpg'%(un)):
-            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
-        else:
-            img_path = 'blogapp/static/upload_photo/default.jpg'
-        figfile = io.BytesIO(open(img_path, 'rb').read())
-        img = base64.b64encode(figfile.getvalue()).decode('ascii')
-
-    if userE is not None:
-        if os.path.exists('blogapp/static/upload_photo/%s.jpg'%(un)):
-            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
-        else:
-            img_path = 'blogapp/static/upload_photo/default.jpg'
-        figfile = io.BytesIO(open(img_path, 'rb').read())
-        img = base64.b64encode(figfile.getvalue()).decode('ascii')
-    #         上面冗余用来查找头像
+    if type=='employee':
+        types=1
+    else:
+        types=0
+    img=geticon();
     if request.method == 'GET':
 
         question_ground = Question.query.filter().all()
         my_question = Question.query.filter(Question.author_name == un).all()
+        employee= Employee.query.filter().all()
         question_num = len(my_question)
-        return render_template('Question.html',question_ground=question_ground,img=img,my_question=my_question,question_num=question_num, type=type)
+        return render_template('Question.html',question_ground=question_ground,img=img,my_question=my_question,question_num=question_num, type=type,employee=employee,types=types)
     else:
         title = request.form.get('title')
         content = request.form.get('content')
@@ -1102,10 +1109,6 @@ def question():
         if session.get("USERNAME") is None:
             flash('Please login first')
             return redirect(url_for('index'))
-            # question1 = Question(question_title=title, content=content,author_name = 'Anonymous_user')
-            # db.session.add(question1)
-            # db.session.commit()
-            # return redirect(url_for('question'))
         else:
             name=session.get("USERNAME")
             question1 = Question(question_title=title, content=content,author_name=name)
@@ -1116,48 +1119,25 @@ def question():
 @app.route('/question_detail/<int:question_id>',methods=['GET','POST'])
 def question_detail(question_id):
     un = session.get('USERNAME')
-
-    userC = Customer.query.filter(Customer.username == un).first()
-    userE = Employee.query.filter(Employee.username == un).first()
-    if userC is not None:
-
-        if os.path.exists('blogapp/static/upload_photo/%s.jpg'%(un)):
-            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
-        else:
-            img_path = 'blogapp/static/upload_photo/default.jpg'
-        figfile = io.BytesIO(open(img_path, 'rb').read())
-        img = base64.b64encode(figfile.getvalue()).decode('ascii')
-
-    if userE is not None:
-        if os.path.exists('blogapp/static/upload_photo/%s.jpg'%(un)):
-            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
-        else:
-            img_path = 'blogapp/static/upload_photo/default.jpg'
-        figfile = io.BytesIO(open(img_path, 'rb').read())
-        img = base64.b64encode(figfile.getvalue()).decode('ascii')
-
-    #         上面冗余用来查找头像
+    img = geticon();
 
 
     user2 = Question.query.filter(Question.id == question_id).first().author
     # 问题都是用户Customer提出的
     # print('tttttttttttttttt'+session.get('USERNAME'))
     temp=session.get('USERNAME')
-    type=session.get('type')
+    type=session.get('USERTYPE')
     if type == 'employee':
         user = Employee.query.filter(Employee.username == temp).first()
+        fl=1;
     else:
         user = Customer.query.filter(Customer.username == temp).first()
+        fl=0;
     print('temp' + temp)
-    # question_num = len(user2.realquestions)
-    # answer_num = len(user2.realanswer)
-    # article_num = len(user2.questions)
-    # print('user:'+user.username+'gggggggggggg')
     context = {
             'question': Question.query.filter(Question.id == question_id).first(),
-            # 'question_num': question_num,
-            # 'answer_num': answer_num,
-            # 'article_num': article_num
+            'flag':fl
+
     }
     return render_template('Question_detail.html', user2=user2,user=user,**context,img=img)
 
@@ -1194,7 +1174,6 @@ def delete_answer():
     return redirect(url_for('question_detail',question_id=int(question_id)))
 
 
-
 @app.route('/someone_detail/<username>',methods=['GET','POST'])
 def someone_detail(username):
     # print("ssssssssssssssssssss")
@@ -1223,6 +1202,7 @@ def delete_question():
     db.session.delete(question)
     db.session.commit()
     return redirect(url_for('question'))
+
 
 
 @app.route('/password_modify',methods=['GET','POST'])
@@ -1280,18 +1260,136 @@ def detail():
 
 
 
-@app.route('/user', methods=['POST'])
-def check_user():
-    userName = request.form['username']
-    haveregisted = userInfoTable.query.filter_by(username=request.form['username']).all()
-    if haveregisted.__len__() != 0: # 判断是否已被注册
-        passwordRight = userInfoTable.query.filter_by(username=request.form['username'],
-        password=request.form['password']).all()
-        if passwordRight.__len__() != 0:
-            print(str(userName) + "log success")
-            return '登录成功'
-        else:
-            return '1'
+
+
+
+@app.route('/changepass',methods=['GET','POST'])
+def changepass():
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = Customer.query.filter_by(email=form.email.data).first()
+        if user is None:
+            flash('该电子邮箱未注册')
+            print("啊实打实打算" + str(app.config['MAIL_USERNAME']))
+            return redirect(url_for('changepass'))
+        send_password_reset_email(user)
+        flash('查看您的电子邮箱消息，以重置您的密码')
+        return redirect(url_for('sign_in_c'))
+    return render_template('Change_pass.html', title='重置密码', form=form)
+
+
+def send_password_reset_email(user):
+    """发送密码重置电子邮件"""
+    token = user.get_jwt_token()
+    send_email('重置您的密码',
+               sender=app.config['MAIL_USERNAME'],
+               recipients=([user.email]),
+               text_body=render_template('email/reset_password.txt', user=user, token=token),
+               html_body=render_template('email/reset_password.html', user=user, token=token))
+@app.route('/resetpass/<token>',methods=['GET','POST'])
+def resetpass(token):
+        user = Customer.verify_jwt_token(token)
+        if user is None:
+            return redirect(url_for('index'))
+        form = ResetPasswordForm()
+        if form.validate_on_submit():
+            user.password_hash=generate_password_hash(form.password.data)
+            db.session.commit()
+            flash('您的密码已被重置')
+            return redirect(url_for('sign_in_c'))
+        return render_template('reset_password_12.html', form=form)
+
+
+@app.route('/Doc_info/<employee_username>',methods=['GET','POST'])
+def Doc_info(employee_username):
+    type=session.get("USERTYPE")
+    if type=='employee':
+        employee_e = 1
+        check=3
     else:
-        print(str(userName) + "log fail")
-        return '0'
+        employee_e = 0
+        check = ifollow(employee_username)
+    number=followers(employee_username)
+    employee = Employee.query.filter(Employee.username == employee_username).first()
+
+    answers = AnswerQuestion.query.filter(AnswerQuestion.author_id == employee.id).all()
+    questions = set()
+    for answer in answers:
+        questions.add(answer.question)
+    img=geticon();
+    return render_template('DocInform.html', employee=employee,number=number,checks=check,questions=questions,employee_e=employee_e,img=img)
+
+
+
+@app.route('/add_follower/<employee_username>',methods=['GET','POST'])
+def add_follower(employee_username):
+    username = session.get("USERNAME")
+    print("asddddddddddddddddddddddd")
+    employee = Employee.query.filter(Employee.username == employee_username).first()
+    customer = Customer.query.filter(Customer.username == username).first()
+    Follow = Followrelationship(follower_id=customer.id, followed_id=employee.id)
+    db.session.add(Follow)
+    db.session.commit()
+    return redirect(url_for('Doc_info', employee_username=employee_username))
+
+def followers(employee_username):
+    employee = Employee.query.filter(Employee.username == employee_username).first()
+    if Followrelationship.query.filter(Followrelationship.followed_id == employee.id).all() is None:
+        number = 0
+    else:
+        number = Followrelationship.query.filter(Followrelationship.followed_id == employee.id).count()
+    return number
+
+
+@app.route('/delete_follower/<employee_username>',methods=['GET','POST'])
+def delete_follower(employee_username):
+    username = session.get("USERNAME")
+    employee = Employee.query.filter(Employee.username == employee_username).first()
+    customer = Customer.query.filter(Customer.username == username).first()
+    follow_query=Followrelationship.query.filter(and_(Followrelationship.followed_id == employee.id, Followrelationship.follower_id == customer.id)).first()
+
+    db.session.delete(follow_query)
+    db.session.commit()
+    number=followers(employee_username)
+    return redirect(url_for('Doc_info',employee_username=employee_username))
+    # return render_template('DocInform.html', employee=employee,number=number)
+
+
+def ifollow(employee_username):
+    employee = Employee.query.filter(Employee.username == employee_username).first()
+    username = session.get("USERNAME")
+    flag=0
+    customer = Customer.query.filter(Customer.username == username).first()
+    follow_query=Followrelationship.query.filter(Followrelationship.followed_id == employee.id).all()
+    if Followrelationship.query.filter(Followrelationship.followed_id == employee.id) is None:
+        flag = 0
+    else:
+        for fo in follow_query:
+            if fo.follower_id==customer.id:
+                flag = 1
+            else:
+                flag=0
+    return flag
+
+def geticon():
+    un = session.get('USERNAME')
+
+    userC = Customer.query.filter(Customer.username == un).first()
+    userE = Employee.query.filter(Employee.username == un).first()
+    if userC is not None:
+
+        if os.path.exists('blogapp/static/upload_photo/%s.jpg' % (un)):
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+        else:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+        figfile = io.BytesIO(open(img_path, 'rb').read())
+        img = base64.b64encode(figfile.getvalue()).decode('ascii')
+
+    if userE is not None:
+        if os.path.exists('blogapp/static/upload_photo/%s.jpg' % (un)):
+            img_path = 'blogapp/static/upload_photo/' + un + '.jpg'
+        else:
+            img_path = 'blogapp/static/upload_photo/default.jpg'
+        figfile = io.BytesIO(open(img_path, 'rb').read())
+        img = base64.b64encode(figfile.getvalue()).decode('ascii')
+    return img
